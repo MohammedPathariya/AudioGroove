@@ -1,0 +1,11 @@
+torch>=2.0.0
+torchvision
+music21>=6.1.0
+mido>=1.2.10
+tqdm
+numpy
+scipy
+pandas
+matplotlib
+natsort
+tensorboard
