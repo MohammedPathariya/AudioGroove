@@ -1,5 +1,3 @@
-#generation/generate.py
-
 import os
 import sys
 import json
@@ -9,10 +7,11 @@ from tqdm import tqdm
 from mido import MidiFile, MidiTrack, Message
 from music21 import pitch
 
-# ─── Add project root to sys.path ───
-proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, proj_root)
+# ─── 1. Add project's 'src' directory to sys.path ───
+src_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, src_root)
 
+# ─── 2. Import custom modules AFTER updating the path ───
 from models.midi_lstm import MidiLSTMEnhanced
 from data_prep.extract_midi import extract_notes_from_midi
 from utils.paths import CHECKPOINT_DIR, VOCAB_JSONL, SEED_MIDI, OUTPUT_MIDI
@@ -24,24 +23,42 @@ TEMPERATURE  = 1.0
 TOP_K        = 50
 NOTE_DURATION = 480  # MIDI ticks
 
-# ─── Resolve paths ───
+# ─── Resolve paths from utils.paths ───
 CHECKPOINT_PATH = os.path.join(CHECKPOINT_DIR, "best_epoch_03.pt")
 
 # ─── Sanity check files ───
+print("Looking for files...")
 for name, path in [("checkpoint", CHECKPOINT_PATH), ("vocab", VOCAB_JSONL), ("seed MIDI", SEED_MIDI)]:
     if not os.path.exists(path):
         raise FileNotFoundError(f"❌ Cannot find {name} at: {path}")
+print("✅ All necessary files found.")
 
-# ─── Load vocab ───
+
+# ─── Load vocab (MODIFIED SECTION) ───
+# This new logic reads the entire file and extracts the JSON from the LAST line.
+print(f"Reading full vocabulary history from: {VOCAB_JSONL}")
 note_to_int, int_to_note = {}, {}
 with open(VOCAB_JSONL, "r") as f:
+    last_line = None
     for line in f:
-        rec = json.loads(line)
-        note_to_int = rec["note_to_int"]
-        int_to_note = {int(k): v for k, v in rec["int_to_note"].items()}
+        # This will efficiently loop through and keep only the last non-empty line
+        if line.strip():
+            last_line = line
+
+    if last_line is None:
+        raise ValueError(f"Vocabulary file is empty or contains no valid lines: {VOCAB_JSONL}")
+
+    # Parse the JSON from the last line
+    rec = json.loads(last_line)
+    note_to_int = rec["note_to_int"]
+    int_to_note = {int(k): v for k, v in rec["int_to_note"].items()}
+
 VOCAB_SIZE = len(note_to_int)
+print(f"Vocabulary size from file (last line): {VOCAB_SIZE}")
+
 
 # ─── Load model ───
+print(f"Loading model configured for {VOCAB_SIZE} tokens...")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = MidiLSTMEnhanced(
     vocab_size=VOCAB_SIZE,
@@ -49,8 +66,15 @@ model = MidiLSTMEnhanced(
     num_layers=3, dropout=0.3,
     bidirectional=True, attn_heads=8
 ).to(device)
+
+# This line will now succeed because VOCAB_SIZE will be read from the final record.
 model.load_state_dict(torch.load(CHECKPOINT_PATH, map_location=device))
 model.eval()
+print(f"✅ Model loaded onto {device}.")
+
+
+# ... (The rest of the script is identical) ...
+
 
 # ─── Convert seed MIDI to token IDs ───
 def midi_to_token_ids(path):
@@ -93,9 +117,12 @@ for tok_id in generated:
     note_str = int_to_note.get(tok_id)
     if not note_str or "." in note_str or not PITCH_RE.match(note_str):
         continue
-    midi_num = pitch.Pitch(note_str).midi
-    track.append(Message('note_on', note=midi_num, velocity=64, time=0))
-    track.append(Message('note_off', note=midi_num, velocity=64, time=NOTE_DURATION))
+    try:
+        midi_num = pitch.Pitch(note_str).midi
+        track.append(Message('note_on', note=midi_num, velocity=64, time=0))
+        track.append(Message('note_off', note=midi_num, velocity=64, time=NOTE_DURATION))
+    except Exception as e:
+        continue
 
 mid.save(OUTPUT_MIDI)
 print(f"✅ Wrote generated MIDI to: {OUTPUT_MIDI}")

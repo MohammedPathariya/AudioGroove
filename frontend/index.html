@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioGroove - AI Music Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+</head>
+<body>
+    <div class="background-particles"></div>
+
+    <div class="container">
+        <h1 class="logo">AudioGroove</h1>
+        
+        <div class="music-visual">
+            <div class="note-animation">
+                <div class="note"></div><div class="note"></div><div class="note"></div>
+                <div class="note"></div><div class="note"></div>
+            </div>
+            <div class="music-icon">🎵</div>
+        </div>
+
+        <div class="controls">
+            <label for="seed-midi-input" class="btn btn-upload">
+                🌱 Upload Seed MIDI (Optional)
+            </label>
+            <input type="file" id="seed-midi-input" accept=".mid,.midi" hidden>
+            <span id="file-name" class="file-name-text">No file selected</span>
+
+            <div class="button-group">
+                <button id="generate-btn" class="btn btn-generate">Generate</button>
+                <button id="regenerate-btn" class="btn btn-regenerate hidden">Regenerate</button>
+            </div>
+            
+            <div id="progress-container" class="progress-container hidden">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <div id="status-text" class="status-text"></div>
+            
+            <a id="download-btn" class="btn btn-download hidden" download="audiogroove_composition.mid">
+                <span>⬇️ Download</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
