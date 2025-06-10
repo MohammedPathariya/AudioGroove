@@ -41,7 +41,7 @@ from data_prep.extract_midi import extract_notes_from_midi
 
 # ─── Global Settings & Sanity Checks ───
 TIMESTEPS    = 32
-GENERATE_LEN = 200
+GENERATE_LEN = 100
 TEMPERATURE  = 1.0
 TOP_K        = 50
 NOTE_DURATION = 480
