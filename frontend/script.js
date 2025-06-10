@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration ---
-    const API_ENDPOINT = 'https://audiogroove-backend.onrender.com/generate';
+    // This now points to your live Hugging Face Space backend
+    const API_ENDPOINT = 'https://pathariyamohammed-audiogroove-hf.hf.space/generate';
 
     // --- DOM Elements ---
     const midiInputElement = document.getElementById('seed-midi-input');
@@ -43,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const url = URL.createObjectURL(generatedMidiBlob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = 'audiogroove_composition.mid';
+a.href = url;
+a.download = 'audiogroove_composition.mid';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
