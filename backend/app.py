@@ -13,33 +13,31 @@ from music21 import pitch
 
 # ─── Flask App Initialization ───
 app = Flask(__name__)
-
-# --- Production-Ready CORS Setup ---
-# Reads the allowed frontend URL from an environment variable for security.
-# This avoids hardcoding the URL and allows for different environments.
-# It defaults to allowing localhost for local development.
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:8000")
 CORS(app, origins=[FRONTEND_URL, "http://127.0.0.1:8000", "http://localhost:5173"])
 
+# ─── 1. Corrected Path Definitions ───
+# Since this script is in /backend/, we go up one level ('..') to get the project's root directory.
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-# ─── 1. Standalone Path Definitions ───
-ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DATA_DIR = os.path.join(ROOT_DIR, "data")
+# Define all other paths relative to this correct PROJECT_ROOT
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
+SRC_DIR = os.path.join(PROJECT_ROOT, "src")
+TRAINING_DIR = os.path.join(PROJECT_ROOT, "training")
+
 SEED_FILES_DIR = os.path.join(DATA_DIR, "seed")
 VOCAB_JSONL = os.path.join(DATA_DIR, "processed", "vocab_full_history.jsonl")
-CHECKPOINT_DIR = os.path.join(ROOT_DIR, "training", "checkpoints", "lstm_enhanced")
+CHECKPOINT_DIR = os.path.join(TRAINING_DIR, "checkpoints", "lstm_enhanced")
 CHECKPOINT_PATH = os.path.join(CHECKPOINT_DIR, "best_epoch_03.pt")
 
-
-# ─── 2. Add the 'src' directory to Python's path ───
-src_dir = os.path.join(ROOT_DIR, "src")
-sys.path.insert(0, src_dir)
-
+# ─── 2. Add the project's 'src' directory to Python's path ───
+sys.path.insert(0, SRC_DIR)
 
 # ─── 3. Import custom modules AFTER updating the path ───
 from models.midi_lstm import MidiLSTMEnhanced
 from data_prep.extract_midi import extract_notes_from_midi
 
+# --- (The rest of the file is identical to the previous "production-ready" version) ---
 
 # ─── Global Settings & Sanity Checks ───
 TIMESTEPS    = 32
@@ -52,12 +50,18 @@ for path, name in [(CHECKPOINT_PATH, "checkpoint"), (VOCAB_JSONL, "vocabulary"),
     if not os.path.exists(path):
         raise FileNotFoundError(f"❌ Server HALTED on startup: Cannot find {name} at: {path}")
 
-
 # ─── Load Model and Vocab (on server startup for efficiency) ───
 print("🚀 Server starting: Loading model and vocabulary...")
+model = None # Initialize model as None
 try:
     with open(VOCAB_JSONL, "r") as f:
-        last_line = next(f for line in f if line.strip())
+        last_line = None
+        for line in f:
+            if line.strip():
+                last_line = line
+    if last_line is None:
+        raise ValueError("Vocabulary file is empty.")
+
     rec = json.loads(last_line)
     note_to_int = rec["note_to_int"]
     int_to_note = {int(k): v for k, v in rec["int_to_note"].items()}
@@ -75,13 +79,7 @@ try:
 except Exception as e:
     print(f"🔥🔥🔥 FATAL ERROR DURING STARTUP: {e}")
     traceback.print_exc()
-    # In a real-world scenario, you might exit or prevent the server from starting.
-    # For now, we print a clear error.
-    model = None
 
-
-# ─── ★ Health Check Endpoint ★ ───
-# A simple endpoint to verify that the server is running.
 @app.route("/")
 def health_check():
     return jsonify(
@@ -90,14 +88,11 @@ def health_check():
         model_loaded= (model is not None)
     ), 200
 
-
-# ─── API Endpoint for Music Generation ───
 @app.route("/generate", methods=["POST"])
 def generate_music_endpoint():
     if model is None:
         return jsonify({"error": "Model is not loaded. Server may have failed to start."}), 503
 
-    # (The rest of the generation logic remains the same)
     seed_file = None
     if 'seed_midi' in request.files and request.files['seed_midi'].filename != '':
         seed_file = request.files['seed_midi']
@@ -105,6 +100,8 @@ def generate_music_endpoint():
     else:
         print("🎧 No user seed provided. Using random seed from server.")
         seed_options = [f for f in os.listdir(SEED_FILES_DIR) if f.lower().endswith(('.mid', '.midi'))]
+        if not seed_options:
+            return jsonify({"error": "The server's seed directory is empty."}), 500
         random_seed_name = random.choice(seed_options)
         seed_file = os.path.join(SEED_FILES_DIR, random_seed_name)
         print(f"🎧 Selected random seed: {random_seed_name}")
@@ -131,7 +128,6 @@ def generate_music_endpoint():
         traceback.print_exc()
         return jsonify({"error": "An internal error occurred during music generation."}), 500
 
-
     midi_io = io.BytesIO()
     try:
         PITCH_RE = re.compile(r"^[A-G](?:#|b|-)?\d+$")
@@ -152,14 +148,8 @@ def generate_music_endpoint():
         return jsonify({"error": "Failed to construct the final MIDI file after generation."}), 500
 
     print("✅ Generation complete. Sending MIDI file to user.")
-    return send_file(
-        midi_io,
-        mimetype='audio/midi',
-        as_attachment=True,
-        download_name='generated_music.mid'
-    )
+    return send_file(midi_io, mimetype='audio/midi', as_attachment=True, download_name='generated_music.mid')
 
-# --- Helper functions (no changes) ---
 def midi_to_token_ids(path_or_file):
     tokens = extract_notes_from_midi(path_or_file, instrument_filter=None)
     return [note_to_int[t] for t in tokens if t in note_to_int]
