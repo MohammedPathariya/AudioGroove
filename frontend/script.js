@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration ---
-    const API_ENDPOINT = 'http://127.0.0.1:5000/generate';
+    const API_ENDPOINT = 'https://audiogroove-backend.onrender.com/generate';
 
     // --- DOM Elements ---
     const midiInputElement = document.getElementById('seed-midi-input');
