@@ -18,8 +18,6 @@ Generate your own unique compositions with a single click. See what the AI creat
 
 **[https://audiogroove.vercel.app/](https://audiogroove.vercel.app/)**
 
-![AudioGroove Frontend Screenshot](https://i.imgur.com/KqC1s3k.png)
-
 ---
 
 ## 💡 My Motivation
