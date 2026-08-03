@@ -12,6 +12,7 @@ data/audit/lmdclean_pilot_250/chunks/
 training/checkpoints/
 training/logs/
 runs/mlruns/
+runs/day4/
 
 # Ignore generated outputs
 generated_music.mid

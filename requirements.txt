@@ -9,3 +9,6 @@ pandas
 matplotlib
 natsort
 tensorboard
+dask>=2023.5.0
+mlflow>=2.0.0
+pytest>=7.0.0
