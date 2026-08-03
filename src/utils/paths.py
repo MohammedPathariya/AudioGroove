@@ -20,6 +20,10 @@ PROCESSED_DIR = os.path.join(DATA_DIR, "processed")
 # Directory containing all seed MIDI files
 SEED_FILES_DIR = os.path.join(DATA_DIR, "seed")
 
+TRAIN_PT = os.path.join(PROCESSED_DIR, "train.pt")
+VAL_PT   = os.path.join(PROCESSED_DIR, "val.pt")
+TEST_PT  = os.path.join(PROCESSED_DIR, "test.pt")
+
 # Vocabulary file
 VOCAB_JSONL = os.path.join(PROCESSED_DIR, "vocab_full_history.jsonl")
 
