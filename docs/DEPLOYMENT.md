@@ -55,6 +55,8 @@ Each deployable model artifact must be accompanied by:
 - generation evaluation report
 - artifact checksum
 - data modality and representation version
+- MLflow run ID and tracking backend
+- Dask preprocessing configuration and worker or partition limits
 
 Do not deploy a checkpoint if its vocabulary, representation, model configuration, or audio preprocessing configuration is unknown.
 
@@ -73,7 +75,7 @@ Raw audio generation is likely to require a different serving architecture from 
 
 ## Optional cloud training
 
-Cloud GPU training is allowed only after the 250-song pilot is reproducible locally on the smoke or development dataset. The first cloud-scale run must use the pilot-approved configuration and the cloud run must use:
+Cloud GPU training is allowed only after the 250-song pilot is reproducible locally on the smoke or development dataset. The first cloud-scale run must use the pilot-approved Dask and MLflow configuration and the cloud run must use:
 
 - a pinned repository commit
 - a pinned dataset or manifest
@@ -81,6 +83,8 @@ Cloud GPU training is allowed only after the 250-song pilot is reproducible loca
 - a saved configuration
 - a resumable checkpoint
 - an exported evaluation report
+- an exported MLflow run or tracking archive with its run ID
+- the Dask preprocessing configuration and bounded partition limits
 
 Cloud compute is for the larger LMDClean experiment after the pilot gate passes, not for debugging broken preprocessing or training code. The pilot comparison itself must remain reproducible on the bounded development setup where practical.
 

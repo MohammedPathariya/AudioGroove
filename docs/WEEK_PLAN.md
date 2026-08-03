@@ -64,6 +64,7 @@ Use a representation that preserves enough information for meaningful generation
 ### Work
 
 - Split the pilot by source song before windowing. Group by artist or album when reliable metadata is available.
+- Use Dask for bounded MIDI parsing and chunk preparation, with deterministic source ordering and a recorded worker or partition configuration.
 - Implement or finalize event tokens for note starts, note ends or durations, time shifts, velocity, and instrument information.
 - Define vocabulary special tokens and unknown-token behavior.
 - Implement a streaming or bounded-chunk `Dataset`.
@@ -99,11 +100,13 @@ Train a compact baseline locally on the bounded 250-song pilot using the same ob
 - Use gradient accumulation instead of a large physical batch.
 - Disable CUDA-only assumptions and start with float32 on MPS.
 - Add checkpoint resume and early stopping.
+- Track the run in local MLflow under `runs/mlruns/`. Log the dataset revision, source and window counts, selection and split seeds, Git commit, model configuration, device, training budget, metrics, checkpoint, and generation artifacts.
+- Keep Dask preprocessing configuration and MLflow run metadata in the reproducibility record.
 - If the local device is insufficient, move the training run to Google Colab only after the local smoke test passes.
 
 ### Deliverable
 
-The compact baseline completes a bounded pilot run and produces a checkpoint plus a metrics report.
+The compact baseline completes a bounded pilot run and produces a checkpoint, an MLflow run, and a metrics report.
 
 ### Stop condition
 
@@ -140,7 +143,7 @@ A versioned JSON or CSV baseline report with fixed random seeds and saved sample
 
 ### Stop condition
 
-The report can be regenerated from one command and clearly states dataset revision, pilot-selection seed, split seed, model, device, source-file counts, and sample count. The test split is not changed during tuning.
+The report can be regenerated from one command and clearly states dataset revision, pilot-selection seed, split seed, model, device, Dask preprocessing configuration, MLflow run ID, source-file counts, and sample count. The test split is not changed during tuning.
 
 ## Day 6: Model comparison and resource profiling
 
@@ -155,8 +158,10 @@ Compare the compact LSTM, GRU, and compact Transformer on the same bounded 250-s
   - same dataset
   - same seed
   - same frozen source-file split
+  - same Dask preprocessing configuration
   - same number of epochs or training steps
   - same evaluation sample count
+- Log every comparison run and artifact to MLflow. Do not select a model from untracked terminal output.
 - Record:
   - peak memory
   - samples per second
@@ -203,7 +208,7 @@ The selected pilot result can be reproduced from the documented commands without
 
 ## After Day 7: Larger LMDClean training gate
 
-The larger corpus is a separate phase. It may begin only after the pilot gate passes. The larger run must pin the approved preprocessing configuration, repository revision, dataset version, split policy, random seeds, model configuration, checkpoint location, and evaluation procedure. The pilot test split and the larger-run final test split must remain held out from model selection.
+The larger corpus is a separate phase. It may begin only after the pilot gate passes. The larger run must pin the approved Dask preprocessing configuration, repository revision, dataset version, split policy, random seeds, model configuration, MLflow tracking configuration, checkpoint location, and evaluation procedure. The pilot test split and the larger-run final test split must remain held out from model selection.
 
 ## Laptop resource guardrails
 

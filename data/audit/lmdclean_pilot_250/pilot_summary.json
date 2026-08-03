@@ -1,0 +1,71 @@
+{
+  "audit_dir": "data/audit/lmdclean_pilot_250",
+  "chunk_manifest": {
+    "test": {
+      "chunk_count": 1469,
+      "source_file_count": 38,
+      "token_count": 377085,
+      "window_count": 375869
+    },
+    "train": {
+      "chunk_count": 7099,
+      "source_file_count": 175,
+      "token_count": 1822689,
+      "window_count": 1817089
+    },
+    "val": {
+      "chunk_count": 1181,
+      "source_file_count": 37,
+      "token_count": 303460,
+      "window_count": 302276
+    }
+  },
+  "configuration": {
+    "max_duration_seconds": 600.0,
+    "max_windows_per_chunk": 256,
+    "sequence_length": 32,
+    "tokenization": "mido note_on/note_off event tokens"
+  },
+  "dataset_name": "lmdclean_pilot_250",
+  "dataset_revision": "cb79c82e90dc9087dc7f525d5ddf48648c0e7ba64d39fcdce6619acb94fbe62d",
+  "dataset_revision_method": "sha256 of sorted relative MIDI paths and byte sizes; selected files also have content SHA-256",
+  "exclusion_count": 6984,
+  "exclusion_counts_by_reason": {
+    "duplicate_song_identity": 6979,
+    "overlong": 3,
+    "unreadable": 2
+  },
+  "leakage_checks": {
+    "artist_group_overlap_count": 0,
+    "sha256_overlap_count": 0,
+    "song_identity_overlap_count": 0
+  },
+  "metadata": {
+    "album_grouping_used": false,
+    "album_metadata_reason": "No reliable album metadata was present in the corpus layout or sidecar files.",
+    "artist_grouping_used": true
+  },
+  "pilot_dir": "data/pilot_250",
+  "resource_limits": {
+    "chunking": "bounded, one chunk buffer at a time",
+    "larger_corpus_training_started": false,
+    "max_windows_per_chunk": 256,
+    "model_training": "not run by this command",
+    "training_started": false
+  },
+  "selected_song_count": 250,
+  "selection_seed": 20260803,
+  "source_dir": "data/clean_midi",
+  "source_file_count": 17256,
+  "split_counts": {
+    "test": 38,
+    "train": 175,
+    "val": 37
+  },
+  "split_seed": 20260804,
+  "target_song_count": 250,
+  "test_split_frozen": true,
+  "token_count": 2503234,
+  "unique_song_identity_count": 10277,
+  "window_count": 2495234
+}

@@ -94,9 +94,15 @@ This file records decisions that affect architecture, experiments, evaluation, a
 
 ## D-016: Controlled model comparison on one frozen pilot
 
-- **Decision:** Compare the compact LSTM, GRU, and compact Transformer on the same pilot source split, token representation, sequence length, random seed policy, training budget, and evaluation sample count.
+- **Decision:** Compare the compact LSTM, GRU, and compact Transformer on the same pilot source split, token representation, sequence length, random seed policy, training budget, and evaluation sample count. Use Dask for bounded preprocessing and MLflow for local, machine-readable experiment tracking.
 - **Reason:** Changing the dataset or training budget between models makes quality differences uninterpretable.
-- **Consequence:** Every result must report predictive, MIDI-validity, musical-statistics, originality, latency, and resource metrics. A model is selected only after the comparison report records whether it improved, degraded, or did not conclusively change the agreed metrics.
+- **Consequence:** Every result must report predictive, MIDI-validity, musical-statistics, originality, latency, and resource metrics. Dask task configuration and MLflow run IDs must be recorded with the dataset revision and Git commit. A model is selected only after the comparison report records whether it improved, degraded, or did not conclusively change the agreed metrics.
+
+## D-018: Dask and MLflow experiment infrastructure
+
+- **Decision:** Use Dask to parallelize MIDI parsing and bounded feature or chunk preparation, and use MLflow to track pilot training and benchmark runs. The first tracking backend is local under `runs/mlruns/`; no external tracking service is required.
+- **Reason:** The project needs a traceable preprocessing and training history that can support claims about dataset scale, runtime, experiments, and model selection without relying on undocumented terminal output.
+- **Consequence:** Dask work must preserve source-level split assignments and deterministic ordering. MLflow must log dataset revision, source and window counts, selection and split seeds, model configuration, device, training budget, metrics, resource measurements, checkpoints, manifests, and benchmark reports. Dask and MLflow integration is not considered verified until a pilot run completes and the artifacts can be reopened locally.
 
 ## D-017: Larger-corpus scale-up gate
 

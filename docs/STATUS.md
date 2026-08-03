@@ -39,6 +39,7 @@ AudioGroove is an end-to-end prototype for seeded MIDI generation. It has source
 4. The current code selects CUDA or CPU and does not properly support MPS as the primary local device.
 5. The project has no automated evaluation harness or human evaluation protocol.
 6. The large cleaned training dataset is not present locally, and the active environment is missing `natsort` for chunk-management imports.
+7. Dask preprocessing and MLflow experiment tracking have been specified but not yet integrated into or verified by a pilot training run.
 
 ## Modality settled, representation and model selection pending
 
@@ -81,9 +82,11 @@ The planned pilot is a bounded development benchmark, not the final generalizati
 - Split by source song before windowing, grouping by artist or album when reliable metadata exists.
 - Freeze the pilot test split before model comparison.
 - Train and compare a compact LSTM, GRU, and compact Transformer using the same representation, source split, seed policy, training budget, and evaluation sample count.
+- Run bounded preprocessing through Dask with a recorded worker or partition configuration.
+- Track every baseline and comparison run in local MLflow under `runs/mlruns/`, including dataset revision, Dask configuration, Git commit, model configuration, metrics, resources, checkpoints, and benchmark artifacts.
 - Report predictive, MIDI-validity, musical-statistics, originality, latency, memory, and throughput metrics.
 
-The larger LMDClean run is blocked until the pilot has a reproducible loader, stable bounded training, verified MIDI serialization, a frozen evaluation report, and a documented resource profile.
+The larger LMDClean run is blocked until the pilot has a reproducible loader, verified Dask preprocessing, a stable bounded training run tracked in MLflow, verified MIDI serialization, a frozen evaluation report, and a documented resource profile.
 
 ## Day 2 data audit completed
 
@@ -114,3 +117,38 @@ Results are recorded in `data/audit/day2/`:
 - Generated `.pt` chunks and the quarantined MIDI copy remain local and are
   ignored by Git. The manifests and `src/data_prep/day2_audit.py` regenerate
   them without publishing source media or machine-specific paths.
+
+## LMDClean 250-song pilot selected
+
+The cleaned corpus is available locally at `data/clean_midi/`. The bounded
+pilot selector is `src/data_prep/build_lmdclean_pilot.py` and copies selected
+source files into the ignored local folder `data/pilot_250/`, organized as
+`train/`, `val/`, and `test/` by artist group. The source corpus is not moved
+or modified.
+
+Command:
+
+```bash
+python3 -m src.data_prep.build_lmdclean_pilot
+```
+
+Pilot evidence is recorded in `data/audit/lmdclean_pilot_250/`:
+
+- Dataset revision: `cb79c82e90dc9087dc7f525d5ddf48648c0e7ba64d39fcdce6619acb94fbe62d`.
+  This revision is the SHA-256 of sorted relative MIDI paths and byte sizes.
+  Selected files also have content SHA-256 values in `selected_manifest.jsonl`.
+- 17,256 MIDI files were inventoried, representing 10,277 unique artist and
+  normalized song identities after numbered filename variants were grouped.
+- Exactly 250 songs were selected with selection seed `20260803` and copied
+  without source mutation.
+- Frozen source-level split with split seed `20260804`: train 175, validation
+  37, test 38. Artist groups were kept within one split. Album grouping was not
+  used because no reliable album metadata or sidecar file was present.
+- The pilot contains 2,503,234 event tokens and 2,495,234 next-token windows
+  across 9,749 bounded chunks. Each chunk contains at most 256 windows and
+  uses sequence length 32.
+- Exclusions: 6,979 duplicate song identities, 3 overlong files, and 2
+  unreadable files. No selected file is unreadable or overlong.
+- Leakage checks passed: zero song-identity overlap, zero artist-group overlap,
+  and zero SHA-256 overlap across splits.
+- `training_started` and `larger_corpus_training_started` are both `false`.

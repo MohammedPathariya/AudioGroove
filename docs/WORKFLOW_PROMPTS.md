@@ -45,7 +45,7 @@ Implement only the Day 3 representation and bounded dataset loader for the modal
 ## Day 4 prompt: baseline
 
 ```text
-Implement only the Day 4 compact baseline. Use next-token prediction so training matches autoregressive generation. Add MPS selection with CPU fallback, small physical batches, gradient accumulation, checkpoint resume, and early stopping. Start with the smoke or development dataset. Report device, memory behavior, training time, losses, perplexity, accuracy, and generation result.
+Implement only the Day 4 compact baseline. Use next-token prediction so training matches autoregressive generation. Use Dask for bounded preprocessing with deterministic ordering and a recorded worker or partition configuration. Track the run in local MLflow under `runs/mlruns/`, logging the dataset revision, source and window counts, seeds, Git commit, model configuration, device, training budget, losses, perplexity, accuracy, resources, checkpoint, and generation artifacts. Add MPS selection with CPU fallback, small physical batches, gradient accumulation, checkpoint resume, and early stopping. Start with the 250-song pilot. Report device, memory behavior, training time, MLflow run ID, losses, perplexity, accuracy, and generation result.
 ```
 
 ## Day 5 prompt: evaluation
@@ -57,7 +57,7 @@ Implement only the Day 5 evaluation harness. Add predictive, output-validity, mu
 ## Day 6 prompt: model comparison
 
 ```text
-Implement only the Day 6 controlled model comparison. Keep dataset, split, seed, training budget, and evaluation procedure fixed relative to the compact baseline. Compare the selected alternative model, which may be attention, GRU, compact Transformer, temporal convolution, or a pretrained audio-feature approach. Profile memory, speed, and output quality. Stop if the M1 begins swapping or the run becomes unstable. State whether the comparison model improved, degraded, or did not conclusively change the measured results.
+Implement only the Day 6 controlled model comparison. Keep dataset, split, seed, Dask preprocessing configuration, training budget, and evaluation procedure fixed relative to the compact baseline. Compare the selected alternative model, which may be attention, GRU, compact Transformer, temporal convolution, or a pretrained audio-feature approach. Log each run and artifact in MLflow. Profile memory, speed, and output quality. Stop if the M1 begins swapping or the run becomes unstable. State whether the comparison model improved, degraded, or did not conclusively change the measured results.
 ```
 
 ## Day 7 prompt: integration

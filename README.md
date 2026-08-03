@@ -51,7 +51,8 @@ AudioGroove is built with a modern, decoupled architecture, with each component 
 
 **Machine Learning:**
 - **Core Model:** A PyTorch-based LSTM with a Multi-Head Self-Attention layer.
-- **Data Processing:** `music21` for advanced MIDI parsing and feature extraction.
+- **Data Processing:** Dask for bounded parallel MIDI ETL and `music21` or `mido` for MIDI parsing and feature extraction.
+- **Experiment Tracking:** MLflow for reproducible local training runs, metrics, checkpoints, and benchmark artifacts.
 - **Artifact Hosting:** [**Hugging Face Hub**](https://huggingface.co/docs/hub/index) to store the large model checkpoint (`.pt`) and vocabulary file (`.jsonl`), keeping the source code repository lightweight.
 
 ### System Architecture Diagram
@@ -83,7 +84,7 @@ My journey with this project followed a complete machine learning lifecycle:
 
 2.  **Vocabulary Building:** The vocabulary and representation are being rebuilt as part of the bounded pilot so every model comparison uses the same versioned preprocessing artifacts.
 
-3.  **Model & Training:** The pilot will compare a compact LSTM, GRU, and compact Transformer on the same frozen source split and training budget. The existing attention model is a prototype, not yet a verified winner.
+3.  **Model & Training:** The pilot will compare a compact LSTM, GRU, and compact Transformer on the same frozen source split and training budget. Dask will provide bounded preprocessing and MLflow will track the runs. The existing attention model is a prototype, not yet a verified winner.
 
 4.  **Generation Logic:** The generation path supports autoregressive sampling with temperature and top-k controls. Model-quality and generation-validity claims remain pending the controlled pilot benchmark.
 
