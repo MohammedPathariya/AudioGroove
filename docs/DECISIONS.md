@@ -59,7 +59,7 @@ This file records decisions that affect architecture, experiments, evaluation, a
 ## D-010: Deployment claims require verification
 
 - **Decision:** A deployment is not considered complete because a frontend URL exists or a build succeeds.
-- **Reason:** The actual model artifact, backend readiness, generation request, returned MIDI, and cold-start behavior must be checked.
+- **Reason:** The actual model artifact, backend readiness, generation request, returned project output, and cold-start behavior must be checked.
 - **Consequence:** Hosted verification must record URL, commit or artifact revision, request result, latency, and any known free-tier limitations.
 
 ## D-011: Choose the data modality by task fit

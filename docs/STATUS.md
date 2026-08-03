@@ -56,7 +56,7 @@ By the end of the week, the project should have:
 - MPS and CPU device selection
 - a corrected next-token training objective
 - a compact baseline that completes locally
-- an attention comparison experiment, if memory and time permit
+- a selected-model comparison experiment, if memory and time permit
 - automated predictive, validity, musical-statistics, originality, and latency reports
 - documented local startup and deployment smoke-test procedures
 - no unsupported performance claims

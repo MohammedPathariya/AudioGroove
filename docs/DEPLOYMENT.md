@@ -110,7 +110,7 @@ model_revision:
 health_status:
 model_loaded:
 generation_status:
-returned_midi_parseable:
+returned_output_valid:
 generation_latency_seconds:
 cold_start_latency_seconds:
 known_limitations:
@@ -122,6 +122,6 @@ The smoke test is successful only when:
 2. The backend health endpoint responds.
 3. The backend reports the model as loaded.
 4. A request without a seed succeeds.
-5. A request with a valid seed succeeds.
-6. The returned file parses as MIDI.
-7. The returned file contains at least one valid note event.
+5. A request with a valid seed succeeds when seeded input is supported.
+6. The returned output passes the selected modality's parser or decoder.
+7. The returned output contains valid musical content for the selected modality.

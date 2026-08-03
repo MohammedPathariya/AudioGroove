@@ -21,7 +21,7 @@ Before changing the AudioGroove pipeline, compare three options for the stated t
 ## Day 1 prompt: foundation
 
 ```text
-Implement only the AudioGroove repository foundation work from Day 1 of docs/WEEK_PLAN.md. Standardize data paths, define missing chunk-directory constants, and make import conventions consistent. Do not redesign the model or representation yet. Preserve unrelated changes. Verify imports and syntax, and report every remaining blocker.
+Implement only the AudioGroove repository foundation work from Day 1 of docs/WEEK_PLAN.md. Standardize data paths, define missing chunk-directory constants, make import conventions consistent, and record the modality and model-family decision without implementing the new model or representation yet. Preserve unrelated changes. Verify imports and syntax, and report every remaining blocker.
 ```
 
 ## Day 2 prompt: data audit
@@ -33,7 +33,7 @@ Implement only the Day 2 data audit and bounded preprocessing work. Inspect avai
 ## Day 3 prompt: representation
 
 ```text
-Implement only the Day 3 event representation and bounded dataset loader. Preserve timing, duration or note-off information, velocity, and instrument information where the source supports it. Add round-trip and shape tests. Do not add attention or start large training. Verify real MIDI samples through parse, tokenize, detokenize, and reparse.
+Implement only the Day 3 representation and bounded dataset loader for the modality selected in docs/DECISIONS.md. For symbolic data, preserve timing, duration or note-off information, velocity, and instrument information where the source supports it. For audio, define sample rate, segmenting, feature extraction, and reconstruction or playback validation. Add round-trip and shape tests. Do not start large training.
 ```
 
 ## Day 4 prompt: baseline
@@ -57,7 +57,7 @@ Implement only the Day 6 controlled model comparison. Keep dataset, split, seed,
 ## Day 7 prompt: integration
 
 ```text
-Implement only the Day 7 integration and deployment-readiness work. Connect the verified local checkpoint and vocabulary to the backend, add compatibility checks, run seeded and unseeded API generation, validate returned MIDI, and run frontend smoke tests. Update docs/STATUS.md and docs/DEPLOYMENT.md with exact evidence. Do not publish unsupported hosted or model-quality claims.
+Implement only the Day 7 integration and deployment-readiness work. Connect the verified local model artifact and representation assets to the backend, add compatibility checks, run supported seeded and unseeded generation, validate the returned MIDI or audio output, and run frontend smoke tests. Update docs/STATUS.md and docs/DEPLOYMENT.md with exact evidence. Do not publish unsupported hosted or model-quality claims.
 ```
 
 ## Review prompt

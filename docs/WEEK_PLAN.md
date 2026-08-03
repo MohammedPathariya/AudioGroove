@@ -165,7 +165,7 @@ Test whether the selected alternative model provides value under the available r
 
 ### Deliverable
 
-A baseline-versus-attention comparison table with resource and quality metrics.
+A baseline-versus-selected-model comparison table with resource and quality metrics.
 
 ### Stop condition
 
@@ -179,10 +179,10 @@ Make the verified local result reproducible and define the next training step.
 
 ### Work
 
-- Connect the selected checkpoint and vocabulary to the backend.
+- Connect the selected model artifact, representation configuration, and vocabulary or preprocessing assets to the backend.
 - Add readiness checks for artifact compatibility.
 - Run local API generation with and without a seed file.
-- Validate returned MIDI or audio files.
+- Validate returned MIDI or audio files according to the selected modality.
 - Run frontend smoke testing.
 - Update `STATUS.md`, `DECISIONS.md`, and `DEPLOYMENT.md` with actual results.
 - Decide whether a larger cloud run is justified.
@@ -230,7 +230,7 @@ validation_loss
 perplexity
 token_accuracy
 top5_accuracy
-midi_validity_rate
+output_validity_rate
 generation_failure_rate
 mean_generation_latency_ms
 note_density_distance
