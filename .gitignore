@@ -11,6 +11,7 @@ training/logs/
 generated_music.mid
 
 # Python cache
+.DS_Store
 __pycache__/
 *.pyc
 *.pyo
@@ -26,4 +27,3 @@ venv/
 
 # Colab and Jupyter artifacts
 *.ipynb
-
