@@ -73,7 +73,7 @@ Raw audio generation is likely to require a different serving architecture from 
 
 ## Optional cloud training
 
-Cloud GPU training is allowed only for experiments that are already reproducible locally on the smoke or development dataset. The cloud run must use:
+Cloud GPU training is allowed only after the 250-song pilot is reproducible locally on the smoke or development dataset. The first cloud-scale run must use the pilot-approved configuration and the cloud run must use:
 
 - a pinned repository commit
 - a pinned dataset or manifest
@@ -82,7 +82,7 @@ Cloud GPU training is allowed only for experiments that are already reproducible
 - a resumable checkpoint
 - an exported evaluation report
 
-Cloud compute is for the final larger experiment, not for debugging broken preprocessing or training code.
+Cloud compute is for the larger LMDClean experiment after the pilot gate passes, not for debugging broken preprocessing or training code. The pilot comparison itself must remain reproducible on the bounded development setup where practical.
 
 ## Container requirements
 

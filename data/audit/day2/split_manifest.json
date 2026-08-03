@@ -1,0 +1,14 @@
+{
+  "assignment": {
+    "data/seed/Angry_Chair.mid": "train",
+    "data/seed/Another_Day.mid": "train",
+    "data/seed/Boom_Boom_Boom.mid": "test",
+    "data/seed/Dam_That_River.mid": "val",
+    "data/seed/Delicado.mid": "train",
+    "data/seed/Drowning.mid": "train",
+    "data/seed/Hold_My_Hand.mid": "train",
+    "data/seed/It_Takes_Me_Away.mid": "train",
+    "data/seed/Time.mid": "train"
+  },
+  "seed": 20260803
+}

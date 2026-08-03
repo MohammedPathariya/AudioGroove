@@ -30,6 +30,12 @@ Implement only the AudioGroove repository foundation work from Day 1 of docs/WEE
 Implement only the Day 2 data audit and bounded preprocessing work. Inspect available MIDI sources, quarantine unreadable or overlong files without destructive deletion, create a deterministic manifest, and build smoke/development chunk artifacts. Do not start model training. Record exact counts, paths, seeds, and failures.
 ```
 
+## 250-song pilot prompt
+
+```text
+Implement the bounded LMDClean pilot stage for AudioGroove. Select approximately 250 songs deterministically from the available cleaned corpus and record the source-selection seed, dataset revision, exact paths, hashes, and any exclusions. Split by source song before windowing, group by artist or album when reliable metadata exists, and freeze the test split before model comparison. Reuse one preprocessing configuration and bounded chunk format. Do not start larger-corpus training. Report source counts, split counts, token and window counts, quarantine or parse failures, leakage checks, and resource limits.
+```
+
 ## Day 3 prompt: representation
 
 ```text

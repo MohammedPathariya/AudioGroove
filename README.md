@@ -28,7 +28,7 @@ AudioGroove is my answer to that question. This project started as a personal ch
 
 ## ✨ Key Features
 
-- **AI-Powered Composition:** Breathes life into new musical pieces using a deep learning model trained on thousands of songs.
+- **AI-Powered Composition:** Provides the application path for MIDI composition while reproducible pilot training and benchmarking are completed.
 - **Creative Seeding:** You can upload your own `.mid` file to give the AI a starting point, influencing the melody and style of the output.
 - **Freestyle Generation:** If you don't provide a seed, the backend will pick one at random, leading to surprising and unique compositions.
 - **Interactive & Modern UI:** A clean and responsive web interface built with vanilla HTML, CSS, and JavaScript, ensuring a fast and lightweight user experience.
@@ -79,13 +79,13 @@ V
 
 My journey with this project followed a complete machine learning lifecycle:
 
-1.  **Data Collection & Preparation:** The adventure began with a dataset of over 17,000 MIDI files. The first step was a deep dive into data sanitation, writing scripts to find and discard corrupt files and filter tracks to a reasonable length. The `music21` library was my tool of choice for parsing these files and extracting the core note and chord sequences.
+1.  **Data Collection & Preparation:** The current verified audit uses 10 local seed MIDI files. The next controlled stage is an approximately 250-song LMDClean pilot with deterministic source selection, source-level splits, non-destructive quarantine, bounded chunks, and recorded parser failures. The larger corpus remains a later scale-up phase.
 
-2.  **Vocabulary Building:** I built a dynamic vocabulary from all valid MIDI files. To keep the model focused on meaningful patterns, I set a frequency threshold of 50, meaning only musical elements that appeared at least 50 times across the entire dataset made it into the final vocabulary.
+2.  **Vocabulary Building:** The vocabulary and representation are being rebuilt as part of the bounded pilot so every model comparison uses the same versioned preprocessing artifacts.
 
-3.  **Model & Training:** The heart of the system is `MidiLSTMEnhanced`, a PyTorch model I designed with stacked bidirectional LSTM layers to understand sequences, and a multi-head self-attention layer to let the model weigh the importance of different notes when composing.
+3.  **Model & Training:** The pilot will compare a compact LSTM, GRU, and compact Transformer on the same frozen source split and training budget. The existing attention model is a prototype, not yet a verified winner.
 
-4.  **Generation Logic:** The final step was to use the trained model to predict new notes autoregressively. I implemented top-k and temperature sampling to balance creativity with coherence, preventing the model from getting stuck in repetitive loops.
+4.  **Generation Logic:** The generation path supports autoregressive sampling with temperature and top-k controls. Model-quality and generation-validity claims remain pending the controlled pilot benchmark.
 
 ---
 

@@ -85,3 +85,21 @@ This file records decisions that affect architecture, experiments, evaluation, a
 - **Decision:** The first-week implementation target is symbolic MIDI generation using the existing compact unidirectional recurrent model as a baseline. MP3/audio remains an evaluated follow-up path, not a simultaneous rewrite.
 - **Reason:** The current repository, seed data, API, and output path are MIDI-based. This gives the project a bounded, testable baseline on the M1 while leaving room to compare audio approaches in a separate experiment.
 - **Consequence:** Do not implement a new audio representation or alternative model on Day 1. After the baseline and evaluation harness exist, compare a compact GRU or Transformer against the recurrent baseline under the same budget. The final architecture remains evidence-based.
+
+## D-015: 250-song LMDClean pilot benchmark
+
+- **Decision:** Before using the larger LMDClean corpus, build and evaluate a deterministic pilot subset of approximately 250 songs. Use the existing 10-song dataset only as a smoke test.
+- **Reason:** A bounded pilot makes the full preprocessing, training, evaluation, and comparison loop affordable on the available hardware. It also exposes representation, leakage, memory, and reproducibility problems before a larger run.
+- **Consequence:** The pilot is a development benchmark, not the final generalization claim. Select the pilot files with a recorded seed, target a 70/15/15 train/validation/test split, split by source song before windowing, and group by artist or album when reliable metadata is available. Record the exact post-grouping counts and freeze the pilot test split before model comparison.
+
+## D-016: Controlled model comparison on one frozen pilot
+
+- **Decision:** Compare the compact LSTM, GRU, and compact Transformer on the same pilot source split, token representation, sequence length, random seed policy, training budget, and evaluation sample count.
+- **Reason:** Changing the dataset or training budget between models makes quality differences uninterpretable.
+- **Consequence:** Every result must report predictive, MIDI-validity, musical-statistics, originality, latency, and resource metrics. A model is selected only after the comparison report records whether it improved, degraded, or did not conclusively change the agreed metrics.
+
+## D-017: Larger-corpus scale-up gate
+
+- **Decision:** Do not start larger LMDClean training until the 250-song pilot has a reproducible loader, stable bounded training run, frozen evaluation report, verified MIDI serialization, and documented resource profile.
+- **Reason:** More data cannot repair a leaky split, broken target alignment, incomplete representation, or unstable training loop.
+- **Consequence:** The larger run must pin the pilot-approved preprocessing configuration, repository revision, dataset version, split policy, seed, model configuration, and output artifact location. The final held-out evaluation must not be used for model tuning.

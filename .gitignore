@@ -2,6 +2,8 @@
 data/raw/
 data/chunks/
 data/processed/
+data/audit/day2/chunks/
+data/audit/day2/quarantine/
 
 # Ignore training outputs
 training/checkpoints/

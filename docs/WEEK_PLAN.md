@@ -38,16 +38,18 @@ Create a small, reproducible dataset that is safe for 8 GB unified memory.
 
 ### Work
 
+- Select approximately 250 songs from the approved LMDClean version with a fixed seed and record exact paths and hashes.
 - Decide which MIDI corpus is legally and technically usable.
 - Run the scanner in quarantine mode.
 - Generate a manifest with parse status, duration, token count, and source identity.
 - Create deterministic source-file train, validation, and test splits.
 - Build bounded chunk files without merging all windows.
 - Create smoke and development dataset manifests.
+- Keep the pilot test split frozen before model comparison.
 
 ### Deliverable
 
-A reproducible smoke dataset and development dataset exist, with counts and split assignments recorded.
+A reproducible smoke dataset and development dataset exist, with counts and split assignments recorded. The next data target is an approximately 250-song LMDClean pilot, while the current 10-song result remains the smoke test.
 
 ### Stop condition
 
@@ -61,6 +63,7 @@ Use a representation that preserves enough information for meaningful generation
 
 ### Work
 
+- Split the pilot by source song before windowing. Group by artist or album when reliable metadata is available.
 - Implement or finalize event tokens for note starts, note ends or durations, time shifts, velocity, and instrument information.
 - Define vocabulary special tokens and unknown-token behavior.
 - Implement a streaming or bounded-chunk `Dataset`.
@@ -74,13 +77,13 @@ The loader can train from bounded chunks, and the selected representation can be
 
 ### Stop condition
 
-A small sample of real files passes parse, preprocessing, reconstruction or serialization, and output validation checks.
+A small sample of real files passes parse, preprocessing, reconstruction or serialization, and output validation checks. The pilot test split is frozen before model comparison.
 
 ## Day 4: Correct compact baseline
 
 ### Objective
 
-Train a model locally using the same objective used during generation.
+Train a compact baseline locally on the bounded 250-song pilot using the same objective used during generation.
 
 ### Work
 
@@ -100,7 +103,7 @@ Train a model locally using the same objective used during generation.
 
 ### Deliverable
 
-The compact baseline completes a local run and produces a checkpoint plus a metrics report.
+The compact baseline completes a bounded pilot run and produces a checkpoint plus a metrics report.
 
 ### Stop condition
 
@@ -110,7 +113,7 @@ Training loss, validation loss, perplexity, token accuracy, and generation laten
 
 ### Objective
 
-Measure whether the baseline produces technically valid and statistically plausible output for the selected modality.
+Measure whether the baseline produces technically valid and statistically plausible output on the frozen pilot test split.
 
 ### Work
 
@@ -137,13 +140,13 @@ A versioned JSON or CSV baseline report with fixed random seeds and saved sample
 
 ### Stop condition
 
-The report can be regenerated from one command and clearly states dataset, model, device, and sample count.
+The report can be regenerated from one command and clearly states dataset revision, pilot-selection seed, split seed, model, device, source-file counts, and sample count. The test split is not changed during tuning.
 
 ## Day 6: Model comparison and resource profiling
 
 ### Objective
 
-Test whether the selected alternative model provides value under the available resource limits. Attention is only one candidate comparison.
+Compare the compact LSTM, GRU, and compact Transformer on the same bounded 250-song pilot. Attention is only one candidate comparison.
 
 ### Work
 
@@ -151,6 +154,7 @@ Test whether the selected alternative model provides value under the available r
 - Keep the experiment controlled:
   - same dataset
   - same seed
+  - same frozen source-file split
   - same number of epochs or training steps
   - same evaluation sample count
 - Record:
@@ -165,7 +169,7 @@ Test whether the selected alternative model provides value under the available r
 
 ### Deliverable
 
-A baseline-versus-selected-model comparison table with resource and quality metrics.
+A baseline-versus-selected-model comparison table with resource and quality metrics, plus a decision about whether the pilot supports scaling to the larger corpus.
 
 ### Stop condition
 
@@ -175,7 +179,7 @@ The project can state whether the comparison model improved the agreed metrics, 
 
 ### Objective
 
-Make the verified local result reproducible and define the next training step.
+Make the verified pilot result reproducible and define whether the larger LMDClean run is justified.
 
 ### Work
 
@@ -186,6 +190,7 @@ Make the verified local result reproducible and define the next training step.
 - Run frontend smoke testing.
 - Update `STATUS.md`, `DECISIONS.md`, and `DEPLOYMENT.md` with actual results.
 - Decide whether a larger cloud run is justified.
+- Do not start the larger run unless the pilot passes the scale-up gate: reproducible preprocessing, frozen test split, stable bounded training, verified MIDI output, model comparison report, and documented resource profile.
 - Keep README claims limited to verified evidence.
 
 ### Deliverable
@@ -194,7 +199,11 @@ A local end-to-end demo, evaluation report, deployment smoke-test record, and ne
 
 ### Stop condition
 
-The selected result can be reproduced from the documented commands without relying on undocumented local files.
+The selected pilot result can be reproduced from the documented commands without relying on undocumented local files, and the larger-corpus decision is recorded with evidence.
+
+## After Day 7: Larger LMDClean training gate
+
+The larger corpus is a separate phase. It may begin only after the pilot gate passes. The larger run must pin the approved preprocessing configuration, repository revision, dataset version, split policy, random seeds, model configuration, checkpoint location, and evaluation procedure. The pilot test split and the larger-run final test split must remain held out from model selection.
 
 ## Laptop resource guardrails
 
