@@ -1,5 +1,4 @@
 import os
-import sys
 import json
 import re
 import torch
@@ -22,7 +21,6 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # Define all other paths relative to this correct PROJECT_ROOT
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-SRC_DIR = os.path.join(PROJECT_ROOT, "src")
 TRAINING_DIR = os.path.join(PROJECT_ROOT, "training")
 
 SEED_FILES_DIR = os.path.join(DATA_DIR, "seed")
@@ -30,12 +28,8 @@ VOCAB_JSONL = os.path.join(DATA_DIR, "processed", "vocab_full_history.jsonl")
 CHECKPOINT_DIR = os.path.join(TRAINING_DIR, "checkpoints", "lstm_enhanced")
 CHECKPOINT_PATH = os.path.join(CHECKPOINT_DIR, "best_epoch_03.pt")
 
-# ─── 2. Add the project's 'src' directory to Python's path ───
-sys.path.insert(0, SRC_DIR)
-
-# ─── 3. Import custom modules AFTER updating the path ───
-from models.midi_lstm import MidiLSTMEnhanced
-from data_prep.extract_midi import extract_notes_from_midi
+from src.models.midi_lstm import MidiLSTMEnhanced
+from src.data_prep.extract_midi import extract_notes_from_midi
 
 # --- (The rest of the file is identical to the previous "production-ready" version) ---
 

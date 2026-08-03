@@ -10,12 +10,12 @@ from typing import List, Dict, Optional
 
 from mido import MidiFile
 from tqdm import tqdm
-from utils.paths import DATA_DIR
+from src.utils.paths import DATA_DIR, LMDCLEAN_DIR
 
 # ─── Configuration ─────────────────────────────────────────────
-ROOT_DIR = Path(DATA_DIR) / "SmallMIDFolder"
+ROOT_DIR = Path(LMDCLEAN_DIR)
 MAX_REASONABLE_DURATION = 3600  # seconds (1 hour)
-QUARANTINE_DIR = ROOT_DIR.parent / "quarantine_midis"  # sibling to dataset
+QUARANTINE_DIR = Path(DATA_DIR) / "quarantine_midis"
 
 @dataclass
 class MidiStat:

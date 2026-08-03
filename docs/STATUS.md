@@ -15,6 +15,13 @@ AudioGroove is an end-to-end prototype for seeded MIDI generation. It has source
 - The frontend supports optional MIDI upload, generation, regeneration, and download.
 - Python syntax compilation passed during the initial review.
 
+## Day 1 foundation completed
+
+- `data/raw/LMDClean` is the canonical raw-dataset path.
+- Chunk outputs use `data/chunks/train`, `data/chunks/val`, and `data/chunks/test`.
+- Repository Python modules use `src.*` package imports when run from the repository root.
+- The first-week decision is symbolic MIDI generation with the existing compact recurrent model as a baseline. Audio and alternative model families remain follow-up comparisons.
+
 ## Not verified
 
 - The large cleaned training dataset is not present locally.
@@ -26,14 +33,12 @@ AudioGroove is an end-to-end prototype for seeded MIDI generation. It has source
 
 ## Known technical blockers
 
-1. Dataset paths are inconsistent across data-preparation scripts.
-2. Chunk split and merge scripts import path constants that are not defined in `src/utils/paths.py`.
-3. The current training target alignment does not match one-step autoregressive generation.
-4. The current representation loses timing, duration, velocity, and reliable polyphony.
-5. The merge-to-one-tensor workflow is unsafe for an 8 GB M1 machine.
-6. The current code selects CUDA or CPU and does not properly support MPS as the primary local device.
-7. The project has no automated evaluation harness or human evaluation protocol.
-8. Existing local source changes and untracked RNN files have not been reviewed, tested, or committed.
+1. The current training target alignment does not match one-step autoregressive generation.
+2. The current representation loses timing, duration, velocity, and reliable polyphony.
+3. The merge-to-one-tensor workflow is unsafe for an 8 GB M1 machine.
+4. The current code selects CUDA or CPU and does not properly support MPS as the primary local device.
+5. The project has no automated evaluation harness or human evaluation protocol.
+6. The large cleaned training dataset is not present locally, and the active environment is missing `natsort` for chunk-management imports.
 
 ## Modality and model decision pending
 

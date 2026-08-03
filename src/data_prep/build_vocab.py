@@ -6,7 +6,7 @@ import time
 from collections import Counter
 from music21 import converter, instrument, note, chord
 from tqdm import tqdm
-from utils.paths import PROCESSED_DIR, VOCAB_JSONL
+from src.utils.paths import LMDCLEAN_DIR, PROCESSED_DIR, VOCAB_JSONL
 
 def extract_notes_from_midi_simple(midi_path, instrument_filter=None):
     try:
@@ -88,10 +88,8 @@ def build_vocab_from_full_folder(root_dir, instrument_filter=None, threshold=50)
     return counter, note_to_int, int_to_note
 
 if __name__ == "__main__":
-    from utils.paths import DATA_DIR
-    full_folder = os.path.join(DATA_DIR, "LMDClean")
     build_vocab_from_full_folder(
-        root_dir=full_folder,
+        root_dir=LMDCLEAN_DIR,
         instrument_filter=None,
         threshold=50
     )

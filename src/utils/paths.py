@@ -15,6 +15,9 @@ DATA_DIR = os.path.join(ROOT_DIR, "data")
 RAW_DIR = os.path.join(DATA_DIR, "raw")
 LMDCLEAN_DIR = os.path.join(RAW_DIR, "LMDClean")
 CHUNKS_DIR = os.path.join(DATA_DIR, "chunks")
+TRAIN_CHUNKS_DIR = os.path.join(CHUNKS_DIR, "train")
+VAL_CHUNKS_DIR = os.path.join(CHUNKS_DIR, "val")
+TEST_CHUNKS_DIR = os.path.join(CHUNKS_DIR, "test")
 PROCESSED_DIR = os.path.join(DATA_DIR, "processed")
 
 # Directory containing all seed MIDI files

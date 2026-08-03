@@ -6,8 +6,8 @@ from torch.utils.tensorboard import SummaryWriter
 from torch.cuda.amp import autocast, GradScaler
 from tqdm import tqdm
 
-from models.midi_lstm import MidiLSTMEnhanced
-from utils.paths import TRAIN_PT, VAL_PT, VOCAB_JSONL, CHECKPOINT_DIR, LOG_DIR
+from src.models.midi_lstm import MidiLSTMEnhanced
+from src.utils.paths import TRAIN_PT, VAL_PT, VOCAB_JSONL, CHECKPOINT_DIR, LOG_DIR
 
 # ───── Config ─────
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -128,4 +128,3 @@ if __name__ == "__main__":
             print("— no improvement")
 
     writer.close()
-

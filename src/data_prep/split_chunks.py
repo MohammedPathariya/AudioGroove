@@ -3,7 +3,7 @@
 import os
 import torch
 from natsort import natsorted
-from utils.paths import CHUNKS_DIR, TRAIN_CHUNKS_DIR, VAL_CHUNKS_DIR, TEST_CHUNKS_DIR
+from src.utils.paths import CHUNKS_DIR, TRAIN_CHUNKS_DIR, VAL_CHUNKS_DIR, TEST_CHUNKS_DIR
 
 if __name__ == "__main__":
     chunk_files = [

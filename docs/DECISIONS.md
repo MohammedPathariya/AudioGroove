@@ -79,3 +79,9 @@ This file records decisions that affect architecture, experiments, evaluation, a
 - **Decision:** Google Colab may be used for larger training runs after the pipeline works locally.
 - **Reason:** Colab can provide GPU memory and compute that the 8 GB M1 cannot provide reliably.
 - **Consequence:** Colab notebooks must pin the repository commit, dataset version, configuration, random seed, dependencies, and output artifact location. Local development remains the source of truth for debugging and evaluation.
+
+## D-014: First-week modality and model decision
+
+- **Decision:** The first-week implementation target is symbolic MIDI generation using the existing compact unidirectional recurrent model as a baseline. MP3/audio remains an evaluated follow-up path, not a simultaneous rewrite.
+- **Reason:** The current repository, seed data, API, and output path are MIDI-based. This gives the project a bounded, testable baseline on the M1 while leaving room to compare audio approaches in a separate experiment.
+- **Consequence:** Do not implement a new audio representation or alternative model on Day 1. After the baseline and evaluation harness exist, compare a compact GRU or Transformer against the recurrent baseline under the same budget. The final architecture remains evidence-based.

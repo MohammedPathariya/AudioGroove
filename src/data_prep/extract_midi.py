@@ -2,7 +2,7 @@
 
 import os
 from music21 import converter, instrument, note, chord
-from utils.paths import DATA_DIR
+from src.utils.paths import LMDCLEAN_DIR
 
 def find_all_mid_files(root_dir):
     midi_paths = []
@@ -45,8 +45,7 @@ def extract_notes_from_midi(midi_path, instrument_filter=None):
     return notes
 
 if __name__ == "__main__":
-    root = os.path.join(DATA_DIR, "LMDClean")  # Dynamic path now
-    all_midis = find_all_mid_files(root)
+    all_midis = find_all_mid_files(LMDCLEAN_DIR)
     print(f"Found {len(all_midis)} MIDI files.\n")
     for path in all_midis[:5]:
         tokens = extract_notes_from_midi(path, instrument_filter=None)

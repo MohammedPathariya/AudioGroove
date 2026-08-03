@@ -5,8 +5,8 @@ import os
 import numpy as np
 import torch
 from tqdm import tqdm
-from data_prep.extract_midi import extract_notes_from_midi
-from utils.paths import VOCAB_JSONL, CHUNKS_DIR
+from src.data_prep.extract_midi import extract_notes_from_midi
+from src.utils.paths import VOCAB_JSONL, CHUNKS_DIR
 
 def load_vocab_from_jsonl(jsonl_path=VOCAB_JSONL):
     note_to_int, int_to_note, midi_paths = {}, {}, []

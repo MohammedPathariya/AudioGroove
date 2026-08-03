@@ -1,5 +1,4 @@
 import os
-import sys
 import json
 import re
 import torch
@@ -7,14 +6,9 @@ from tqdm import tqdm
 from mido import MidiFile, MidiTrack, Message
 from music21 import pitch
 
-# ─── 1. Add project's 'src' directory to sys.path ───
-src_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, src_root)
-
-# ─── 2. Import custom modules AFTER updating the path ───
-from models.midi_lstm import MidiLSTMEnhanced
-from data_prep.extract_midi import extract_notes_from_midi
-from utils.paths import CHECKPOINT_DIR, VOCAB_JSONL, SEED_MIDI, OUTPUT_MIDI
+from src.models.midi_lstm import MidiLSTMEnhanced
+from src.data_prep.extract_midi import extract_notes_from_midi
+from src.utils.paths import CHECKPOINT_DIR, VOCAB_JSONL, SEED_MIDI, OUTPUT_MIDI
 
 # ─── Settings ───
 TIMESTEPS    = 32
