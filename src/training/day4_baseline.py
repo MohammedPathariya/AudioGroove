@@ -301,6 +301,9 @@ def train(
     checkpoint_dir = run_dir / "checkpoints"
     tracking_dir.mkdir(parents=True, exist_ok=True)
     tracking_uri = tracking_dir.resolve().as_uri()
+    # MLflow 3.x blocks the local file store by default. This project uses
+    # that store intentionally so runs remain portable on local disks or Drive.
+    os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
     try:
         import mlflow
     except ImportError as exc:
