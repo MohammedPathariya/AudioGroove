@@ -126,8 +126,11 @@ def run_epoch(
     accumulation_steps: int,
     max_steps: int | None,
     clip_norm: float,
+    phase: str = "epoch",
 ) -> dict[str, float]:
     training = optimizer is not None
+    phase_start = time.perf_counter()
+    print(f"[{phase}] starting", flush=True)
     model.train(training)
     total_loss = 0.0
     correct = 0
@@ -152,18 +155,33 @@ def run_epoch(
         correct += int((logits.argmax(dim=-1) == targets).sum().item())
         seen += inputs.shape[0]
         batches += 1
+        if batch_index == 0 or (batch_index + 1) % 1000 == 0:
+            elapsed = time.perf_counter() - phase_start
+            print(
+                f"[{phase}] batch={batch_index + 1} examples={seen} "
+                f"loss={total_loss / max(seen, 1):.5f} elapsed={elapsed:.1f}s",
+                flush=True,
+            )
     if training and batches and batches % accumulation_steps:
         torch.nn.utils.clip_grad_norm_(model.parameters(), clip_norm)
         optimizer.step()
         optimizer.zero_grad(set_to_none=True)
     average_loss = total_loss / max(seen, 1)
-    return {
+    metrics = {
         "loss": average_loss,
         "perplexity": math.exp(min(average_loss, 20.0)),
         "accuracy": correct / max(seen, 1),
         "examples": float(seen),
         "batches": float(batches),
     }
+    print(
+        f"[{phase}] complete batches={batches} examples={seen} "
+        f"loss={metrics['loss']:.5f} perplexity={metrics['perplexity']:.3f} "
+        f"accuracy={metrics['accuracy']:.5f} "
+        f"elapsed={time.perf_counter() - phase_start:.1f}s",
+        flush=True,
+    )
+    return metrics
 
 
 def save_checkpoint(
@@ -332,6 +350,7 @@ def train(
                 config.gradient_accumulation_steps,
                 None if config.full_epoch else config.max_train_steps_per_epoch,
                 config.gradient_clip_norm,
+                phase=f"epoch {epoch + 1}/{config.max_epochs} train",
             )
             global_step += int(train_metrics["batches"])
             with torch.no_grad():
@@ -339,6 +358,7 @@ def train(
                     model, val_loader, criterion, None, device, 1,
                     None if config.full_epoch else config.max_validation_batches,
                     config.gradient_clip_norm,
+                    phase=f"epoch {epoch + 1}/{config.max_epochs} val",
                 )
             row = {"epoch": epoch + 1, "train": train_metrics, "val": val_metrics}
             history.append(row)
@@ -392,6 +412,7 @@ def train(
             "mps_available": bool(hasattr(torch.backends, "mps") and torch.backends.mps.is_available()),
         }
         mlflow.log_metrics({key: value for key, value in resources.items() if isinstance(value, (int, float)) and value is not None})
+        mlflow.log_metric("global_step", global_step)
         mlflow.log_artifact(str(best_path), artifact_path="checkpoints")
         mlflow.log_artifact(str(run_dir / "generated.mid"), artifact_path="generation")
         report = {
@@ -399,7 +420,7 @@ def train(
             "dataset": dataset_manifest,
             "device": resources,
             "model": model.config,
-            "training": {"config": asdict(config), "history": history, "best_val_loss": best_val_loss, "epochs_completed": len(history)},
+            "training": {"config": asdict(config), "history": history, "best_val_loss": best_val_loss, "epochs_completed": len(history), "global_step": global_step},
             "checkpoint": display_path(best_path),
             "generation": generation,
         }
