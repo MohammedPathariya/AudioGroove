@@ -59,6 +59,8 @@ class BaselineConfig:
 def select_device() -> tuple[torch.device, str]:
     if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
         return torch.device("mps"), "MPS"
+    if torch.cuda.is_available():
+        return torch.device("cuda"), "CUDA"
     print("MPS unavailable; falling back to CPU")
     return torch.device("cpu"), "CPU"
 
