@@ -2,13 +2,21 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 import torch
 
-from src.data_prep.midi_representation import SPECIAL_TOKENS, MidiEventSequence, build_vocabulary, encode_midi
+from src.data_prep.midi_representation import (
+    DEFAULT_MAX_TIME_SHIFT_TICKS,
+    SPECIAL_TOKENS,
+    MidiEventSequence,
+    build_vocabulary,
+    encode_midi,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -16,8 +24,8 @@ DEFAULT_AUDIT_DIR = ROOT / "data" / "audit" / "lmdclean_pilot_250"
 DEFAULT_OUTPUT_DIR = ROOT / "runs" / "day4" / "pilot_dataset"
 
 
-def _encode(path: str) -> MidiEventSequence:
-    return encode_midi(path)
+def _encode(path: str, max_time_shift_ticks: int) -> MidiEventSequence:
+    return encode_midi(path, max_time_shift_ticks=max_time_shift_ticks)
 
 
 def load_selected_records(audit_dir: Path = DEFAULT_AUDIT_DIR) -> list[dict[str, Any]]:
@@ -26,7 +34,11 @@ def load_selected_records(audit_dir: Path = DEFAULT_AUDIT_DIR) -> list[dict[str,
     return sorted(records, key=lambda record: (record["split"], record["relative_path"]))
 
 
-def dask_encode_records(records: list[dict[str, Any]], workers: int = 2) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def dask_encode_records(
+    records: list[dict[str, Any]],
+    workers: int = 2,
+    max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Encode records in manifest order and return the recorded Dask policy."""
     try:
         import dask
@@ -37,7 +49,10 @@ def dask_encode_records(records: list[dict[str, Any]], workers: int = 2) -> tupl
     if workers < 1:
         raise ValueError("workers must be positive")
     ordered = sorted(records, key=lambda record: (record["split"], record["relative_path"]))
-    tasks = [delayed(_encode)(str(ROOT / record["source_path"])) for record in ordered]
+    tasks = [
+        delayed(_encode)(str(ROOT / record["source_path"]), max_time_shift_ticks)
+        for record in ordered
+    ]
     with dask.config.set(scheduler="threads", num_workers=workers):
         sequences = dask.compute(*tasks)
     enriched = [dict(record, sequence=sequence) for record, sequence in zip(ordered, sequences)]
@@ -45,6 +60,7 @@ def dask_encode_records(records: list[dict[str, Any]], workers: int = 2) -> tupl
         "scheduler": "threads",
         "workers": workers,
         "partition_count": len(tasks),
+        "max_time_shift_ticks": max_time_shift_ticks,
         "ordering": "split then relative_path; dask results consumed in task order",
     }
     return enriched, config
@@ -101,6 +117,7 @@ def prepare_pilot_dataset(
     sequence_length: int = 32,
     max_windows_per_chunk: int = 256,
     dask_workers: int = 2,
+    max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
 ) -> dict[str, Any]:
     """Prepare all 250 songs into split-local bounded chunks."""
     if sequence_length < 1 or max_windows_per_chunk < 1:
@@ -112,14 +129,23 @@ def prepare_pilot_dataset(
             cached.get("sequence_length") == sequence_length
             and cached.get("max_windows_per_chunk") == max_windows_per_chunk
             and cached.get("dask", {}).get("workers") == dask_workers
+            and cached.get("max_time_shift_ticks") == max_time_shift_ticks
+            and "vocabulary_breakdown" in cached
             and all((output_dir / split).is_dir() for split in ("train", "val", "test"))
         ):
             return cached
     records = load_selected_records(audit_dir)
-    enriched, dask_config = dask_encode_records(records, workers=dask_workers)
+    enriched, dask_config = dask_encode_records(
+        records, workers=dask_workers, max_time_shift_ticks=max_time_shift_ticks
+    )
     vocabulary, _ = build_vocabulary(record["sequence"] for record in enriched)
+    vocabulary_breakdown = Counter(token.split(":", 1)[0] for token in vocabulary)
     output_dir.mkdir(parents=True, exist_ok=True)
     for split in ("train", "val", "test"):
+        split_dir = output_dir / split
+        split_dir.mkdir(parents=True, exist_ok=True)
+        for stale_chunk in split_dir.glob("chunk_*.pt"):
+            stale_chunk.unlink()
         split_records = [record for record in enriched if record["split"] == split]
         _write_split_chunks(
             split_records, vocabulary, output_dir, split, sequence_length, max_windows_per_chunk
@@ -132,15 +158,32 @@ def prepare_pilot_dataset(
         split_counts[split]["source_file_count"] = sum(
             record["split"] == split for record in enriched
         )
+    derived_revision = hashlib.sha256(
+        json.dumps(
+            {
+                "source_dataset_revision": summary["dataset_revision"],
+                "representation": "bounded_exact_time_shift_v1",
+                "max_time_shift_ticks": max_time_shift_ticks,
+                "sequence_length": sequence_length,
+                "max_windows_per_chunk": max_windows_per_chunk,
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
     manifest = {
         "dataset_name": "lmdclean_pilot_250",
-        "dataset_revision": summary["dataset_revision"],
+        "dataset_revision": derived_revision,
+        "source_dataset_revision": summary["dataset_revision"],
+        "representation": "bounded_exact_time_shift_v1",
+        "max_time_shift_ticks": max_time_shift_ticks,
         "selection_seed": summary["selection_seed"],
         "split_seed": summary["split_seed"],
         "source_file_count": len(enriched),
         "sequence_length": sequence_length,
         "max_windows_per_chunk": max_windows_per_chunk,
         "vocabulary_size": len(vocabulary),
+        "vocabulary_breakdown": dict(sorted(vocabulary_breakdown.items())),
         "special_tokens": list(SPECIAL_TOKENS),
         "dask": dask_config,
         "splits": split_counts,

@@ -5,6 +5,7 @@ import torch
 
 from src.data_prep.midi_representation import (
     BoundedChunkDataset,
+    SequentialChunkDataset,
     decode_tokens,
     encode_midi,
     make_next_token_chunks,
@@ -48,3 +49,12 @@ def test_bounded_loader_has_stable_shapes(tmp_path: Path) -> None:
     assert y.shape == torch.Size([])
     assert x.dtype == torch.long
     assert y.dtype == torch.long
+
+
+def test_sequential_chunk_stream_visits_each_window_once(tmp_path: Path) -> None:
+    source = tmp_path / "fixture.mid"
+    make_fixture(source)
+    manifest = make_next_token_chunks([source], tmp_path / "chunks", sequence_length=4, max_windows_per_chunk=2)
+    stream = SequentialChunkDataset(tmp_path / "chunks")
+
+    assert sum(1 for _ in stream) == manifest["window_count"]

@@ -19,8 +19,14 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader
 
-from src.data_prep.day4_preprocessing import DEFAULT_OUTPUT_DIR, prepare_pilot_dataset
-from src.data_prep.midi_representation import BoundedChunkDataset, decode_tokens, encode_midi
+from src.data_prep.day4_preprocessing import DEFAULT_OUTPUT_DIR, load_selected_records, prepare_pilot_dataset
+from src.data_prep.midi_representation import (
+    DEFAULT_MAX_TIME_SHIFT_TICKS,
+    BoundedChunkDataset,
+    SequentialChunkDataset,
+    decode_tokens,
+    encode_midi,
+)
 from src.models.compact_midi_lstm import CompactMidiLSTM
 
 
@@ -43,8 +49,11 @@ class BaselineConfig:
     gradient_clip_norm: float = 1.0
     dask_workers: int = 2
     chunk_size: int = 256
+    max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS
+    full_epoch: bool = False
     generation_tokens: int = 64
     seed: int = 20260805
+    generation_seed: int = 20260806
 
 
 def select_device() -> tuple[torch.device, str]:
@@ -68,6 +77,13 @@ def git_commit() -> str:
         return "unknown"
 
 
+def git_dirty() -> bool:
+    try:
+        return bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip())
+    except (OSError, subprocess.CalledProcessError):
+        return True
+
+
 def peak_memory_mb() -> float:
     # macOS reports bytes; Linux reports KiB.
     value = float(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
@@ -82,9 +98,14 @@ def device_memory_mb(device: torch.device) -> float | None:
     return None
 
 
-def loader(path: Path, batch_size: int, shuffle: bool) -> DataLoader:
-    dataset = BoundedChunkDataset(path)
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=0)
+def loader(path: Path, batch_size: int, shuffle: bool, sequential: bool = False) -> DataLoader:
+    dataset = SequentialChunkDataset(path) if sequential else BoundedChunkDataset(path)
+    return DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=False if sequential else shuffle,
+        num_workers=0,
+    )
 
 
 def run_epoch(
@@ -187,15 +208,17 @@ def generate_artifact(
     sequence_length: int,
     token_count: int,
     ticks_per_beat: int,
+    generation_seed: int,
+    max_time_shift_ticks: int,
 ) -> dict[str, Any]:
     inverse = {value: key for key, value in vocabulary.items()}
-    seed = encode_midi(seed_path)
+    seed = encode_midi(seed_path, max_time_shift_ticks=max_time_shift_ticks)
     ids = [vocabulary[token] for token in seed.tokens if token in vocabulary]
     if len(ids) < sequence_length:
         raise ValueError(f"generation seed has {len(ids)} tokens, needs {sequence_length}")
     generated = ids[:sequence_length]
     model.eval()
-    generator = torch.Generator(device="cpu").manual_seed(20260806)
+    generator = torch.Generator(device="cpu").manual_seed(generation_seed)
     with torch.no_grad():
         for _ in range(token_count):
             inputs = torch.tensor([generated[-sequence_length:]], dtype=torch.long, device=device)
@@ -222,6 +245,7 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
         sequence_length=config.sequence_length,
         max_windows_per_chunk=config.chunk_size,
         dask_workers=config.dask_workers,
+        max_time_shift_ticks=config.max_time_shift_ticks,
     )
     dataset_dir = DEFAULT_OUTPUT_DIR
     vocab = json.loads((dataset_dir / "vocabulary.json").read_text(encoding="utf-8"))
@@ -229,8 +253,14 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
     model = CompactMidiLSTM(len(vocab)).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
     criterion = nn.CrossEntropyLoss()
-    train_loader = loader(dataset_dir / "train", config.batch_size, shuffle=True)
-    val_loader = loader(dataset_dir / "val", config.batch_size, shuffle=False)
+    train_loader = loader(
+        dataset_dir / "train", config.batch_size,
+        shuffle=not config.full_epoch, sequential=config.full_epoch,
+    )
+    val_loader = loader(
+        dataset_dir / "val", config.batch_size,
+        shuffle=False, sequential=config.full_epoch,
+    )
     run_dir = DEFAULT_RUN_DIR / time.strftime("%Y%m%d-%H%M%S")
     run_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_dir = run_dir / "checkpoints"
@@ -262,11 +292,13 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
                 "split_seed": 20260804,
                 "training_seed": config.seed,
                 "git_commit": git_commit(),
+                "git_dirty": git_dirty(),
                 "device": device_name,
                 "model": "CompactMidiLSTM",
                 "model_config": json.dumps(model.config, sort_keys=True),
                 "training_budget": json.dumps(asdict(config), sort_keys=True),
                 "dask_config": json.dumps(dataset_manifest["dask"], sort_keys=True),
+                "generation_seed": config.generation_seed,
             }
         )
         if resume:
@@ -279,14 +311,16 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
         for epoch in range(start_epoch, config.max_epochs):
             train_metrics = run_epoch(
                 model, train_loader, criterion, optimizer, device,
-                config.gradient_accumulation_steps, config.max_train_steps_per_epoch,
+                config.gradient_accumulation_steps,
+                None if config.full_epoch else config.max_train_steps_per_epoch,
                 config.gradient_clip_norm,
             )
             global_step += int(train_metrics["batches"])
             with torch.no_grad():
                 val_metrics = run_epoch(
                     model, val_loader, criterion, None, device, 1,
-                    config.max_validation_batches, config.gradient_clip_norm,
+                    None if config.full_epoch else config.max_validation_batches,
+                    config.gradient_clip_norm,
                 )
             row = {"epoch": epoch + 1, "train": train_metrics, "val": val_metrics}
             history.append(row)
@@ -318,7 +352,7 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
                     break
         best_path = checkpoint_dir / "best.pt"
         restored = load_checkpoint(best_path, model, optimizer, device)
-        seed_record = next(record for record in __import__("src.data_prep.day4_preprocessing", fromlist=["load_selected_records"]).load_selected_records() if record["split"] == "test")
+        seed_record = next(record for record in load_selected_records() if record["split"] == "test")
         generation = generate_artifact(
             model,
             ROOT / seed_record["source_path"],
@@ -328,6 +362,8 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
             config.sequence_length,
             config.generation_tokens,
             encode_midi(ROOT / seed_record["source_path"]).ticks_per_beat,
+            config.generation_seed,
+            config.max_time_shift_ticks,
         )
         elapsed = time.perf_counter() - start_time
         resources = {
@@ -363,6 +399,8 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--gradient-accumulation-steps", type=int, default=4)
     parser.add_argument("--dask-workers", type=int, default=2)
+    parser.add_argument("--max-time-shift-ticks", type=int, default=DEFAULT_MAX_TIME_SHIFT_TICKS)
+    parser.add_argument("--full-epoch", action="store_true")
     parser.add_argument("--resume", type=Path)
     args = parser.parse_args()
     config = BaselineConfig(
@@ -372,6 +410,8 @@ def main() -> None:
         batch_size=args.batch_size,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         dask_workers=args.dask_workers,
+        max_time_shift_ticks=args.max_time_shift_ticks,
+        full_epoch=args.full_epoch,
     )
     train(config, resume=args.resume)
 

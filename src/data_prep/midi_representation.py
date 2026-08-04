@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Iterator, Sequence
+from typing import Iterable, Sequence
 
 import mido
 import torch
@@ -19,6 +19,7 @@ from torch.utils.data import Dataset
 
 
 SPECIAL_TOKENS = ("<BOS>", "<EOS>", "<UNK>")
+DEFAULT_MAX_TIME_SHIFT_TICKS = 96
 
 
 @dataclass(frozen=True)
@@ -39,8 +40,13 @@ def _event_token(message: mido.Message) -> str | None:
     return None
 
 
-def encode_midi(path: str | Path) -> MidiEventSequence:
-    """Encode supported MIDI messages in deterministic, delta-tick order."""
+def encode_midi(
+    path: str | Path,
+    max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
+) -> MidiEventSequence:
+    """Encode supported messages with bounded, exact cumulative shifts."""
+    if max_time_shift_ticks < 1:
+        raise ValueError("max_time_shift_ticks must be positive")
     midi = mido.MidiFile(str(path))
     events: list[tuple[int, int, str]] = []
     order = 0
@@ -60,6 +66,9 @@ def encode_midi(path: str | Path) -> MidiEventSequence:
     previous_tick = 0
     for absolute_tick, _, token in events:
         delta = absolute_tick - previous_tick
+        while delta > max_time_shift_ticks:
+            tokens.append(f"TIME_SHIFT:{max_time_shift_ticks}")
+            delta -= max_time_shift_ticks
         if delta:
             tokens.append(f"TIME_SHIFT:{delta}")
         tokens.append(token)
@@ -224,4 +233,28 @@ class BoundedChunkDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]):
         return self._active_chunk["x"][offset], self._active_chunk["y"][offset]
 
 
-__all__ = ["BoundedChunkDataset", "MidiEventSequence", "build_vocabulary", "decode_tokens", "encode_midi", "make_next_token_chunks"]
+class SequentialChunkDataset(torch.utils.data.IterableDataset[tuple[torch.Tensor, torch.Tensor]]):
+    """Stream complete chunks in deterministic order for full-epoch training."""
+
+    def __init__(self, chunk_dir: str | Path):
+        self.chunk_paths = sorted(Path(chunk_dir).glob("chunk_*.pt"))
+        if not self.chunk_paths:
+            raise FileNotFoundError(f"No chunk_*.pt files found in {chunk_dir}")
+
+    def __iter__(self):
+        for path in self.chunk_paths:
+            chunk = BoundedChunkDataset._read_chunk(path)
+            for index in range(chunk["x"].shape[0]):
+                yield chunk["x"][index], chunk["y"][index]
+
+
+__all__ = [
+    "BoundedChunkDataset",
+    "DEFAULT_MAX_TIME_SHIFT_TICKS",
+    "MidiEventSequence",
+    "SequentialChunkDataset",
+    "build_vocabulary",
+    "decode_tokens",
+    "encode_midi",
+    "make_next_token_chunks",
+]
