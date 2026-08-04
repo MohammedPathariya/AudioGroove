@@ -98,6 +98,13 @@ def device_memory_mb(device: torch.device) -> float | None:
     return None
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def loader(path: Path, batch_size: int, shuffle: bool, sequential: bool = False) -> DataLoader:
     dataset = SequentialChunkDataset(path) if sequential else BoundedChunkDataset(path)
     return DataLoader(
@@ -230,24 +237,32 @@ def generate_artifact(
     parsed = mido.MidiFile(str(output_path))
     return {
         "success": True,
-        "path": str(output_path.relative_to(ROOT)),
+        "path": display_path(output_path),
         "token_count": len(generated_tokens),
         "duration_seconds": float(parsed.length),
-        "seed_path": str(seed_path.relative_to(ROOT)),
+        "seed_path": display_path(seed_path),
     }
 
 
-def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
+def train(
+    config: BaselineConfig,
+    resume: Path | None = None,
+    audit_dir: Path = DEFAULT_AUDIT_DIR,
+    dataset_output_dir: Path = DEFAULT_OUTPUT_DIR,
+    tracking_dir: Path = DEFAULT_TRACKING_DIR,
+    run_root: Path = DEFAULT_RUN_DIR,
+) -> dict[str, Any]:
     set_seed(config.seed)
     device, device_name = select_device()
     dataset_manifest = prepare_pilot_dataset(
-        output_dir=DEFAULT_OUTPUT_DIR,
+        audit_dir=audit_dir,
+        output_dir=dataset_output_dir,
         sequence_length=config.sequence_length,
         max_windows_per_chunk=config.chunk_size,
         dask_workers=config.dask_workers,
         max_time_shift_ticks=config.max_time_shift_ticks,
     )
-    dataset_dir = DEFAULT_OUTPUT_DIR
+    dataset_dir = dataset_output_dir
     vocab = json.loads((dataset_dir / "vocabulary.json").read_text(encoding="utf-8"))
     vocab = {token: int(index) for token, index in vocab.items()}
     model = CompactMidiLSTM(len(vocab)).to(device)
@@ -261,10 +276,11 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
         dataset_dir / "val", config.batch_size,
         shuffle=False, sequential=config.full_epoch,
     )
-    run_dir = DEFAULT_RUN_DIR / time.strftime("%Y%m%d-%H%M%S")
+    run_dir = run_root / time.strftime("%Y%m%d-%H%M%S")
     run_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_dir = run_dir / "checkpoints"
-    tracking_uri = DEFAULT_TRACKING_DIR.resolve().as_uri()
+    tracking_dir.mkdir(parents=True, exist_ok=True)
+    tracking_uri = tracking_dir.resolve().as_uri()
     try:
         import mlflow
     except ImportError as exc:
@@ -352,7 +368,7 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
                     break
         best_path = checkpoint_dir / "best.pt"
         restored = load_checkpoint(best_path, model, optimizer, device)
-        seed_record = next(record for record in load_selected_records() if record["split"] == "test")
+        seed_record = next(record for record in load_selected_records(audit_dir) if record["split"] == "test")
         generation = generate_artifact(
             model,
             ROOT / seed_record["source_path"],
@@ -382,7 +398,7 @@ def train(config: BaselineConfig, resume: Path | None = None) -> dict[str, Any]:
             "device": resources,
             "model": model.config,
             "training": {"config": asdict(config), "history": history, "best_val_loss": best_val_loss, "epochs_completed": len(history)},
-            "checkpoint": str(best_path.relative_to(ROOT)),
+            "checkpoint": display_path(best_path),
             "generation": generation,
         }
         (run_dir / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -401,6 +417,10 @@ def main() -> None:
     parser.add_argument("--dask-workers", type=int, default=2)
     parser.add_argument("--max-time-shift-ticks", type=int, default=DEFAULT_MAX_TIME_SHIFT_TICKS)
     parser.add_argument("--full-epoch", action="store_true")
+    parser.add_argument("--audit-dir", type=Path, default=DEFAULT_AUDIT_DIR)
+    parser.add_argument("--dataset-output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--tracking-dir", type=Path, default=DEFAULT_TRACKING_DIR)
+    parser.add_argument("--run-root", type=Path, default=DEFAULT_RUN_DIR)
     parser.add_argument("--resume", type=Path)
     args = parser.parse_args()
     config = BaselineConfig(
@@ -413,7 +433,14 @@ def main() -> None:
         max_time_shift_ticks=args.max_time_shift_ticks,
         full_epoch=args.full_epoch,
     )
-    train(config, resume=args.resume)
+    train(
+        config,
+        resume=args.resume,
+        audit_dir=args.audit_dir.resolve(),
+        dataset_output_dir=args.dataset_output_dir.resolve(),
+        tracking_dir=args.tracking_dir.resolve(),
+        run_root=args.run_root.resolve(),
+    )
 
 
 if __name__ == "__main__":
