@@ -12,6 +12,7 @@ import torch
 
 from src.data_prep.midi_representation import (
     DEFAULT_MAX_TIME_SHIFT_TICKS,
+    DEFAULT_VELOCITY_BINS,
     SPECIAL_TOKENS,
     MidiEventSequence,
     build_vocabulary,
@@ -24,8 +25,12 @@ DEFAULT_AUDIT_DIR = ROOT / "data" / "audit" / "lmdclean_pilot_250"
 DEFAULT_OUTPUT_DIR = ROOT / "runs" / "day4" / "pilot_dataset"
 
 
-def _encode(path: str, max_time_shift_ticks: int) -> MidiEventSequence:
-    return encode_midi(path, max_time_shift_ticks=max_time_shift_ticks)
+def _encode(path: str, max_time_shift_ticks: int, velocity_bins: int) -> MidiEventSequence:
+    return encode_midi(
+        path,
+        max_time_shift_ticks=max_time_shift_ticks,
+        velocity_bins=velocity_bins,
+    )
 
 
 def load_selected_records(audit_dir: Path = DEFAULT_AUDIT_DIR) -> list[dict[str, Any]]:
@@ -38,6 +43,7 @@ def dask_encode_records(
     records: list[dict[str, Any]],
     workers: int = 2,
     max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
+    velocity_bins: int = DEFAULT_VELOCITY_BINS,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Encode records in manifest order and return the recorded Dask policy."""
     try:
@@ -50,7 +56,7 @@ def dask_encode_records(
         raise ValueError("workers must be positive")
     ordered = sorted(records, key=lambda record: (record["split"], record["relative_path"]))
     tasks = [
-        delayed(_encode)(str(ROOT / record["source_path"]), max_time_shift_ticks)
+        delayed(_encode)(str(ROOT / record["source_path"]), max_time_shift_ticks, velocity_bins)
         for record in ordered
     ]
     with dask.config.set(scheduler="threads", num_workers=workers):
@@ -61,6 +67,7 @@ def dask_encode_records(
         "workers": workers,
         "partition_count": len(tasks),
         "max_time_shift_ticks": max_time_shift_ticks,
+        "velocity_bins": velocity_bins,
         "ordering": "split then relative_path; dask results consumed in task order",
     }
     return enriched, config
@@ -118,6 +125,7 @@ def prepare_pilot_dataset(
     max_windows_per_chunk: int = 256,
     dask_workers: int = 2,
     max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
+    velocity_bins: int = DEFAULT_VELOCITY_BINS,
 ) -> dict[str, Any]:
     """Prepare all 250 songs into split-local bounded chunks."""
     if sequence_length < 1 or max_windows_per_chunk < 1:
@@ -130,13 +138,17 @@ def prepare_pilot_dataset(
             and cached.get("max_windows_per_chunk") == max_windows_per_chunk
             and cached.get("dask", {}).get("workers") == dask_workers
             and cached.get("max_time_shift_ticks") == max_time_shift_ticks
+            and cached.get("velocity_bins") == velocity_bins
             and "vocabulary_breakdown" in cached
             and all((output_dir / split).is_dir() for split in ("train", "val", "test"))
         ):
             return cached
     records = load_selected_records(audit_dir)
     enriched, dask_config = dask_encode_records(
-        records, workers=dask_workers, max_time_shift_ticks=max_time_shift_ticks
+        records,
+        workers=dask_workers,
+        max_time_shift_ticks=max_time_shift_ticks,
+        velocity_bins=velocity_bins,
     )
     vocabulary, _ = build_vocabulary(record["sequence"] for record in enriched)
     vocabulary_breakdown = Counter(token.split(":", 1)[0] for token in vocabulary)
@@ -162,8 +174,9 @@ def prepare_pilot_dataset(
         json.dumps(
             {
                 "source_dataset_revision": summary["dataset_revision"],
-                "representation": "bounded_exact_time_shift_v1",
+                "representation": "bounded_time_shift_velocity_v2",
                 "max_time_shift_ticks": max_time_shift_ticks,
+                "velocity_bins": velocity_bins,
                 "sequence_length": sequence_length,
                 "max_windows_per_chunk": max_windows_per_chunk,
             },
@@ -175,8 +188,9 @@ def prepare_pilot_dataset(
         "dataset_name": "lmdclean_pilot_250",
         "dataset_revision": derived_revision,
         "source_dataset_revision": summary["dataset_revision"],
-        "representation": "bounded_exact_time_shift_v1",
+        "representation": "bounded_time_shift_velocity_v2",
         "max_time_shift_ticks": max_time_shift_ticks,
+        "velocity_bins": velocity_bins,
         "selection_seed": summary["selection_seed"],
         "split_seed": summary["split_seed"],
         "source_file_count": len(enriched),

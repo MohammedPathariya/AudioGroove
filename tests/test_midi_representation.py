@@ -5,6 +5,7 @@ import torch
 
 from src.data_prep.midi_representation import (
     BoundedChunkDataset,
+    DEFAULT_VELOCITY_BINS,
     SequentialChunkDataset,
     decode_tokens,
     encode_midi,
@@ -33,6 +34,29 @@ def test_round_trip_preserves_supported_events_and_timing(tmp_path: Path) -> Non
     encoded = encode_midi(original)
     decode_tokens(encoded.tokens, restored, encoded.ticks_per_beat)
 
+    assert encode_midi(restored) == encoded
+
+
+def test_velocity_buckets_are_bounded_and_round_trip_stably(tmp_path: Path) -> None:
+    source = tmp_path / "velocity.mid"
+    track = mido.MidiTrack(
+        [
+            mido.Message("note_on", note=60, velocity=1, time=0),
+            mido.Message("note_off", note=60, velocity=127, time=12),
+        ]
+    )
+    mido.MidiFile(ticks_per_beat=96, tracks=[track]).save(source)
+
+    encoded = encode_midi(source)
+    velocity_tokens = [
+        token for token in encoded.tokens if token.startswith(("NOTE_ON:", "NOTE_OFF:"))
+    ]
+
+    assert [int(token.rsplit(":", 1)[1]) for token in velocity_tokens] == [0, 15]
+    assert all(0 <= int(token.rsplit(":", 1)[1]) < DEFAULT_VELOCITY_BINS for token in velocity_tokens)
+
+    restored = tmp_path / "velocity-restored.mid"
+    decode_tokens(encoded.tokens, restored, encoded.ticks_per_beat)
     assert encode_midi(restored) == encoded
 
 

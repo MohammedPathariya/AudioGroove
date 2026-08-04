@@ -22,6 +22,7 @@ from torch.utils.data import DataLoader
 from src.data_prep.day4_preprocessing import DEFAULT_OUTPUT_DIR, load_selected_records, prepare_pilot_dataset
 from src.data_prep.midi_representation import (
     DEFAULT_MAX_TIME_SHIFT_TICKS,
+    DEFAULT_VELOCITY_BINS,
     BoundedChunkDataset,
     SequentialChunkDataset,
     decode_tokens,
@@ -50,6 +51,7 @@ class BaselineConfig:
     dask_workers: int = 2
     chunk_size: int = 256
     max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS
+    velocity_bins: int = DEFAULT_VELOCITY_BINS
     full_epoch: bool = False
     generation_tokens: int = 64
     seed: int = 20260805
@@ -237,9 +239,14 @@ def generate_artifact(
     ticks_per_beat: int,
     generation_seed: int,
     max_time_shift_ticks: int,
+    velocity_bins: int,
 ) -> dict[str, Any]:
     inverse = {value: key for key, value in vocabulary.items()}
-    seed = encode_midi(seed_path, max_time_shift_ticks=max_time_shift_ticks)
+    seed = encode_midi(
+        seed_path,
+        max_time_shift_ticks=max_time_shift_ticks,
+        velocity_bins=velocity_bins,
+    )
     ids = [vocabulary[token] for token in seed.tokens if token in vocabulary]
     if len(ids) < sequence_length:
         raise ValueError(f"generation seed has {len(ids)} tokens, needs {sequence_length}")
@@ -253,7 +260,12 @@ def generate_artifact(
             next_id = int(torch.multinomial(probabilities, 1, generator=generator).item())
             generated.append(next_id)
     generated_tokens = [inverse[index] for index in generated]
-    decode_tokens(generated_tokens, output_path, ticks_per_beat=ticks_per_beat)
+    decode_tokens(
+        generated_tokens,
+        output_path,
+        ticks_per_beat=ticks_per_beat,
+        velocity_bins=velocity_bins,
+    )
     parsed = mido.MidiFile(str(output_path))
     return {
         "success": True,
@@ -281,6 +293,7 @@ def train(
         max_windows_per_chunk=config.chunk_size,
         dask_workers=config.dask_workers,
         max_time_shift_ticks=config.max_time_shift_ticks,
+        velocity_bins=config.velocity_bins,
     )
     dataset_dir = dataset_output_dir
     vocab = json.loads((dataset_dir / "vocabulary.json").read_text(encoding="utf-8"))
@@ -338,6 +351,7 @@ def train(
                 "training_budget": json.dumps(asdict(config), sort_keys=True),
                 "dask_config": json.dumps(dataset_manifest["dask"], sort_keys=True),
                 "generation_seed": config.generation_seed,
+                "velocity_bins": config.velocity_bins,
             }
         )
         if resume:
@@ -405,6 +419,7 @@ def train(
             encode_midi(ROOT / seed_record["source_path"]).ticks_per_beat,
             config.generation_seed,
             config.max_time_shift_ticks,
+            config.velocity_bins,
         )
         elapsed = time.perf_counter() - start_time
         resources = {
@@ -442,6 +457,7 @@ def main() -> None:
     parser.add_argument("--gradient-accumulation-steps", type=int, default=4)
     parser.add_argument("--dask-workers", type=int, default=2)
     parser.add_argument("--max-time-shift-ticks", type=int, default=DEFAULT_MAX_TIME_SHIFT_TICKS)
+    parser.add_argument("--velocity-bins", type=int, default=DEFAULT_VELOCITY_BINS)
     parser.add_argument("--full-epoch", action="store_true")
     parser.add_argument("--audit-dir", type=Path, default=DEFAULT_AUDIT_DIR)
     parser.add_argument("--dataset-output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
@@ -457,6 +473,7 @@ def main() -> None:
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         dask_workers=args.dask_workers,
         max_time_shift_ticks=args.max_time_shift_ticks,
+        velocity_bins=args.velocity_bins,
         full_epoch=args.full_epoch,
     )
     train(

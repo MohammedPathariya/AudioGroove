@@ -20,6 +20,7 @@ from torch.utils.data import Dataset
 
 SPECIAL_TOKENS = ("<BOS>", "<EOS>", "<UNK>")
 DEFAULT_MAX_TIME_SHIFT_TICKS = 96
+DEFAULT_VELOCITY_BINS = 16
 
 
 @dataclass(frozen=True)
@@ -28,11 +29,23 @@ class MidiEventSequence:
     ticks_per_beat: int
 
 
-def _event_token(message: mido.Message) -> str | None:
+def _velocity_bucket(velocity: int, bins: int) -> int:
+    return min(bins - 1, max(0, ((velocity - 1) * bins) // 128))
+
+
+def _bucket_velocity(bucket: int, bins: int) -> int:
+    if bucket < 0 or bucket >= bins:
+        raise ValueError(f"velocity bucket {bucket} outside 0..{bins - 1}")
+    return min(127, bucket * 128 // bins + 64 // bins)
+
+
+def _event_token(message: mido.Message, velocity_bins: int) -> str | None:
     if message.type == "note_on" and message.velocity > 0:
-        return f"NOTE_ON:{message.channel}:{message.note}:{message.velocity}"
+        bucket = _velocity_bucket(message.velocity, velocity_bins)
+        return f"NOTE_ON:{message.channel}:{message.note}:{bucket}"
     if message.type == "note_off" or (message.type == "note_on" and message.velocity == 0):
-        return f"NOTE_OFF:{message.channel}:{message.note}:{message.velocity}"
+        bucket = _velocity_bucket(message.velocity, velocity_bins)
+        return f"NOTE_OFF:{message.channel}:{message.note}:{bucket}"
     if message.type == "program_change":
         return f"PROGRAM:{message.channel}:{message.program}"
     if message.type == "set_tempo":
@@ -43,10 +56,13 @@ def _event_token(message: mido.Message) -> str | None:
 def encode_midi(
     path: str | Path,
     max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
+    velocity_bins: int = DEFAULT_VELOCITY_BINS,
 ) -> MidiEventSequence:
     """Encode supported messages with bounded, exact cumulative shifts."""
     if max_time_shift_ticks < 1:
         raise ValueError("max_time_shift_ticks must be positive")
+    if velocity_bins < 1 or velocity_bins > 128:
+        raise ValueError("velocity_bins must be between 1 and 128")
     midi = mido.MidiFile(str(path))
     events: list[tuple[int, int, str]] = []
     order = 0
@@ -54,7 +70,7 @@ def encode_midi(
         absolute_tick = 0
         for message in track:
             absolute_tick += int(message.time)
-            token = _event_token(message)
+            token = _event_token(message, velocity_bins)
             if token is not None:
                 events.append((absolute_tick, order, token))
                 order += 1
@@ -95,6 +111,7 @@ def decode_tokens(
     tokens: Sequence[str],
     output_path: str | Path,
     ticks_per_beat: int = 480,
+    velocity_bins: int = DEFAULT_VELOCITY_BINS,
 ) -> Path:
     """Serialize supported tokens to a valid single-track MIDI file."""
     track = mido.MidiTrack()
@@ -110,10 +127,12 @@ def decode_tokens(
             pending_ticks += values  # type: ignore[operator]
             continue
         if kind == "NOTE_ON":
-            channel, note, velocity = values  # type: ignore[misc]
+            channel, note, velocity_bucket = values  # type: ignore[misc]
+            velocity = _bucket_velocity(velocity_bucket, velocity_bins)
             message = mido.Message("note_on", channel=channel, note=note, velocity=velocity)
         elif kind == "NOTE_OFF":
-            channel, note, velocity = values  # type: ignore[misc]
+            channel, note, velocity_bucket = values  # type: ignore[misc]
+            velocity = _bucket_velocity(velocity_bucket, velocity_bins)
             message = mido.Message("note_off", channel=channel, note=note, velocity=velocity)
         elif kind == "PROGRAM":
             channel, program = values  # type: ignore[misc]
@@ -251,6 +270,7 @@ class SequentialChunkDataset(torch.utils.data.IterableDataset[tuple[torch.Tensor
 __all__ = [
     "BoundedChunkDataset",
     "DEFAULT_MAX_TIME_SHIFT_TICKS",
+    "DEFAULT_VELOCITY_BINS",
     "MidiEventSequence",
     "SequentialChunkDataset",
     "build_vocabulary",
