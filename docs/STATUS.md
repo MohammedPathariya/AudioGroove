@@ -156,6 +156,11 @@ Pilot evidence is recorded in `data/audit/lmdclean_pilot_250/`:
   unreadable files. No selected file is unreadable or overlong.
 - Leakage checks passed: zero song-identity overlap, zero artist-group overlap,
   and zero SHA-256 overlap across splits.
+- On 2026-08-05, the ignored isolated copy was regenerated from
+  `selected_manifest.jsonl` and verified against all 250 source SHA-256 hashes.
+  It contains 190 distinct artists and remains the reproducible development
+  pilot. The corpus layout has no reliable genre metadata, so this is not
+  presented as a genre-stratified sample.
 - The previous exploratory training state is not retained locally. New HPC
   training must start without a checkpoint or prior MLflow run.
 - The migration target supplied for the clean HPC run is dataset revision
