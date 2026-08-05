@@ -1,0 +1,120 @@
+{
+  "dataset_revision": "bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc",
+  "experiment_name": "AudioGroove-250-Pilot-HPC",
+  "training": {
+    "sequence_length": 32,
+    "batch_size": 64,
+    "gradient_accumulation_steps": 1,
+    "max_epochs": 5,
+    "max_train_batches": null,
+    "max_validation_batches": null,
+    "early_stopping_patience": 2,
+    "gradient_clip_norm": 1.0,
+    "weight_decay": 0.0001,
+    "scheduler_factor": 0.5,
+    "scheduler_patience": 1,
+    "amp": true,
+    "seed": 20260805
+  },
+  "generation": {
+    "token_count": 512,
+    "temperature": 1.0,
+    "top_k": 50,
+    "seed": 20260806
+  },
+  "models": {
+    "lstm": {
+      "small": {
+        "learning_rate": 0.001,
+        "architecture": {
+          "embed_dim": 128,
+          "hidden_dim": 192,
+          "num_layers": 1,
+          "dropout": 0.1
+        }
+      },
+      "baseline": {
+        "learning_rate": 0.001,
+        "architecture": {
+          "embed_dim": 128,
+          "hidden_dim": 256,
+          "num_layers": 1,
+          "dropout": 0.1
+        }
+      },
+      "large": {
+        "learning_rate": 0.001,
+        "architecture": {
+          "embed_dim": 192,
+          "hidden_dim": 384,
+          "num_layers": 2,
+          "dropout": 0.2
+        }
+      }
+    },
+    "gru": {
+      "small": {
+        "learning_rate": 0.001,
+        "architecture": {
+          "embed_dim": 128,
+          "hidden_dim": 192,
+          "num_layers": 1,
+          "dropout": 0.1
+        }
+      },
+      "baseline": {
+        "learning_rate": 0.001,
+        "architecture": {
+          "embed_dim": 128,
+          "hidden_dim": 256,
+          "num_layers": 1,
+          "dropout": 0.1
+        }
+      },
+      "large": {
+        "learning_rate": 0.001,
+        "architecture": {
+          "embed_dim": 192,
+          "hidden_dim": 384,
+          "num_layers": 2,
+          "dropout": 0.2
+        }
+      }
+    },
+    "transformer": {
+      "small": {
+        "learning_rate": 0.0003,
+        "architecture": {
+          "d_model": 192,
+          "num_layers": 2,
+          "num_heads": 4,
+          "ffn_dim": 512,
+          "dropout": 0.1,
+          "max_sequence_length": 32
+        }
+      },
+      "baseline": {
+        "learning_rate": 0.0003,
+        "architecture": {
+          "d_model": 256,
+          "num_layers": 2,
+          "num_heads": 4,
+          "ffn_dim": 512,
+          "dropout": 0.1,
+          "max_sequence_length": 32
+        }
+      },
+      "large": {
+        "learning_rate": 0.0003,
+        "architecture": {
+          "d_model": 256,
+          "num_layers": 4,
+          "num_heads": 8,
+          "ffn_dim": 1024,
+          "dropout": 0.2,
+          "max_sequence_length": 32
+        }
+      }
+    }
+  }
+}
