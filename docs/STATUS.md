@@ -1,10 +1,15 @@
 # AudioGroove Status
 
-Updated: 2026-08-03
+Updated: 2026-08-05
 
 ## Current state
 
 AudioGroove is an end-to-end prototype for seeded MIDI generation. It has source code for MIDI extraction, vocabulary construction, chunked dataset creation, LSTM training, autoregressive sampling, a Flask API, and a vanilla JavaScript frontend.
+
+The local training state has been reset for HPC migration. Previous local run
+directories, MLflow data, prepared training chunks, generated training logs,
+and checkpoint artifacts were deleted. The source code and 250-song selection
+audit remain.
 
 ## Verified in the current checkout
 
@@ -151,4 +156,12 @@ Pilot evidence is recorded in `data/audit/lmdclean_pilot_250/`:
   unreadable files. No selected file is unreadable or overlong.
 - Leakage checks passed: zero song-identity overlap, zero artist-group overlap,
   and zero SHA-256 overlap across splits.
-- `training_started` and `larger_corpus_training_started` are both `false`.
+- The previous exploratory training state is not retained locally. New HPC
+  training must start without a checkpoint or prior MLflow run.
+- The migration target supplied for the clean HPC run is dataset revision
+  `bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc`, with
+  vocabulary size 22,481 and split window counts of 2,757,737 train,
+  464,678 validation, and 586,728 test. These values must be checked against
+  the retained manifests before training; the currently retained audit summary
+  records an older source revision and must not be silently treated as the
+  migration input.
