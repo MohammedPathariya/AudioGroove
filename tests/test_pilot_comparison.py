@@ -66,7 +66,9 @@ def test_epoch_metrics_count_each_example_once() -> None:
             self.anchor = nn.Parameter(torch.zeros(()))
 
         def forward(self, inputs: torch.Tensor) -> torch.Tensor:
-            return torch.zeros(inputs.shape[0], 7) + self.anchor
+            logits = torch.zeros(inputs.shape[0], 7)
+            logits[:, 0] = 1.0
+            return logits + self.anchor
 
     batches = iter(
         [

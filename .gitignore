@@ -4,7 +4,7 @@ data/chunks/
 data/processed/
 data/audit/day2/chunks/
 data/audit/day2/quarantine/
-data/clean_midi/
+data/clean_midi
 data/pilot_250/
 data/audit/lmdclean_pilot_250/chunks/
 
