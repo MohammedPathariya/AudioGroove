@@ -79,6 +79,20 @@ All three models complete the same bounded smoke run on HPC, and the artifacts
 can be reopened from scratch using only repository-relative configuration and
 HPC data paths.
 
+### Current evidence
+
+- The 250-song HPC source copy passed all 250 SHA-256 checks.
+- Deterministic preprocessing produced revision `bf670db4...`, vocabulary
+  22,481, and the approved split and window counts.
+- LSTM job `7900523` completed on CUDA, wrote MLflow run
+  `ba27493426aa4baebd1f1082bdba50fe`, reloaded a checkpoint, and generated a
+  parseable MIDI artifact.
+- Local forward/backward and optimizer checks pass for LSTM, GRU, and causal
+  Transformer through the shared trainer.
+- GRU and Transformer HPC smoke jobs are deliberately skipped. Their first
+  production jobs therefore carry higher failure risk and do not count as
+  verified until they complete.
+
 ## Phase 4: Controlled baseline comparison
 
 ### Objective
@@ -99,6 +113,11 @@ Compare the three model families under one fixed training contract.
 | GRU | 128 embedding, 256 hidden | 1 | unidirectional |
 | Transformer | 256 `d_model` | 2 | 4 heads, FFN 512 |
 
+The complete small/baseline/large profile matrix is stored in
+`training/configs/pilot_experiments.json`. Baseline trainable parameter counts
+are 9,050,449 LSTM, 8,951,633 GRU, and 12,595,665 Transformer parameters. This
+is a fixed representative-family comparison, not a parameter-matched claim.
+
 Keep fixed across models:
 
 - sequence length
@@ -111,8 +130,10 @@ Keep fixed across models:
 
 ### Execution
 
-Submit three independent Slurm jobs to separate GPU nodes. Each job logs to
-the same MLflow experiment but has a unique run and Slurm ID.
+Submit three independent one-GPU Slurm jobs. Slurm controls physical placement;
+parallel jobs may share a multi-GPU node. Each supplied job uses a unique
+MLflow file store and records a unique run and Slurm ID. A tracking-server URI
+can be supplied when a shared server is available.
 
 ### Stop condition
 

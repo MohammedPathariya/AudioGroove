@@ -115,3 +115,22 @@ This file records decisions that affect architecture, experiments, evaluation, a
 - **Decision:** Do not start larger LMDClean training until the 250-song pilot has a reproducible loader, stable bounded training run, frozen evaluation report, verified MIDI serialization, and documented resource profile.
 - **Reason:** More data cannot repair a leaky split, broken target alignment, incomplete representation, or unstable training loop.
 - **Consequence:** The larger run must pin the pilot-approved preprocessing configuration, repository revision, dataset version, split policy, seed, model configuration, and output artifact location. The final held-out evaluation must not be used for model tuning.
+
+## D-020: Shared pilot model and training contract
+
+- **Decision:** Build the LSTM, GRU, and causal Transformer behind one
+  next-token interface and train them through one configuration-driven runner.
+  Freeze small, baseline, and large profiles in
+  `training/configs/pilot_experiments.json`. Use five full epochs, batch size
+  64, AdamW, weight decay `1e-4`, gradient clip 1.0, validation-based early
+  stopping, and CUDA AMP for the initial profiles. Use learning rate `1e-3`
+  for LSTM/GRU and `3e-4` for Transformer.
+- **Reason:** Separate trainers or undocumented command-line changes would
+  confound architecture differences with data order, optimizer behavior,
+  metrics, checkpoint semantics, and generation settings.
+- **Consequence:** Every run streams the same deterministic chunk order for its
+  seed, logs parameter count and full configuration, validates checkpoint data
+  and vocabulary compatibility, and generates from a validation seed. Test
+  evaluation is disabled unless `--evaluate-test` is explicitly supplied after
+  finalist selection. The baseline configurations are not parameter matched;
+  quality must be interpreted alongside parameter count, runtime, and memory.

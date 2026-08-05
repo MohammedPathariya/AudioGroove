@@ -4,7 +4,10 @@ Updated: 2026-08-05
 
 ## Current state
 
-AudioGroove is an end-to-end prototype for seeded MIDI generation. It has source code for MIDI extraction, vocabulary construction, chunked dataset creation, LSTM training, autoregressive sampling, a Flask API, and a vanilla JavaScript frontend.
+AudioGroove is an end-to-end prototype for seeded MIDI generation. The current
+pilot path has deterministic MIDI preprocessing, compact LSTM, GRU, and causal
+Transformer families, a shared training and generation contract, MLflow
+tracking, Slurm launch scripts, a Flask API, and a vanilla JavaScript frontend.
 
 The local training state has been reset for HPC migration. Previous local run
 directories, MLflow data, prepared training chunks, generated training logs,
@@ -15,8 +18,10 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The repository is on `main` and was previously synchronized with `origin/main`.
 - Ten seed MIDI files are present under `data/seed/`.
-- The enhanced model definition contains a stacked bidirectional LSTM and multi-head self-attention.
-- The generation path uses a 32-token context, temperature sampling, and top-k sampling.
+- The controlled comparison has unidirectional LSTM and GRU models plus an
+  explicitly masked causal Transformer. All return one next-token distribution.
+- The shared generation path uses a 32-token context, temperature sampling,
+  top-k sampling, and a validation-split seed during model selection.
 - The frontend supports optional MIDI upload, generation, regeneration, and download.
 - Python syntax compilation passed during the initial review.
 - Big Red 200 access is verified through Slurm project `r00284`.
@@ -25,6 +30,15 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   multiplication.
 - The HPC Python module is `python/gpu/3.11.5`; personal scratch is writable at
   `/N/scratch/mjpathar`.
+- The HPC copy contains 250/250 hash-verified source MIDI files. Preprocessing
+  produced dataset revision `bf670db4...`, vocabulary 22,481, and 2,757,737,
+  464,678, and 586,728 train, validation, and test windows.
+- LSTM GPU smoke job `7900523` completed with exit code `0:0`, CUDA training,
+  checkpoint reload, MLflow run `ba27493426aa4baebd1f1082bdba50fe`, and valid
+  generated MIDI. Its 16-example metrics are infrastructure evidence only.
+- Local verification passes 13 tests, including forward/backward checks for all
+  three model families, strict causal masking, deterministic chunk streaming,
+  and configuration-profile checks.
 
 ## Day 1 foundation completed
 
@@ -37,21 +51,24 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- A local training run has not been completed.
-- An HPC AudioGroove training run has not been completed.
+- No full-budget model run has completed.
+- GRU and Transformer have not executed on an HPC GPU; their smoke jobs were
+  explicitly deferred.
 - Parallel Slurm model execution and HPC MLflow tracking have not been verified.
 - A current end-to-end hosted generation request has not been verified in this session.
 - No defensible model-quality metrics have yet been produced.
 
 ## Known technical blockers
 
-1. The HPC training and MLflow execution path still needs implementation and verification.
-2. The current bounded representation must be checked against the intended timing,
-   velocity, program, and tempo contract before comparison training.
-3. The project has no complete automated evaluation harness or human evaluation protocol.
+1. Parallel production jobs and post-run MLflow-store consolidation remain
+   unverified.
+2. GRU and Transformer CUDA behavior will first be tested by their production
+   jobs because separate smoke jobs were skipped.
+3. The project has no complete musical-statistics, originality, or human
+   evaluation harness yet.
 4. The current 250-song pilot has no reliable genre metadata and is not a
    genre-stratified generalization benchmark.
-5. The large cleaned training dataset is not present locally, and the active environment is missing `natsort` for chunk-management imports.
+5. The large cleaned training dataset is not present locally.
 6. Model registry, deployment promotion, and post-deployment monitoring are not implemented.
 
 ## Modality and product strategy
@@ -87,12 +104,13 @@ model artifact.
 
 ## Current priority
 
-Move the frozen 250-song pilot to Big Red 200, verify HPC preprocessing and
-MLflow tracking, run the parallel model comparison, and produce the first
-model-promotion decision. Do not start larger-corpus training or raw-audio
-training until this gate passes.
+Publish the shared three-model trainer to the HPC checkout, run the controlled
+baseline jobs, verify isolated MLflow artifacts, then decide whether to run the
+nine-profile sweep. Do not evaluate the frozen test split, start larger-corpus
+training, or begin raw-audio training before finalists are selected.
 
-The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md).
+The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
+the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).
 
 ## Next development phase: 250-song pilot
 
@@ -179,10 +197,10 @@ Pilot evidence is recorded in `data/audit/lmdclean_pilot_250/`:
   presented as a genre-stratified sample.
 - The previous exploratory training state is not retained locally. New HPC
   training must start without a checkpoint or prior MLflow run.
-- The migration target supplied for the clean HPC run is dataset revision
-  `bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc`, with
-  vocabulary size 22,481 and split window counts of 2,757,737 train,
-  464,678 validation, and 586,728 test. These values must be checked against
-  the retained manifests before training; the currently retained audit summary
-  records an older source revision and must not be silently treated as the
-  migration input.
+- HPC preprocessing verified derived dataset revision
+  `bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc`,
+  vocabulary size 22,481, and split window counts of 2,757,737 train, 464,678
+  validation, and 586,728 test. The retained `cb79c82...` value is the source
+  selection revision; `bf670db4...` is the deterministic representation and
+  chunk revision derived from it. They identify different layers of the same
+  accepted data contract.
