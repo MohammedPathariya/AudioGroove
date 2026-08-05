@@ -74,17 +74,17 @@ This file records decisions that affect architecture, experiments, evaluation, a
 - **Reason:** Compact Transformers, temporal convolutional models, GRU variants, and pretrained audio or symbolic music models may fit the task better.
 - **Consequence:** Model comparisons must use the same data split, training budget, generation protocol, and evaluation report. A larger model is not automatically a better result on the available hardware.
 
-## D-013: Google Colab is the approved scale-up path
+## D-013: Big Red 200 is the approved scale-up path
 
-- **Decision:** Google Colab may be used for larger training runs after the pipeline works locally.
-- **Reason:** Colab can provide GPU memory and compute that the 8 GB M1 cannot provide reliably.
-- **Consequence:** Colab notebooks must pin the repository commit, dataset version, configuration, random seed, dependencies, and output artifact location. Local development remains the source of truth for debugging and evaluation.
+- **Decision:** Big Red 200 is the primary scale-up environment for the 250-song pilot and subsequent controlled experiments.
+- **Reason:** The account has verified Slurm GPU access through project `r00284`, with an A100 GPU and CUDA-enabled PyTorch. This provides reproducible batch execution without relying on a temporary Colab runtime.
+- **Consequence:** HPC jobs must pin the repository commit, dataset version, configuration, random seed, dependencies, Slurm project, GPU request, and artifact locations. Colab is not part of the current training path.
 
-## D-014: First-week modality and model decision
+## D-014: MIDI-first MLOps benchmark
 
-- **Decision:** The first-week implementation target is symbolic MIDI generation using the existing compact unidirectional recurrent model as a baseline. MP3/audio remains an evaluated follow-up path, not a simultaneous rewrite.
-- **Reason:** The current repository, seed data, API, and output path are MIDI-based. This gives the project a bounded, testable baseline on the M1 while leaving room to compare audio approaches in a separate experiment.
-- **Consequence:** Do not implement a new audio representation or alternative model on Day 1. After the baseline and evaluation harness exist, compare a compact GRU or Transformer against the recurrent baseline under the same budget. The final architecture remains evidence-based.
+- **Decision:** Complete the symbolic MIDI MLOps benchmark before beginning raw MP3/audio modeling. Compare a compact LSTM, GRU, and causal Transformer on the frozen pilot, then connect the selected artifact to the API and frontend.
+- **Reason:** MIDI is interpretable, bounded, and already supported by the repository. Raw audio requires a separate licensed dataset, representation, model family, and evaluation stack.
+- **Consequence:** Rendered audio previews may improve the product experience, but raw audio training is deferred until its data and evaluation gates are approved.
 
 ## D-015: 250-song LMDClean pilot benchmark
 
@@ -96,13 +96,19 @@ This file records decisions that affect architecture, experiments, evaluation, a
 
 - **Decision:** Compare the compact LSTM, GRU, and compact Transformer on the same pilot source split, token representation, sequence length, random seed policy, training budget, and evaluation sample count. Use Dask for bounded preprocessing and MLflow for local, machine-readable experiment tracking.
 - **Reason:** Changing the dataset or training budget between models makes quality differences uninterpretable.
-- **Consequence:** Every result must report predictive, MIDI-validity, musical-statistics, originality, latency, and resource metrics. Dask task configuration and MLflow run IDs must be recorded with the dataset revision and Git commit. A model is selected only after the comparison report records whether it improved, degraded, or did not conclusively change the agreed metrics.
+- **Consequence:** Every result must report predictive, MIDI-validity, musical-statistics, originality, latency, and resource metrics. Dask task configuration, MLflow run IDs, Slurm job IDs, and GPU metadata must be recorded with the dataset revision and Git commit. Validation results select configurations; the frozen test split is evaluated only after selection.
 
 ## D-018: Dask and MLflow experiment infrastructure
 
-- **Decision:** Use Dask to parallelize MIDI parsing and bounded feature or chunk preparation, and use MLflow to track pilot training and benchmark runs. The first tracking backend is local under `runs/mlruns/`; no external tracking service is required.
+- **Decision:** Use Dask to parallelize MIDI parsing and bounded feature or chunk preparation, and use MLflow to track pilot training and benchmark runs. HPC tracking must use a concurrency-safe tracking server or isolated per-job stores with verified consolidation.
 - **Reason:** The project needs a traceable preprocessing and training history that can support claims about dataset scale, runtime, experiments, and model selection without relying on undocumented terminal output.
-- **Consequence:** Dask work must preserve source-level split assignments and deterministic ordering. MLflow must log dataset revision, source and window counts, selection and split seeds, model configuration, device, training budget, metrics, resource measurements, checkpoints, manifests, and benchmark reports. Dask and MLflow integration is not considered verified until a pilot run completes and the artifacts can be reopened locally.
+- **Consequence:** Dask work must preserve source-level split assignments and deterministic ordering. MLflow must log dataset revision, source and window counts, selection and split seeds, model configuration, device, Slurm metadata, training budget, metrics, resource measurements, checkpoints, manifests, and benchmark reports. Dask and MLflow integration is not considered verified until parallel HPC runs complete and their artifacts can be reopened.
+
+## D-019: Genre and audio are separate follow-up tracks
+
+- **Decision:** Treat the current 250-song pilot as a heterogeneous artist-disjoint symbolic benchmark, not a genre-stratified benchmark. Create separate genre manifests and audio experiments rather than relabeling or replacing the current pilot.
+- **Reason:** The corpus layout has no reliable genre metadata, and raw MP3 training introduces substantially different rights, data, representation, compute, and evaluation requirements.
+- **Consequence:** The current model-selection decision applies only to the symbolic MIDI pilot. Genre-specific or audio conclusions require their own frozen datasets and MLflow experiments.
 
 ## D-017: Larger-corpus scale-up gate
 

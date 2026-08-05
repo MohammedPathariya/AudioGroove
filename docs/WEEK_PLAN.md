@@ -1,260 +1,223 @@
-# AudioGroove Seven-Day Plan
+# AudioGroove Pilot MLOps Weekly Plan
 
-This plan is designed for an Apple MacBook Air M1 with 8 GB unified memory. Each day has one primary phase, a concrete deliverable, and a stopping condition. Do not move to the next phase while the stopping condition is false unless the failure is documented.
+Updated: 2026-08-05
 
-## Day 1: Repository, modality, and experiment foundation
+This plan covers the next implementation phase: a reproducible, HPC-backed
+comparison of a compact LSTM, GRU, and causal Transformer on the frozen
+250-song symbolic MIDI pilot. Raw MP3/audio modeling is explicitly deferred
+to a separate licensed-data feasibility phase.
 
-### Objective
+Do not advance past a phase while its stop condition is false unless the
+failure is recorded in `docs/STATUS.md` and the relevant MLflow or audit
+artifact.
 
-Make the repository internally consistent, decide what the system should generate, and establish the experiment contract.
-
-### Work
-
-- Standardize all data and output paths.
-- Define missing chunk-directory constants.
-- Standardize Python import and module execution conventions.
-- Remove accidental `.DS_Store` changes from the intended work.
-- Define a configuration object or file for dataset, model, device, seed, and output paths.
-- Add a dataset manifest schema.
-- Record the current prototype limitations in `STATUS.md`.
-- Define the primary task: symbolic continuation, symbolic composition, audio continuation, or audio generation.
-- Compare MIDI, extracted audio features, and raw MP3/audio against data availability, rights, storage, compute, and evaluation requirements.
-- Decide whether the first week will deliver a symbolic baseline or an audio baseline.
-- List candidate model families that fit the chosen representation.
-
-### Deliverable
-
-The data-preparation and model modules can be imported without path-name errors, one configuration identifies every input and output location, and `DECISIONS.md` records the initial modality and model-family choice.
-
-### Stop condition
-
-Focused import checks and syntax checks pass. No training is attempted yet.
-
-## Day 2: Data audit and bounded preprocessing
+## Phase 1: HPC and repository foundation
 
 ### Objective
 
-Create a small, reproducible dataset that is safe for 8 GB unified memory.
+Make the Big Red 200 environment reproducible before transferring data or
+starting training.
 
 ### Work
 
-- Select approximately 250 songs from the approved LMDClean version with a fixed seed and record exact paths and hashes.
-- Decide which MIDI corpus is legally and technically usable.
-- Run the scanner in quarantine mode.
-- Generate a manifest with parse status, duration, token count, and source identity.
-- Create deterministic source-file train, validation, and test splits.
-- Build bounded chunk files without merging all windows.
-- Create smoke and development dataset manifests.
-- Keep the pilot test split frozen before model comparison.
-
-### Deliverable
-
-A reproducible smoke dataset and development dataset exist, with counts and split assignments recorded. The next data target is an approximately 250-song LMDClean pilot, while the current 10-song result remains the smoke test.
+- Clone the approved repository commit on Big Red 200.
+- Use Slurm project `r00284` and personal scratch at `/N/scratch/mjpathar`.
+- Load `python/gpu/3.11.5`.
+- Record Python, PyTorch, CUDA, driver, GPU, Slurm, and Git metadata.
+- Create separate directories for repository, data, checkpoints, MLflow, logs,
+  and reports.
+- Run the GPU smoke test and a repository import test.
 
 ### Stop condition
 
-The same input manifest and seed reproduce the same split and chunk counts.
+One Slurm job completes with CUDA-enabled PyTorch, and the environment record
+can be reproduced on another GPU node.
 
-## Day 3: Representation and dataset loader
+## Phase 2: Frozen data contract
 
 ### Objective
 
-Use a representation that preserves enough information for meaningful generation and evaluation. For MIDI, this means event tokens. For audio, this means a defined sample rate, segment length, feature representation, and reconstruction path.
+Ensure every model sees exactly the same dataset and representation.
 
 ### Work
 
-- Split the pilot by source song before windowing. Group by artist or album when reliable metadata is available.
-- Use Dask for bounded MIDI parsing and chunk preparation, with deterministic source ordering and a recorded worker or partition configuration.
-- Implement or finalize event tokens for note starts, note ends or durations, time shifts, velocity, and instrument information.
-- Define vocabulary special tokens and unknown-token behavior.
-- Implement a streaming or bounded-chunk `Dataset`.
-- Add shape, range, and round-trip tests.
-- Confirm that generated event sequences can be converted back to valid MIDI.
-- If audio is selected, define the audio preprocessing and reconstruction or playback path before training.
-
-### Deliverable
-
-The loader can train from bounded chunks, and the selected representation can be converted into an output that can be evaluated.
+- Transfer or rebuild the isolated 250-song pilot from the original
+  `data/clean_midi` corpus.
+- Verify the selected manifest and every source SHA-256 hash.
+- Resolve the source revision mismatch between the retained `cb79c82...`
+  audit and the previous Colab-reported `bf670db4...` prepared dataset.
+- Freeze the source-level split: 175 train, 37 validation, 38 test.
+- Verify zero song, artist, and content-hash leakage.
+- Rebuild bounded chunks on HPC with deterministic ordering.
+- Record vocabulary size, window counts, chunk counts, sequence length, and
+  representation configuration.
 
 ### Stop condition
 
-A small sample of real files passes parse, preprocessing, reconstruction or serialization, and output validation checks. The pilot test split is frozen before model comparison.
+The HPC manifest matches the approved data contract and is identical for all
+future model runs. The test split is frozen before tuning begins.
 
-## Day 4: Correct compact baseline
+## Phase 3: Preprocessing and loader verification
 
 ### Objective
 
-Train a compact baseline locally on the bounded 250-song pilot using the same objective used during generation.
+Prove that the real pilot can be loaded on a GPU node without relying on
+Colab or Drive artifacts.
 
 ### Work
 
-- Implement next-token targets.
-- Add MPS selection with CPU fallback.
-- Start with the smallest suitable baseline for the chosen representation. For symbolic data, use a compact unidirectional LSTM, GRU, temporal convolutional model, or small Transformer. For audio, prefer a pretrained representation or a bounded spectrogram baseline rather than raw waveform generation from scratch.
-- If the symbolic baseline is selected, start with:
-  - embedding 128
-  - hidden size 256
-  - one or two layers
-  - batch size 8 to 16
-  - sequence length 32 or 64
-- Use gradient accumulation instead of a large physical batch.
-- Disable CUDA-only assumptions and start with float32 on MPS.
-- Add checkpoint resume and early stopping.
-- Track the run in local MLflow under `runs/mlruns/`. Log the dataset revision, source and window counts, selection and split seeds, Git commit, model configuration, device, training budget, metrics, checkpoint, and generation artifacts.
-- Keep Dask preprocessing configuration and MLflow run metadata in the reproducibility record.
-- If the local device is insufficient, move the training run to Google Colab only after the local smoke test passes.
-
-### Deliverable
-
-The compact baseline completes a bounded pilot run and produces a checkpoint, an MLflow run, and a metrics report.
+- Run Dask preprocessing with a recorded worker and ordering configuration.
+- Validate chunk shapes, token ranges, vocabulary compatibility, and target
+  alignment.
+- Run a short loader-only job.
+- Run a short forward/backward pass for all three model families.
+- Confirm checkpoints can be saved and reloaded.
 
 ### Stop condition
 
-Training loss, validation loss, perplexity, token accuracy, and generation latency are recorded.
+All three models complete the same bounded smoke run on HPC, and the artifacts
+can be reopened from scratch using only repository-relative configuration and
+HPC data paths.
 
-## Day 5: Evaluation harness and baseline report
+## Phase 4: Controlled baseline comparison
 
 ### Objective
 
-Measure whether the baseline produces technically valid and statistically plausible output on the frozen pilot test split.
+Compare the three model families under one fixed training contract.
 
-### Work
+### Models
 
-- Implement predictive metrics:
-  - cross-entropy
-  - perplexity
-  - token accuracy
-  - top-5 accuracy
-- Implement validity metrics:
-  - MIDI parse success for symbolic output
-  - audio decode success for audio output
-  - non-empty output rate
-  - valid event or waveform rate
-  - generation failure rate
-- Implement musical distribution metrics appropriate to the modality:
-  - symbolic: note density, pitch range, pitch-class distribution, duration distribution, time-shift distribution, repetition ratio
-  - audio: loudness, spectral statistics, segment duration, clipping rate, and a defined audio-quality measure
-- Compare generated outputs with held-out real files.
-- Measure nearest-training-example similarity and n-gram overlap.
+- Compact unidirectional LSTM
+- Compact unidirectional GRU
+- Compact causal Transformer
 
-### Deliverable
+### Initial configurations
 
-A versioned JSON or CSV baseline report with fixed random seeds and saved sample MIDI files.
+| Model | Embedding or model size | Layers | Other |
+|---|---:|---:|---|
+| LSTM | 128 embedding, 256 hidden | 1 | unidirectional |
+| GRU | 128 embedding, 256 hidden | 1 | unidirectional |
+| Transformer | 256 `d_model` | 2 | 4 heads, FFN 512 |
+
+Keep fixed across models:
+
+- sequence length
+- effective batch size
+- optimizer policy
+- maximum epochs or steps
+- gradient clipping
+- evaluation sample count
+- training and generation seeds
+
+### Execution
+
+Submit three independent Slurm jobs to separate GPU nodes. Each job logs to
+the same MLflow experiment but has a unique run and Slurm ID.
 
 ### Stop condition
 
-The report can be regenerated from one command and clearly states dataset revision, pilot-selection seed, split seed, model, device, Dask preprocessing configuration, MLflow run ID, source-file counts, and sample count. The test split is not changed during tuning.
+All three baseline runs finish or fail with a recorded explanation. MLflow
+contains parameters, epoch metrics, checkpoints, resources, and generated
+MIDI artifacts for every run.
 
-## Day 6: Model comparison and resource profiling
+## Phase 5: Small hyperparameter sweep
 
 ### Objective
 
-Compare the compact LSTM, GRU, and compact Transformer on the same bounded 250-song pilot. Attention is only one candidate comparison.
+Measure configuration sensitivity without creating an uncontrolled grid.
 
-### Work
+### Sweep
 
-- Add the selected comparison model while keeping the same representation and split. Possible comparisons include LSTM versus GRU, LSTM versus compact Transformer, or a symbolic model versus a pretrained audio-feature baseline.
-- Keep the experiment controlled:
-  - same dataset
-  - same seed
-  - same frozen source-file split
-  - same Dask preprocessing configuration
-  - same number of epochs or training steps
-  - same evaluation sample count
-- Log every comparison run and artifact to MLflow. Do not select a model from untracked terminal output.
-- Record:
-  - peak memory
-  - samples per second
-  - epoch duration
-  - generation latency
-  - audio quality metrics if the selected output is audio
-  - validation perplexity
-  - musical and validity metrics
-- Stop or reduce the model if the machine begins swapping or becomes unstable.
+Run small, baseline, and larger configurations for each family:
 
-### Deliverable
+- LSTM and GRU: embedding 128 or 192; hidden size 192, 256, or 384; one or
+  two layers.
+- Transformer: `d_model` 192 or 256; two or four layers; four or eight heads;
+  FFN size 512 or 1024.
+- Learning rates: start with `1e-3` for LSTM/GRU and `3e-4` for Transformer.
+- Weight decay: fixed initially at `1e-4`.
+- Training budget: fixed five-epoch comparison budget before any longer run.
 
-A baseline-versus-selected-model comparison table with resource and quality metrics, plus a decision about whether the pilot supports scaling to the larger corpus.
+Select configurations using validation metrics and resource behavior only.
 
 ### Stop condition
 
-The project can state whether the comparison model improved the agreed metrics, degraded them, or remains inconclusive.
+The sweep report identifies the best configuration per model family, including
+uncertainty caused by early stopping, runtime, and GPU memory.
 
-## Day 7: Integration, deployment readiness, and handoff
+## Phase 6: Seed confirmation and held-out evaluation
 
 ### Objective
 
-Make the verified pilot result reproducible and define whether the larger LMDClean run is justified.
+Separate model selection from final generalization measurement.
 
 ### Work
 
-- Connect the selected model artifact, representation configuration, and vocabulary or preprocessing assets to the backend.
-- Add readiness checks for artifact compatibility.
-- Run local API generation with and without a seed file.
-- Validate returned MIDI or audio files according to the selected modality.
-- Run frontend smoke testing.
-- Update `STATUS.md`, `DECISIONS.md`, and `DEPLOYMENT.md` with actual results.
-- Decide whether a larger cloud run is justified.
-- Do not start the larger run unless the pilot passes the scale-up gate: reproducible preprocessing, frozen test split, stable bounded training, verified MIDI output, model comparison report, and documented resource profile.
-- Keep README claims limited to verified evidence.
+- Run at least three training seeds for each finalist.
+- Select the final candidate using validation results and seed stability.
+- Evaluate each final candidate once on the frozen 38-song test split.
+- Generate MIDI with identical seed files, generation lengths, temperatures,
+  and sampling seeds.
+- Produce one final comparison table.
 
-### Deliverable
+### Metrics
 
-A local end-to-end demo, evaluation report, deployment smoke-test record, and next-phase recommendation.
+- Cross-entropy and perplexity
+- Token accuracy and top-5 accuracy
+- Training time and throughput
+- Peak GPU memory
+- Checkpoint size
+- MIDI parse and validity rate
+- Generation latency and failure rate
+- Pitch, note-density, velocity, duration, and time-shift statistics
+- Repetition and training-overlap measures
 
 ### Stop condition
 
-The selected pilot result can be reproduced from the documented commands without relying on undocumented local files, and the larger-corpus decision is recorded with evidence.
+The test results are produced once, after model and configuration selection,
+and the report clearly labels validation versus held-out test evidence.
 
-## After Day 7: Larger LMDClean training gate
+## Phase 7: Registry, deployment, and monitoring
 
-The larger corpus is a separate phase. It may begin only after the pilot gate passes. The larger run must pin the approved Dask preprocessing configuration, repository revision, dataset version, split policy, random seeds, model configuration, MLflow tracking configuration, checkpoint location, and evaluation procedure. The pilot test split and the larger-run final test split must remain held out from model selection.
+### Objective
 
-## Laptop resource guardrails
+Turn the selected pilot model into a verifiable product artifact.
 
-- Prefer MPS, with explicit CPU fallback.
-- Start with batch size 8 or 16.
-- Use zero or one data-loader worker.
-- Avoid `pin_memory=True` unless measured to help.
-- Do not merge all dataset chunks into one tensor.
-- Keep sequence lengths at 32 or 64 initially.
-- Save checkpoints frequently.
-- Watch memory pressure and stop before macOS begins heavy swapping.
-- Use cloud GPU only after the local pipeline is reproducible.
-- Use Google Colab for larger runs when local MPS memory or runtime is insufficient.
-- Do not train raw audio generation from scratch during this week unless the data, model, and compute budget are already available.
+### Work
 
-## Metrics to report every experiment
+- Register the selected checkpoint with its vocabulary and representation
+  metadata.
+- Promote it only after compatibility and held-out evaluation checks pass.
+- Connect the model to the generation API.
+- Validate MIDI generation with and without a seed file.
+- Render generated MIDI to an audio preview where appropriate.
+- Connect the frontend and test download and regeneration flows.
+- Record API latency, invalid-output rate, generation failures, and basic
+  output statistics.
 
-```text
-dataset_version
-source_file_count
-window_count
-split_seed
-model_name
-parameter_count
-device
-batch_size
-gradient_accumulation_steps
-sequence_length
-training_steps
-epoch_time_seconds
-peak_memory_if_available
-validation_loss
-perplexity
-token_accuracy
-top5_accuracy
-output_validity_rate
-generation_failure_rate
-mean_generation_latency_ms
-note_density_distance
-pitch_distribution_distance
-duration_distribution_distance
-repetition_ratio
-training_overlap_rate
-data_modality
-audio_sample_rate_if_applicable
-segment_length_if_applicable
-model_family
-colab_runtime_and_gpu_if_applicable
-```
+### Stop condition
+
+The deployed service loads the registered artifact, generates valid output,
+and exposes a reproducible model and data revision.
+
+## Scale-up gate
+
+Do not start larger-corpus LMDClean training until all of the following are
+true:
+
+- the frozen pilot data contract is verified
+- all three model families have completed controlled runs
+- MLflow tracking is complete and recoverable
+- the evaluation report is reproducible
+- test evaluation is separated from model selection
+- generated MIDI serialization is verified
+- resource requirements are documented
+- a model promotion decision is recorded
+
+## Deferred audio and genre tracks
+
+Raw MP3/audio training is a separate phase. It requires licensed or owned
+recordings, a larger data contract, an explicit audio representation, and
+audio-specific evaluation. The current heterogeneous pilot also lacks reliable
+genre metadata, so genre-specific studies should use separate manifests and
+separate MLflow experiments rather than silently relabeling the current pilot.

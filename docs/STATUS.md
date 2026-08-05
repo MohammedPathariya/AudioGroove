@@ -9,7 +9,7 @@ AudioGroove is an end-to-end prototype for seeded MIDI generation. It has source
 The local training state has been reset for HPC migration. Previous local run
 directories, MLflow data, prepared training chunks, generated training logs,
 and checkpoint artifacts were deleted. The source code and 250-song selection
-audit remain.
+audit remain. Training will proceed on Big Red 200, not Colab.
 
 ## Verified in the current checkout
 
@@ -19,6 +19,12 @@ audit remain.
 - The generation path uses a 32-token context, temperature sampling, and top-k sampling.
 - The frontend supports optional MIDI upload, generation, regeneration, and download.
 - Python syntax compilation passed during the initial review.
+- Big Red 200 access is verified through Slurm project `r00284`.
+- A Slurm GPU smoke test completed on an NVIDIA A100-SXM4 40 GB node with
+  PyTorch `2.2.0+cu118`, CUDA available, and a successful CUDA matrix
+  multiplication.
+- The HPC Python module is `python/gpu/3.11.5`; personal scratch is writable at
+  `/N/scratch/mjpathar`.
 
 ## Day 1 foundation completed
 
@@ -31,52 +37,62 @@ audit remain.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The tracked checkpoint files are Git LFS pointer files, not usable local weights.
 - A local training run has not been completed.
+- An HPC AudioGroove training run has not been completed.
+- Parallel Slurm model execution and HPC MLflow tracking have not been verified.
 - A current end-to-end hosted generation request has not been verified in this session.
 - No defensible model-quality metrics have yet been produced.
 
 ## Known technical blockers
 
-1. The current training target alignment does not match one-step autoregressive generation.
-2. The current representation loses timing, duration, velocity, and reliable polyphony.
-3. The merge-to-one-tensor workflow is unsafe for an 8 GB M1 machine.
-4. The current code selects CUDA or CPU and does not properly support MPS as the primary local device.
-5. The project has no automated evaluation harness or human evaluation protocol.
-6. The large cleaned training dataset is not present locally, and the active environment is missing `natsort` for chunk-management imports.
-7. Dask preprocessing and MLflow experiment tracking have been specified but not yet integrated into or verified by a pilot training run.
+1. The HPC training and MLflow execution path still needs implementation and verification.
+2. The current bounded representation must be checked against the intended timing,
+   velocity, program, and tempo contract before comparison training.
+3. The project has no complete automated evaluation harness or human evaluation protocol.
+4. The current 250-song pilot has no reliable genre metadata and is not a
+   genre-stratified generalization benchmark.
+5. The large cleaned training dataset is not present locally, and the active environment is missing `natsort` for chunk-management imports.
+6. Model registry, deployment promotion, and post-deployment monitoring are not implemented.
 
-## Modality settled, representation and model selection pending
+## Modality and product strategy
 
-The project is not required to remain MIDI-only or LSTM-only.
+The immediate product and MLOps path is symbolic MIDI generation. MIDI is not
+treated as the final audio experience; it is the controlled representation for
+model comparison, reproducible evaluation, and deployment integration.
 
-- MIDI is currently the easiest path for interpretable preprocessing, compact experiments, and low-cost generation.
-- MP3 or raw audio generation is a larger problem, not a simpler replacement. It requires audio decoding, segmentation, loudness and sample-rate policy, much larger datasets, a different model family, and audio-quality evaluation.
-- A practical audio route may use pretrained audio representations or a pretrained audio-generation model rather than training raw waveform generation from scratch.
-- Candidate model families include compact Transformers, GRUs, temporal convolutional networks, symbolic music Transformers, and pretrained audio or neural-codec models.
-- Google Colab is available for larger training after the 250-song pilot passes the scale-up gate.
+- Complete the MIDI-first LSTM, GRU, and causal Transformer benchmark on HPC.
+- Render valid generated MIDI to audio previews for the product experience.
+- Treat genre-specific benchmarks as separate evaluation tracks because the
+  current pilot has no reliable genre metadata.
+- Defer raw MP3/audio modeling until the project has licensed audio, an explicit
+  representation, an audio evaluation protocol, and a justified data scale.
 
-The modality and model choice must be recorded in `DECISIONS.md` before Day 3 implementation work begins.
+## Definition of a successful pilot phase
 
-## Definition of a successful first week
+By the end of the pilot phase, the project should have:
 
-By the end of the week, the project should have:
-
-- a reproducible small dataset and source-file split manifest
-- a corrected streaming dataset loader
-- MPS and CPU device selection
-- a corrected next-token training objective
-- a compact baseline that completes locally
-- a selected-model comparison experiment, if memory and time permit
+- a frozen 250-song source manifest and split
+- a reproducible bounded loader on HPC
+- a completed LSTM, GRU, and causal Transformer comparison
+- MLflow records for every configuration and seed
 - automated predictive, validity, musical-statistics, originality, and latency reports
-- documented local startup and deployment smoke-test procedures
+- a held-out test evaluation performed only after model selection
+- a registered model artifact with compatible vocabulary and representation metadata
+- documented API and frontend deployment smoke tests
 - no unsupported performance claims
 
-The week does not require training a raw-audio model from scratch. It requires making and documenting a defensible modality choice, then producing one reproducible baseline.
+The pilot does not require raw-audio model training. It requires a defensible
+symbolic benchmark and an MLOps chain from data manifest through deployable
+model artifact.
 
 ## Current priority
 
-Use an approximately 250-song LMDClean subset as a controlled pilot before any larger-corpus training. The first meaningful result is a reproducible model comparison and benchmark report, not a larger checkpoint.
+Move the frozen 250-song pilot to Big Red 200, verify HPC preprocessing and
+MLflow tracking, run the parallel model comparison, and produce the first
+model-promotion decision. Do not start larger-corpus training or raw-audio
+training until this gate passes.
+
+The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md).
 
 ## Next development phase: 250-song pilot
 
@@ -88,7 +104,7 @@ The planned pilot is a bounded development benchmark, not the final generalizati
 - Freeze the pilot test split before model comparison.
 - Train and compare a compact LSTM, GRU, and compact Transformer using the same representation, source split, seed policy, training budget, and evaluation sample count.
 - Run bounded preprocessing through Dask with a recorded worker or partition configuration.
-- Track every baseline and comparison run in local MLflow under `runs/mlruns/`, including dataset revision, Dask configuration, Git commit, model configuration, metrics, resources, checkpoints, and benchmark artifacts.
+- Track every baseline and comparison run in HPC MLflow, using a concurrency-safe tracking configuration, including dataset revision, Dask configuration, Git commit, model configuration, metrics, resources, checkpoints, and benchmark artifacts.
 - Report predictive, MIDI-validity, musical-statistics, originality, latency, memory, and throughput metrics.
 
 The larger LMDClean run is blocked until the pilot has a reproducible loader, verified Dask preprocessing, a stable bounded training run tracked in MLflow, verified MIDI serialization, a frozen evaluation report, and a documented resource profile.
