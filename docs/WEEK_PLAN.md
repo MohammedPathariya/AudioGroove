@@ -100,6 +100,10 @@ HPC data paths.
   `7903832` completed successfully with verified reports, checkpoints, clean
   Git provenance, parseable generated MIDI, and recoverable MLflow runs. Their
   1.1 GB `baseline-v2` archive contains 243 checksum-verified files.
+- Profile-sweep jobs `7905354` through `7905362` completed successfully with
+  all nine reports, checkpoints, generated MIDI files, and MLflow stores
+  verified. Validation selected the `large` profile for LSTM, GRU, and
+  Transformer. The sweep archive is preserved with verified checksums.
 
 ## Phase 4: Controlled baseline comparison
 

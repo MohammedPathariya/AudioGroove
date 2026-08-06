@@ -1,0 +1,37 @@
+{
+  "archive": {
+    "checksum_verification": "passed",
+    "location": "$AG_SCRATCH/archive/profile-sweep-v1"
+  },
+  "baseline_runs": 3,
+  "dataset_revision": "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31",
+  "family_finalists": [
+    {
+      "best_val_loss": 6.822062580510129,
+      "model_family": "gru",
+      "model_profile": "large",
+      "slurm_job_id": 7905358,
+      "source_run": "2f5d0a2c4e904525859793af144cf2ba"
+    },
+    {
+      "best_val_loss": 6.921282146665363,
+      "model_family": "lstm",
+      "model_profile": "large",
+      "slurm_job_id": 7905355,
+      "source_run": "23f40551de9649b49489039d133ceb85"
+    },
+    {
+      "best_val_loss": 6.916594171670379,
+      "model_family": "transformer",
+      "model_profile": "large",
+      "slurm_job_id": 7905361,
+      "source_run": "0e747b1cac5f4af682e241eac7cd2641"
+    }
+  ],
+  "profile_sweep_runs": 9,
+  "selection_metric": "best_validation_loss",
+  "test_evaluated": false,
+  "training_seed": 20260805,
+  "vocabulary_hash": "6a67a6b3d51d4c23a5af820175605b1c8612d178ba9f229e32ca7f3a90bec010",
+  "vocabulary_size": 18849
+}

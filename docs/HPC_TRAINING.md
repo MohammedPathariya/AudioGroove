@@ -203,6 +203,11 @@ python -m src.evaluation.pilot_results \
   --select-family-finalists
 ```
 
+The completed profile sweep is documented in
+[`PILOT_SWEEP_RESULTS.md`](PILOT_SWEEP_RESULTS.md). It selected the `large`
+profile for each family using validation loss. The nine sweep artifacts are
+preserved under `$AG_SCRATCH/archive/profile-sweep-v1` with verified checksums.
+
 ## Three-seed finalists
 
 Run each selected family/profile with the frozen seeds `20260807`, `20260808`,

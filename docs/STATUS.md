@@ -57,6 +57,12 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   verification. The 1.1 GB `baseline-v2` archive contains 243 files and a
   fully verified checksum manifest. Exact evidence is in
   [`docs/CORRECTED_BASELINE_RESULTS.md`](CORRECTED_BASELINE_RESULTS.md).
+- Profile-sweep jobs `7905354` through `7905362` completed with exit code
+  `0:0`. All nine reports, checkpoints, generated MIDI files, and MLflow
+  stores passed verification. GRU-large leads validation loss at `6.8221`;
+  the large profile was selected for all three families. The artifacts are
+  preserved in the checksum-verified `profile-sweep-v1` archive. Exact
+  evidence is in [`docs/PILOT_SWEEP_RESULTS.md`](PILOT_SWEEP_RESULTS.md).
 
 ## Day 1 foundation completed
 
@@ -69,8 +75,7 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The nine missing small/large/larger profile runs and three-seed finalist comparison
-  have not run.
+- The three-seed finalist comparison has not run.
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
 - A current end-to-end hosted generation request has not been verified in this session.
@@ -119,10 +124,9 @@ model artifact.
 
 ## Current priority
 
-Run Slurm dry-run checks, then submit the nine missing small/large/larger
-profile jobs. Combine them with the accepted baseline reports for
-validation-only profile selection. Do not evaluate the frozen test split,
-start larger-corpus training, or begin raw-audio training before the
+Submit the three selected family finalists with three seeds each. Aggregate
+validation results and seed variance before evaluating the frozen test split.
+Do not start larger-corpus training or begin raw-audio training before the
 three-seed finalist selection is frozen.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
