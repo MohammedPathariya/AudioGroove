@@ -167,8 +167,9 @@ generation, recoverable best checkpoints, and `test: null`.
 
 ## Profile sweep
 
-Do not submit the nine-job sweep until the three corrected baselines pass the
-checks above.
+The three corrected baseline runs already cover the `baseline` profile for each
+family. Do not repeat them. Submit only the six missing `small` and `large`
+profiles after the corrected baselines pass the checks above.
 
 ```bash
 bash training/slurm/submit_pilot_sweep.sh
@@ -180,7 +181,7 @@ Select one profile per family using validation loss only:
 python -m src.evaluation.pilot_results \
   --run-root "$AG_SCRATCH/runs/pilot_comparison_v2" \
   --dataset-revision a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31 \
-  --phases sweep \
+  --phases baseline sweep \
   --output-dir "$AG_SCRATCH/reports/pilot_v2/sweep" \
   --select-family-finalists
 ```

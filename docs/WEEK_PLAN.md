@@ -97,7 +97,8 @@ HPC data paths.
 - Preliminary LSTM, GRU, and Transformer production jobs all completed on HPC,
   were archived with verified checksums, and have recoverable MLflow runs and
   parseable generated MIDI. Corrected baseline jobs `7903830`, `7903831`, and
-  `7903832` are submitted but not yet verified complete.
+  `7903832` completed successfully with verified reports, checkpoints, clean
+  Git provenance, and parseable generated MIDI.
 
 ## Phase 4: Controlled baseline comparison
 

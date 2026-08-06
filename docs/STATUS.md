@@ -50,8 +50,11 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   Validation OOV is 7,229 of 465,862 tokens (1.55%); test OOV is 30,427 of
   587,944 tokens (5.18%).
 - Corrected baseline jobs `7903830` LSTM, `7903831` GRU, and `7903832`
-  Transformer have been submitted. Their completion and results are not yet
-  verified.
+  Transformer completed with exit code `0:0`. GRU leads validation loss at
+  6.9753, LSTM leads top-1 accuracy at 9.79%, and Transformer is slower and
+  larger under the baseline profile. All reports, checkpoints, clean Git
+  provenance, and generated MIDI files passed verification. Exact evidence is
+  in [`docs/CORRECTED_BASELINE_RESULTS.md`](CORRECTED_BASELINE_RESULTS.md).
 
 ## Day 1 foundation completed
 
@@ -64,8 +67,8 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The leakage-corrected baseline runs have not yet completed.
-- The nine-profile sweep and three-seed finalist comparison have not run.
+- The six missing small/large profile runs and three-seed finalist comparison
+  have not run.
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
 - A current end-to-end hosted generation request has not been verified in this session.
@@ -73,13 +76,12 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 ## Known technical blockers
 
-1. Corrected baseline jobs must complete before the profile sweep.
-3. The project has no complete musical-statistics, originality, or human
+1. The project has no complete musical-statistics, originality, or human
    evaluation harness yet.
-4. The current 250-song pilot has no reliable genre metadata and is not a
+2. The current 250-song pilot has no reliable genre metadata and is not a
    genre-stratified generalization benchmark.
-5. The large cleaned training dataset is not present locally.
-6. Model registry, deployment promotion, and post-deployment monitoring are not implemented.
+3. The large cleaned training dataset is not present locally.
+4. Model registry, deployment promotion, and post-deployment monitoring are not implemented.
 
 ## Modality and product strategy
 
@@ -114,9 +116,9 @@ model artifact.
 
 ## Current priority
 
-Monitor the three corrected baseline jobs and validate their reports,
-checkpoints, MLflow runs, and generated MIDI. Do not run the profile sweep
-until those reports pass validation. Do not evaluate the frozen test split,
+Verify that the corrected MLflow stores reopen, then submit the six missing
+small/large profile jobs. Combine them with the accepted baseline reports for
+validation-only profile selection. Do not evaluate the frozen test split,
 start larger-corpus training, or begin raw-audio training before the
 three-seed finalist selection is frozen.
 

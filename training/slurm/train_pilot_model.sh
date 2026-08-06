@@ -40,6 +40,16 @@ export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 source "$AG_SCRATCH/venv/bin/activate"
 cd "$AG_REPO"
 
+ACTUAL_GIT_COMMIT="$(git rev-parse HEAD)"
+if [[ -n "${AG_EXPECTED_GIT_COMMIT:-}" && "$ACTUAL_GIT_COMMIT" != "$AG_EXPECTED_GIT_COMMIT" ]]; then
+    echo "repository changed after submission: expected $AG_EXPECTED_GIT_COMMIT, found $ACTUAL_GIT_COMMIT" >&2
+    exit 2
+fi
+if [[ -n "$(git status --porcelain)" ]]; then
+    echo "refusing to train from a dirty repository" >&2
+    exit 2
+fi
+
 RUN_ARGUMENTS=()
 if [[ -n "$TRAINING_SEED" ]]; then
     RUN_ARGUMENTS+=(--training-seed "$TRAINING_SEED")

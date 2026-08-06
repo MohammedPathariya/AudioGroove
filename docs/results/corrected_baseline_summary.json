@@ -1,0 +1,78 @@
+{
+  "classification": "accepted_single_seed_baseline",
+  "dataset_revision": "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31",
+  "git_commit": "5b7ccd84209b418e0564892c12aeb52d8c1b9f07",
+  "git_dirty": false,
+  "runs": [
+    {
+      "best_epoch": 1,
+      "best_val_accuracy": 0.0978527066054343,
+      "best_val_loss": 7.021515723637817,
+      "best_val_perplexity": 1120.4836748785797,
+      "best_val_top5_accuracy": 0.22899082805727838,
+      "checkpoint_size_mb": 87.5800666809082,
+      "epochs_completed": 3,
+      "generated_midi": {
+        "duration_seconds": 9.0,
+        "messages": 265,
+        "parse_success": true
+      },
+      "mlflow_run_id": "8f57d31e723043699a3502f8bbe4a6d0",
+      "model_family": "lstm",
+      "parameter_count": 7652129,
+      "peak_gpu_memory_mb": 191.56982421875,
+      "slurm_elapsed_seconds": 789,
+      "slurm_exit_code": "0:0",
+      "slurm_job_id": 7903830,
+      "trainer_elapsed_seconds": 697.8000386639906
+    },
+    {
+      "best_epoch": 1,
+      "best_val_accuracy": 0.09696607112882469,
+      "best_val_loss": 6.975286563233062,
+      "best_val_perplexity": 1069.8637289597193,
+      "best_val_top5_accuracy": 0.23189606566267393,
+      "checkpoint_size_mb": 86.4492073059082,
+      "epochs_completed": 3,
+      "generated_midi": {
+        "duration_seconds": 15.322,
+        "messages": 378,
+        "parse_success": true
+      },
+      "mlflow_run_id": "a78943adf92543c5a8cb4f6d8dd16276",
+      "model_family": "gru",
+      "parameter_count": 7553313,
+      "peak_gpu_memory_mb": 189.91796875,
+      "slurm_elapsed_seconds": 821,
+      "slurm_exit_code": "0:0",
+      "slurm_job_id": 7903831,
+      "trainer_elapsed_seconds": 729.3506869809935
+    },
+    {
+      "best_epoch": 2,
+      "best_val_accuracy": 0.0827691433637917,
+      "best_val_loss": 7.102804624446184,
+      "best_val_perplexity": 1215.3709580539712,
+      "best_val_top5_accuracy": 0.21649400229836574,
+      "checkpoint_size_mb": 122.85395622253418,
+      "epochs_completed": 4,
+      "generated_midi": {
+        "duration_seconds": 13.807,
+        "messages": 309,
+        "parse_success": true
+      },
+      "mlflow_run_id": "8b3931b087394e468d37c3aeadbe4871",
+      "model_family": "transformer",
+      "parameter_count": 10732449,
+      "peak_gpu_memory_mb": 261.9140625,
+      "slurm_elapsed_seconds": 1398,
+      "slurm_exit_code": "0:0",
+      "slurm_job_id": 7903832,
+      "trainer_elapsed_seconds": 1382.3162549019908
+    }
+  ],
+  "test_evaluated": false,
+  "training_seed": 20260805,
+  "vocabulary_hash": "6a67a6b3d51d4c23a5af820175605b1c8612d178ba9f229e32ca7f3a90bec010",
+  "vocabulary_size": 18849
+}
