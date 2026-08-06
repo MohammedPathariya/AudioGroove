@@ -113,48 +113,25 @@ artifacts.
 ## Regenerate the corrected dataset
 
 Use the new output directory so the preliminary chunks remain recoverable.
+Preprocessing runs as a CPU Slurm job rather than on a shared login node.
 
 ```bash
 cd "$AG_REPO"
-
-python - <<'PY'
-import json
-from pathlib import Path
-
-from src.data_prep.day4_preprocessing import prepare_pilot_dataset
-
-output = Path("/N/scratch/mjpathar/AudioGroove/prepared/pilot_dataset_train_vocab")
-manifest = prepare_pilot_dataset(
-    audit_dir=Path("data/audit/lmdclean_pilot_250"),
-    output_dir=output,
-    sequence_length=32,
-    max_windows_per_chunk=256,
-    dask_workers=2,
-)
-print(json.dumps(manifest, indent=2, sort_keys=True))
-PY
+sbatch training/slurm/prepare_pilot_dataset.sh
 ```
 
-Verify the frozen contract:
+Monitor the submitted job and inspect both logs after it leaves the queue:
 
 ```bash
-python - <<'PY'
-import json
-from pathlib import Path
-
-path = Path("/N/scratch/mjpathar/AudioGroove/prepared/pilot_dataset_train_vocab/manifest.json")
-manifest = json.loads(path.read_text())
-
-assert manifest["dataset_revision"] == "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31"
-assert manifest["vocabulary_policy"] == "train_only"
-assert manifest["unknown_token_policy"] == "map_to_unk"
-assert manifest["vocabulary_size"] == 18849
-assert manifest["splits"]["train"]["oov_token_count"] == 0
-assert manifest["splits"]["val"]["oov_token_count"] == 7229
-assert manifest["splits"]["test"]["oov_token_count"] == 30427
-print("Corrected pilot manifest verified")
-PY
+squeue -j JOB_ID
+sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,AllocTRES,MaxRSS
+cat "$AG_SCRATCH/logs/prepare_v2_JOB_ID.out"
+cat "$AG_SCRATCH/logs/prepare_v2_JOB_ID.err"
 ```
+
+The job verifies all 250 source hashes before writing, refuses to overwrite an
+existing output directory, and validates the revision, vocabulary policy,
+vocabulary size, and OOV counts before reporting success.
 
 ## Corrected baseline submission
 
