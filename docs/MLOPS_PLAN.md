@@ -1,6 +1,6 @@
 # AudioGroove MLOps and Modality Roadmap
 
-Updated: 2026-08-05
+Updated: 2026-08-06
 
 ## Purpose
 
@@ -48,12 +48,13 @@ The current pilot contains 250 songs split into 175 train, 37 validation, and
 is therefore a heterogeneous artist-disjoint symbolic benchmark, not a
 genre-stratified benchmark.
 
-The retained source audit revision is `cb79c82...`. Deterministic HPC
-preprocessing derived revision `bf670db4...`, vocabulary size 22,481, and
-2,757,737/464,678/586,728 train/validation/test windows. These values exactly
-match the earlier prepared-data record, so the revision mismatch is resolved:
-the first value identifies selected source files and the second identifies the
-representation and chunk configuration derived from them.
+The retained source audit revision is `cb79c82...`. The first HPC preprocessing
+revision, `bf670db4...`, fit a 22,481-token vocabulary on all splits and is now
+classified as preliminary. The corrected revision `a68aee4e...` fits an
+18,849-token vocabulary on training songs only and maps held-out tokens to
+`<UNK>`. It preserves the 2,757,737/464,678/586,728
+train/validation/test-window counts. Validation OOV is 1.55%; test OOV is
+5.18% and must not influence model selection.
 
 ## Experiment design
 

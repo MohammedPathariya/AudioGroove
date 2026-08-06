@@ -1,6 +1,6 @@
 # AudioGroove Pilot MLOps Weekly Plan
 
-Updated: 2026-08-05
+Updated: 2026-08-06
 
 This plan covers the next implementation phase: a reproducible, HPC-backed
 comparison of a compact LSTM, GRU, and causal Transformer on the frozen
@@ -48,7 +48,9 @@ Ensure every model sees exactly the same dataset and representation.
   audit and the previous Colab-reported `bf670db4...` prepared dataset.
 - Freeze the source-level split: 175 train, 37 validation, 38 test.
 - Verify zero song, artist, and content-hash leakage.
-- Rebuild bounded chunks on HPC with deterministic ordering.
+- Fit the vocabulary on training songs only, map unseen validation and test
+  tokens to `<UNK>`, and rebuild bounded chunks on HPC with deterministic
+  ordering.
 - Record vocabulary size, window counts, chunk counts, sequence length, and
   representation configuration.
 
@@ -82,16 +84,17 @@ HPC data paths.
 ### Current evidence
 
 - The 250-song HPC source copy passed all 250 SHA-256 checks.
-- Deterministic preprocessing produced revision `bf670db4...`, vocabulary
-  22,481, and the approved split and window counts.
+- Revision `bf670db4...` produced the approved split and window counts but fit
+  vocabulary on all splits, so its completed runs are preliminary only.
+- Corrected local preprocessing produced revision `a68aee4e...`, vocabulary
+  18,849, validation OOV 1.55%, and test OOV 5.18%. HPC regeneration remains.
 - LSTM job `7900523` completed on CUDA, wrote MLflow run
   `ba27493426aa4baebd1f1082bdba50fe`, reloaded a checkpoint, and generated a
   parseable MIDI artifact.
 - Local forward/backward and optimizer checks pass for LSTM, GRU, and causal
   Transformer through the shared trainer.
-- GRU and Transformer HPC smoke jobs are deliberately skipped. Their first
-  production jobs therefore carry higher failure risk and do not count as
-  verified until they complete.
+- Preliminary LSTM, GRU, and Transformer production jobs all completed on HPC.
+  Corrected baselines still need to run on revision `a68aee4e...`.
 
 ## Phase 4: Controlled baseline comparison
 
@@ -115,7 +118,8 @@ Compare the three model families under one fixed training contract.
 
 The complete small/baseline/large profile matrix is stored in
 `training/configs/pilot_experiments.json`. Baseline trainable parameter counts
-are 9,050,449 LSTM, 8,951,633 GRU, and 12,595,665 Transformer parameters. This
+are 7,652,129 LSTM, 7,553,313 GRU, and 10,732,449 Transformer parameters with
+the corrected 18,849-token vocabulary. This
 is a fixed representative-family comparison, not a parameter-matched claim.
 
 Keep fixed across models:

@@ -15,16 +15,17 @@ set -euo pipefail
 MODEL_FAMILY="${1:-}"
 MODEL_PROFILE="${2:-baseline}"
 RUN_PHASE="${3:-baseline}"
+TRAINING_SEED="${4:-}"
 if [[ ! "$MODEL_FAMILY" =~ ^(lstm|gru|transformer)$ ]]; then
-    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist|test]" >&2
+    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist] [training-seed]" >&2
     exit 2
 fi
 if [[ ! "$MODEL_PROFILE" =~ ^(small|baseline|large)$ ]]; then
-    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist|test]" >&2
+    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist] [training-seed]" >&2
     exit 2
 fi
-if [[ ! "$RUN_PHASE" =~ ^(baseline|sweep|finalist|test)$ ]]; then
-    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist|test]" >&2
+if [[ ! "$RUN_PHASE" =~ ^(baseline|sweep|finalist)$ ]]; then
+    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist] [training-seed]" >&2
     exit 2
 fi
 
@@ -39,12 +40,18 @@ export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK"
 source "$AG_SCRATCH/venv/bin/activate"
 cd "$AG_REPO"
 
+RUN_ARGUMENTS=()
+if [[ -n "$TRAINING_SEED" ]]; then
+    RUN_ARGUMENTS+=(--training-seed "$TRAINING_SEED")
+fi
+
 python -u -m src.training.pilot_comparison \
     --model-family "$MODEL_FAMILY" \
     --profile "$MODEL_PROFILE" \
     --run-phase "$RUN_PHASE" \
     --config "$AG_REPO/training/configs/pilot_experiments.json" \
     --audit-dir "$AG_REPO/data/audit/lmdclean_pilot_250" \
-    --dataset-dir "$AG_SCRATCH/prepared/pilot_dataset" \
-    --tracking-dir "$AG_SCRATCH/mlruns/${SLURM_JOB_ID}-${MODEL_FAMILY}-${MODEL_PROFILE}" \
-    --run-root "$AG_SCRATCH/runs/pilot_comparison"
+    --dataset-dir "$AG_SCRATCH/prepared/pilot_dataset_train_vocab" \
+    --tracking-dir "$AG_SCRATCH/mlruns/v2/${SLURM_JOB_ID}-${MODEL_FAMILY}-${MODEL_PROFILE}" \
+    --run-root "$AG_SCRATCH/runs/pilot_comparison_v2" \
+    "${RUN_ARGUMENTS[@]}"

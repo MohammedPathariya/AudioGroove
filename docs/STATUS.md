@@ -1,6 +1,6 @@
 # AudioGroove Status
 
-Updated: 2026-08-05
+Updated: 2026-08-06
 
 ## Current state
 
@@ -30,15 +30,21 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   multiplication.
 - The HPC Python module is `python/gpu/3.11.5`; personal scratch is writable at
   `/N/scratch/mjpathar`.
-- The HPC copy contains 250/250 hash-verified source MIDI files. Preprocessing
-  produced dataset revision `bf670db4...`, vocabulary 22,481, and 2,757,737,
-  464,678, and 586,728 train, validation, and test windows.
+- The HPC copy contains 250/250 hash-verified source MIDI files. The first
+  prepared revision `bf670db4...` produced 22,481 vocabulary tokens and
+  2,757,737, 464,678, and 586,728 train, validation, and test windows, but fit
+  the vocabulary on all three splits and is now classified as preliminary.
 - LSTM GPU smoke job `7900523` completed with exit code `0:0`, CUDA training,
   checkpoint reload, MLflow run `ba27493426aa4baebd1f1082bdba50fe`, and valid
   generated MIDI. Its 16-example metrics are infrastructure evidence only.
-- Local verification passes 13 tests, including forward/backward checks for all
-  three model families, strict causal masking, deterministic chunk streaming,
-  and configuration-profile checks.
+- Preliminary full-budget jobs completed successfully for LSTM `7900534`, GRU
+  `7900535`, and Transformer `7900536`. GRU had the best validation loss at
+  6.9306, but these results cannot be the final benchmark because of the
+  vocabulary-fit leakage.
+- Leakage-corrected local preprocessing fits an 18,849-token vocabulary on the
+  training split only and deterministically produces revision `a68aee4e...`.
+  Validation OOV is 7,229 of 465,862 tokens (1.55%); test OOV is 30,427 of
+  587,944 tokens (5.18%).
 
 ## Day 1 foundation completed
 
@@ -51,19 +57,19 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- No full-budget model run has completed.
-- GRU and Transformer have not executed on an HPC GPU; their smoke jobs were
-  explicitly deferred.
-- Parallel Slurm model execution and HPC MLflow tracking have not been verified.
+- The leakage-corrected revision has not yet been regenerated or trained on
+  HPC.
+- The nine-profile sweep and three-seed finalist comparison have not run.
+- The isolated per-job MLflow stores have not been consolidated into a shared
+  tracking server.
 - A current end-to-end hosted generation request has not been verified in this session.
 - No defensible model-quality metrics have yet been produced.
 
 ## Known technical blockers
 
-1. Parallel production jobs and post-run MLflow-store consolidation remain
-   unverified.
-2. GRU and Transformer CUDA behavior will first be tested by their production
-   jobs because separate smoke jobs were skipped.
+1. Preliminary artifacts must be archived as `preliminary-v1` before corrected
+   preprocessing begins.
+2. Corrected baseline jobs must complete before the profile sweep.
 3. The project has no complete musical-statistics, originality, or human
    evaluation harness yet.
 4. The current 250-song pilot has no reliable genre metadata and is not a
@@ -104,10 +110,11 @@ model artifact.
 
 ## Current priority
 
-Publish the shared three-model trainer to the HPC checkout, run the controlled
-baseline jobs, verify isolated MLflow artifacts, then decide whether to run the
-nine-profile sweep. Do not evaluate the frozen test split, start larger-corpus
-training, or begin raw-audio training before finalists are selected.
+Archive the preliminary runs, regenerate revision `a68aee4e...` on HPC, and
+rerun the three corrected baselines. Do not run the profile sweep until those
+reports pass validation. Do not evaluate the frozen test split, start
+larger-corpus training, or begin raw-audio training before the three-seed
+finalist selection is frozen.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).
@@ -197,10 +204,8 @@ Pilot evidence is recorded in `data/audit/lmdclean_pilot_250/`:
   presented as a genre-stratified sample.
 - The previous exploratory training state is not retained locally. New HPC
   training must start without a checkpoint or prior MLflow run.
-- HPC preprocessing verified derived dataset revision
-  `bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc`,
-  vocabulary size 22,481, and split window counts of 2,757,737 train, 464,678
-  validation, and 586,728 test. The retained `cb79c82...` value is the source
-  selection revision; `bf670db4...` is the deterministic representation and
-  chunk revision derived from it. They identify different layers of the same
-  accepted data contract.
+- HPC preprocessing produced derived revision `bf670db4...`, vocabulary size
+  22,481, and the expected window counts. Subsequent review found that its
+  vocabulary was fit on train, validation, and test tokens. It is retained as
+  preliminary evidence, not an accepted final data contract. The corrected
+  train-only-vocabulary revision is `a68aee4e...`.

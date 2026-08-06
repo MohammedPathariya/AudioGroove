@@ -22,7 +22,13 @@ import mido
 import torch
 from torch import nn
 
-from src.data_prep.day4_preprocessing import DEFAULT_AUDIT_DIR, DEFAULT_OUTPUT_DIR, load_selected_records
+from src.data_prep.day4_preprocessing import (
+    DEFAULT_AUDIT_DIR,
+    DEFAULT_OUTPUT_DIR,
+    UNKNOWN_TOKEN_POLICY,
+    VOCABULARY_POLICY,
+    load_selected_records,
+)
 from src.data_prep.midi_representation import decode_tokens, encode_midi
 from src.models.compact_midi_models import MODEL_FAMILIES, build_compact_model, count_parameters
 from src.training.chunk_stream import iter_chunk_batches
@@ -344,6 +350,30 @@ def load_checkpoint(
     vocabulary_hash: str,
     device: torch.device,
 ) -> dict[str, Any]:
+    checkpoint = load_model_checkpoint(
+        path,
+        model=model,
+        experiment=experiment,
+        dataset_revision=dataset_revision,
+        vocabulary_hash=vocabulary_hash,
+        device=device,
+    )
+    optimizer.load_state_dict(checkpoint["optimizer"])
+    scheduler.load_state_dict(checkpoint["scheduler"])
+    if checkpoint.get("scaler"):
+        scaler.load_state_dict(checkpoint["scaler"])
+    return checkpoint
+
+
+def load_model_checkpoint(
+    path: Path,
+    *,
+    model: nn.Module,
+    experiment: ExperimentConfig,
+    dataset_revision: str,
+    vocabulary_hash: str,
+    device: torch.device,
+) -> dict[str, Any]:
     try:
         checkpoint = torch.load(path, map_location=device, weights_only=True)
     except Exception:
@@ -358,10 +388,6 @@ def load_checkpoint(
     if saved.get("model_parameters") != experiment.model_parameters:
         raise ValueError("checkpoint architecture does not match the requested model")
     model.load_state_dict(checkpoint["model"])
-    optimizer.load_state_dict(checkpoint["optimizer"])
-    scheduler.load_state_dict(checkpoint["scheduler"])
-    if checkpoint.get("scaler"):
-        scaler.load_state_dict(checkpoint["scaler"])
     return checkpoint
 
 
@@ -431,7 +457,6 @@ def train(
     tracking_uri: str | None = None,
     run_phase: str = "baseline",
     resume: Path | None = None,
-    evaluate_test: bool = False,
 ) -> dict[str, Any]:
     set_seed(experiment.training.seed)
     manifest_path = dataset_dir / "manifest.json"
@@ -444,6 +469,10 @@ def train(
         )
     if manifest.get("sequence_length") != experiment.training.sequence_length:
         raise ValueError("prepared sequence length does not match the experiment configuration")
+    if manifest.get("vocabulary_policy") != VOCABULARY_POLICY:
+        raise ValueError("prepared vocabulary must be fit on the training split only")
+    if manifest.get("unknown_token_policy") != UNKNOWN_TOKEN_POLICY:
+        raise ValueError("prepared dataset must map unseen tokens to <UNK>")
     vocabulary = {
         token: int(index)
         for token, index in json.loads(vocabulary_path.read_text(encoding="utf-8")).items()
@@ -554,6 +583,12 @@ def train(
                 "source_dataset_revision": manifest["source_dataset_revision"],
                 "vocabulary_size": len(vocabulary),
                 "vocabulary_hash": vocabulary_hash,
+                "vocabulary_policy": manifest["vocabulary_policy"],
+                "unknown_token_policy": manifest["unknown_token_policy"],
+                "val_oov_token_count": manifest["splits"]["val"]["oov_token_count"],
+                "val_oov_token_rate": manifest["splits"]["val"]["oov_token_rate"],
+                "test_oov_token_count": manifest["splits"]["test"]["oov_token_count"],
+                "test_oov_token_rate": manifest["splits"]["test"]["oov_token_rate"],
                 "sequence_length": experiment.training.sequence_length,
                 "batch_size": experiment.training.batch_size,
                 "effective_batch_size": (
@@ -682,28 +717,6 @@ def train(
             experiment.training.sequence_length,
             experiment.generation,
         )
-        test_metrics = None
-        if evaluate_test:
-            test_metrics = run_epoch(
-                model,
-                iter_chunk_batches(
-                    dataset_dir / "test",
-                    experiment.training.batch_size,
-                    shuffle=False,
-                    seed=experiment.training.seed,
-                    max_batches=None,
-                ),
-                criterion,
-                device,
-                optimizer=None,
-                scaler=scaler,
-                gradient_accumulation_steps=1,
-                gradient_clip_norm=experiment.training.gradient_clip_norm,
-                amp=use_amp,
-                phase="held-out test",
-            )
-            mlflow.log_metrics({f"test_{name}": value for name, value in test_metrics.items()})
-
         elapsed = time.perf_counter() - training_started
         resources = {
             "elapsed_seconds": elapsed,
@@ -736,7 +749,7 @@ def train(
                 "best_val_loss": best_val_loss,
                 "history": history,
             },
-            "test": test_metrics,
+            "test": None,
             "generation": generation,
             "resources": resources,
             "checkpoints": {"best": str(best_path), "last": str(last_path)},
@@ -764,12 +777,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tracking-uri")
     parser.add_argument(
         "--run-phase",
-        choices=("baseline", "sweep", "finalist", "test"),
+        choices=("baseline", "sweep", "finalist"),
         default="baseline",
     )
     parser.add_argument("--run-root", type=Path, default=DEFAULT_RUN_ROOT)
     parser.add_argument("--resume", type=Path)
-    parser.add_argument("--evaluate-test", action="store_true")
     parser.add_argument("--max-epochs", type=int)
     parser.add_argument("--max-train-batches", type=int)
     parser.add_argument("--max-validation-batches", type=int)
@@ -833,7 +845,6 @@ def main() -> None:
         tracking_uri=args.tracking_uri,
         run_phase=args.run_phase,
         resume=args.resume.resolve() if args.resume else None,
-        evaluate_test=args.evaluate_test,
     )
 
 
@@ -846,8 +857,12 @@ __all__ = [
     "GenerationConfig",
     "TrainingConfig",
     "generate_midi",
+    "environment_metadata",
     "load_experiment_config",
+    "load_model_checkpoint",
     "run_epoch",
+    "select_device",
+    "sha256_file",
     "train",
     "validate_experiment_config",
 ]

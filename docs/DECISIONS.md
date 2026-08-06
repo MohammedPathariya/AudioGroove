@@ -131,6 +131,20 @@ This file records decisions that affect architecture, experiments, evaluation, a
 - **Consequence:** Every run streams the same deterministic chunk order for its
   seed, logs parameter count and full configuration, validates checkpoint data
   and vocabulary compatibility, and generates from a validation seed. Test
-  evaluation is disabled unless `--evaluate-test` is explicitly supplied after
-  finalist selection. The baseline configurations are not parameter matched;
-  quality must be interpreted alongside parameter count, runtime, and memory.
+  evaluation is absent from the training command. A separate evaluator requires
+  a frozen validation-only selection manifest after finalist selection. The
+  baseline configurations are not parameter matched; quality must be
+  interpreted alongside parameter count, runtime, and memory.
+
+## D-021: Fit symbolic vocabulary on training data only
+
+- **Decision:** Build the pilot vocabulary from the 175 training songs only.
+  Map unseen validation and test tokens to `<UNK>`, record split-level OOV
+  counts and rates, and classify revision `bf670db4...` and its completed runs
+  as `preliminary-v1`.
+- **Reason:** Building token identities from validation and test songs leaks
+  held-out distribution information into a fitted preprocessing artifact.
+- **Consequence:** The corrected revision is `a68aee4e...` with vocabulary size
+  18,849. All model selection must be repeated on that revision. The final test
+  requires a frozen validation-only selection manifest and an atomic one-time
+  evaluation gate.

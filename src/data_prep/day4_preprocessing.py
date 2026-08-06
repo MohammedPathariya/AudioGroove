@@ -23,6 +23,8 @@ from src.data_prep.midi_representation import (
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_AUDIT_DIR = ROOT / "data" / "audit" / "lmdclean_pilot_250"
 DEFAULT_OUTPUT_DIR = ROOT / "runs" / "day4" / "pilot_dataset"
+VOCABULARY_POLICY = "train_only"
+UNKNOWN_TOKEN_POLICY = "map_to_unk"
 
 
 def _encode(path: str, max_time_shift_ticks: int, velocity_bins: int) -> MidiEventSequence:
@@ -80,13 +82,17 @@ def _write_split_chunks(
     split: str,
     sequence_length: int,
     max_windows_per_chunk: int,
-) -> dict[str, int]:
+) -> dict[str, int | float]:
     split_dir = output_dir / split
     split_dir.mkdir(parents=True, exist_ok=True)
     x_buffer: list[list[int]] = []
     y_buffer: list[int] = []
     chunk_index = 0
     window_count = 0
+    token_count = 0
+    oov_token_count = 0
+    unique_oov_tokens: set[str] = set()
+    unknown_id = vocabulary["<UNK>"]
 
     def flush() -> None:
         nonlocal chunk_index
@@ -107,7 +113,12 @@ def _write_split_chunks(
         chunk_index += 1
 
     for record in records:
-        ids = [vocabulary[token] for token in record["sequence"].tokens]
+        tokens = record["sequence"].tokens
+        missing = [token for token in tokens if token not in vocabulary]
+        token_count += len(tokens)
+        oov_token_count += len(missing)
+        unique_oov_tokens.update(missing)
+        ids = [vocabulary.get(token, unknown_id) for token in tokens]
         for start in range(max(0, len(ids) - sequence_length)):
             x_buffer.append(ids[start : start + sequence_length])
             y_buffer.append(ids[start + sequence_length])
@@ -115,7 +126,15 @@ def _write_split_chunks(
             if len(x_buffer) >= max_windows_per_chunk:
                 flush()
     flush()
-    return {"source_file_count": len(records), "window_count": window_count, "chunk_count": chunk_index}
+    return {
+        "source_file_count": len(records),
+        "window_count": window_count,
+        "chunk_count": chunk_index,
+        "token_count": token_count,
+        "oov_token_count": oov_token_count,
+        "oov_token_rate": oov_token_count / token_count if token_count else 0.0,
+        "unique_oov_token_count": len(unique_oov_tokens),
+    }
 
 
 def prepare_pilot_dataset(
@@ -139,8 +158,16 @@ def prepare_pilot_dataset(
             and cached.get("dask", {}).get("workers") == dask_workers
             and cached.get("max_time_shift_ticks") == max_time_shift_ticks
             and cached.get("velocity_bins") == velocity_bins
+            and cached.get("vocabulary_policy") == VOCABULARY_POLICY
+            and cached.get("unknown_token_policy") == UNKNOWN_TOKEN_POLICY
             and "vocabulary_breakdown" in cached
             and all((output_dir / split).is_dir() for split in ("train", "val", "test"))
+            and all(
+                "oov_token_rate" in cached.get("splits", {}).get(split, {})
+                and len(list((output_dir / split).glob("chunk_*.pt")))
+                == cached["splits"][split]["chunk_count"]
+                for split in ("train", "val", "test")
+            )
         ):
             return cached
     records = load_selected_records(audit_dir)
@@ -150,26 +177,22 @@ def prepare_pilot_dataset(
         max_time_shift_ticks=max_time_shift_ticks,
         velocity_bins=velocity_bins,
     )
-    vocabulary, _ = build_vocabulary(record["sequence"] for record in enriched)
+    train_records = [record for record in enriched if record["split"] == "train"]
+    vocabulary, _ = build_vocabulary(record["sequence"] for record in train_records)
     vocabulary_breakdown = Counter(token.split(":", 1)[0] for token in vocabulary)
     output_dir.mkdir(parents=True, exist_ok=True)
+    split_counts = {}
     for split in ("train", "val", "test"):
         split_dir = output_dir / split
         split_dir.mkdir(parents=True, exist_ok=True)
         for stale_chunk in split_dir.glob("chunk_*.pt"):
             stale_chunk.unlink()
         split_records = [record for record in enriched if record["split"] == split]
-        _write_split_chunks(
+        split_counts[split] = _write_split_chunks(
             split_records, vocabulary, output_dir, split, sequence_length, max_windows_per_chunk
         )
 
     summary = json.loads((audit_dir / "pilot_summary.json").read_text(encoding="utf-8"))
-    split_counts = {}
-    for split in ("train", "val", "test"):
-        split_counts[split] = _count_split(output_dir / split, sequence_length)
-        split_counts[split]["source_file_count"] = sum(
-            record["split"] == split for record in enriched
-        )
     derived_revision = hashlib.sha256(
         json.dumps(
             {
@@ -179,6 +202,8 @@ def prepare_pilot_dataset(
                 "velocity_bins": velocity_bins,
                 "sequence_length": sequence_length,
                 "max_windows_per_chunk": max_windows_per_chunk,
+                "vocabulary_policy": VOCABULARY_POLICY,
+                "unknown_token_policy": UNKNOWN_TOKEN_POLICY,
             },
             sort_keys=True,
             separators=(",", ":"),
@@ -196,6 +221,9 @@ def prepare_pilot_dataset(
         "source_file_count": len(enriched),
         "sequence_length": sequence_length,
         "max_windows_per_chunk": max_windows_per_chunk,
+        "vocabulary_policy": VOCABULARY_POLICY,
+        "vocabulary_source_split": "train",
+        "unknown_token_policy": UNKNOWN_TOKEN_POLICY,
         "vocabulary_size": len(vocabulary),
         "vocabulary_breakdown": dict(sorted(vocabulary_breakdown.items())),
         "special_tokens": list(SPECIAL_TOKENS),
@@ -211,18 +239,9 @@ def prepare_pilot_dataset(
     return manifest
 
 
-def _count_split(split_dir: Path, sequence_length: int) -> dict[str, int]:
-    paths = sorted(split_dir.glob("chunk_*.pt"))
-    windows = 0
-    for path in paths:
-        try:
-            chunk = torch.load(path, map_location="cpu", weights_only=True)
-        except TypeError:
-            chunk = torch.load(path, map_location="cpu")
-        if chunk["x"].ndim != 2 or chunk["x"].shape[1] != sequence_length:
-            raise ValueError(f"Unexpected chunk shape in {path}")
-        windows += int(chunk["x"].shape[0])
-    return {"chunk_count": len(paths), "window_count": windows}
-
-
-__all__ = ["DEFAULT_OUTPUT_DIR", "prepare_pilot_dataset"]
+__all__ = [
+    "DEFAULT_OUTPUT_DIR",
+    "UNKNOWN_TOKEN_POLICY",
+    "VOCABULARY_POLICY",
+    "prepare_pilot_dataset",
+]

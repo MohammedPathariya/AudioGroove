@@ -1,6 +1,6 @@
 {
-  "dataset_revision": "bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc",
-  "experiment_name": "AudioGroove-250-Pilot-HPC",
+  "dataset_revision": "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31",
+  "experiment_name": "AudioGroove-250-Pilot-HPC-v2",
   "training": {
     "sequence_length": 32,
     "batch_size": 64,
