@@ -67,7 +67,7 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The six missing small/large profile runs and three-seed finalist comparison
+- The nine missing small/large/larger profile runs and three-seed finalist comparison
   have not run.
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
@@ -116,8 +116,8 @@ model artifact.
 
 ## Current priority
 
-Verify that the corrected MLflow stores reopen, then submit the six missing
-small/large profile jobs. Combine them with the accepted baseline reports for
+Verify that the corrected MLflow stores reopen, then submit the nine missing
+small/large/larger profile jobs. Combine them with the accepted baseline reports for
 validation-only profile selection. Do not evaluate the frozen test split,
 start larger-corpus training, or begin raw-audio training before the
 three-seed finalist selection is frozen.

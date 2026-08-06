@@ -769,7 +769,11 @@ def train(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model-family", choices=MODEL_FAMILIES, required=True)
-    parser.add_argument("--profile", choices=("small", "baseline", "large"), default="baseline")
+    parser.add_argument(
+        "--profile",
+        choices=("small", "baseline", "large", "larger"),
+        default="baseline",
+    )
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--audit-dir", type=Path, default=DEFAULT_AUDIT_DIR)
     parser.add_argument("--dataset-dir", type=Path, default=DEFAULT_OUTPUT_DIR)

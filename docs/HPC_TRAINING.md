@@ -38,16 +38,20 @@ at 1.0, plateau scheduling, early-stopping patience 2, CUDA AMP, training seed
 | LSTM | small | embed 128, hidden 192, 1 layer, dropout 0.1 | `1e-3` | 6,297,825 |
 | LSTM | baseline | embed 128, hidden 256, 1 layer, dropout 0.1 | `1e-3` | 7,652,129 |
 | LSTM | large | embed 192, hidden 384, 2 layers, dropout 0.2 | `1e-3` | 12,946,401 |
+| LSTM | larger | embed 256, hidden 512, 2 layers, dropout 0.2 | `1e-3` | 18,173,089 |
 | GRU | small | embed 128, hidden 192, 1 layer, dropout 0.1 | `1e-3` | 6,236,001 |
 | GRU | baseline | embed 128, hidden 256, 1 layer, dropout 0.1 | `1e-3` | 7,553,313 |
 | GRU | large | embed 192, hidden 384, 2 layers, dropout 0.2 | `1e-3` | 12,428,769 |
+| GRU | larger | embed 256, hidden 512, 2 layers, dropout 0.2 | `1e-3` | 17,253,537 |
 | Transformer | small | model 192, 2 layers, 4 heads, FFN 512, dropout 0.1 | `3e-4` | 7,956,001 |
 | Transformer | baseline | model 256, 2 layers, 4 heads, FFN 512, dropout 0.1 | `3e-4` | 10,732,449 |
 | Transformer | large | model 256, 4 layers, 8 heads, FFN 1024, dropout 0.2 | `3e-4` | 12,837,281 |
+| Transformer | larger | model 320, 4 layers, 8 heads, FFN 1280, dropout 0.2 | `3e-4` | 17,024,929 |
 
 These are architecture profiles, not a factorial sensitivity study. The
-baseline models are not parameter matched. Report quality beside parameter
-count, runtime, and memory.
+baseline models are not parameter matched. The larger models are roughly
+parameter matched at 17.0 to 18.2 million parameters. Report quality beside
+parameter count, runtime, and memory.
 
 ## Update and verify the HPC checkout
 
@@ -168,8 +172,8 @@ generation, recoverable best checkpoints, and `test: null`.
 ## Profile sweep
 
 The three corrected baseline runs already cover the `baseline` profile for each
-family. Do not repeat them. Submit only the six missing `small` and `large`
-profiles after the corrected baselines pass the checks above.
+family. Do not repeat them. Submit only the nine missing `small`, `large`, and
+`larger` profiles after the corrected baselines pass the checks above.
 
 ```bash
 bash training/slurm/submit_pilot_sweep.sh

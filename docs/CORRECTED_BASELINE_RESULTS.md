@@ -61,8 +61,8 @@ originality, long-range structure, and listener preference remain unmeasured.
 ## Decision
 
 Proceed to the controlled size-profile sweep. The accepted baseline profile
-runs already cover three of the nine family/profile combinations. Submit only
-the six missing `small` and `large` profiles, then combine `baseline` and
+runs already cover three of the twelve family/profile combinations. Submit only
+the nine missing `small`, `large`, and `larger` profiles, then combine `baseline` and
 `sweep` reports when selecting one profile per family.
 
 Do not evaluate the test split. Do not promote GRU from this single-seed result.

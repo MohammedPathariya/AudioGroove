@@ -120,7 +120,7 @@ This file records decisions that affect architecture, experiments, evaluation, a
 
 - **Decision:** Build the LSTM, GRU, and causal Transformer behind one
   next-token interface and train them through one configuration-driven runner.
-  Freeze small, baseline, and large profiles in
+  Freeze small, baseline, large, and larger profiles in
   `training/configs/pilot_experiments.json`. Use five full epochs, batch size
   64, AdamW, weight decay `1e-4`, gradient clip 1.0, validation-based early
   stopping, and CUDA AMP for the initial profiles. Use learning rate `1e-3`

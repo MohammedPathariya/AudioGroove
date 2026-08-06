@@ -17,15 +17,15 @@ MODEL_PROFILE="${2:-baseline}"
 RUN_PHASE="${3:-baseline}"
 TRAINING_SEED="${4:-}"
 if [[ ! "$MODEL_FAMILY" =~ ^(lstm|gru|transformer)$ ]]; then
-    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist] [training-seed]" >&2
+    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large|larger] [baseline|sweep|finalist] [training-seed]" >&2
     exit 2
 fi
-if [[ ! "$MODEL_PROFILE" =~ ^(small|baseline|large)$ ]]; then
-    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist] [training-seed]" >&2
+if [[ ! "$MODEL_PROFILE" =~ ^(small|baseline|large|larger)$ ]]; then
+    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large|larger] [baseline|sweep|finalist] [training-seed]" >&2
     exit 2
 fi
 if [[ ! "$RUN_PHASE" =~ ^(baseline|sweep|finalist)$ ]]; then
-    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large] [baseline|sweep|finalist] [training-seed]" >&2
+    echo "usage: sbatch $0 {lstm|gru|transformer} [small|baseline|large|larger] [baseline|sweep|finalist] [training-seed]" >&2
     exit 2
 fi
 

@@ -3,6 +3,7 @@ from pathlib import Path
 import torch
 from torch import nn
 
+from src.models.compact_midi_models import build_compact_model, count_parameters
 from src.training.chunk_stream import iter_chunk_batches
 from src.training.pilot_comparison import load_experiment_config, run_epoch
 
@@ -49,14 +50,26 @@ def test_baseline_configuration_defines_all_model_families() -> None:
 
 def test_sweep_profiles_change_architecture_without_changing_budget() -> None:
     config_path = Path("training/configs/pilot_experiments.json")
+    profile_names = ("small", "baseline", "large", "larger")
 
-    small = load_experiment_config(config_path, "lstm", "small")
-    baseline = load_experiment_config(config_path, "lstm", "baseline")
-    large = load_experiment_config(config_path, "lstm", "large")
+    for family in ("lstm", "gru", "transformer"):
+        experiments = [
+            load_experiment_config(config_path, family, profile)
+            for profile in profile_names
+        ]
+        parameter_counts = [
+            count_parameters(
+                build_compact_model(family, 18_849, experiment.model_parameters)
+            )
+            for experiment in experiments
+        ]
 
-    assert small.model_parameters["hidden_dim"] < baseline.model_parameters["hidden_dim"]
-    assert baseline.model_parameters["hidden_dim"] < large.model_parameters["hidden_dim"]
-    assert small.training == baseline.training == large.training
+        assert parameter_counts == sorted(parameter_counts)
+        assert len(set(parameter_counts)) == len(profile_names)
+        assert all(
+            experiment.training == experiments[0].training
+            for experiment in experiments[1:]
+        )
 
 
 def test_epoch_metrics_count_each_example_once() -> None:

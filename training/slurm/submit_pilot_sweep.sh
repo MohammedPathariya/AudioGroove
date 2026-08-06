@@ -11,7 +11,7 @@ if [[ -n "$(git -C "$REPO_ROOT" status --porcelain)" ]]; then
 fi
 
 for model_family in lstm gru transformer; do
-    for model_profile in small large; do
+    for model_profile in small large larger; do
         sbatch \
             --job-name "ag-${model_family}-${model_profile}" \
             --export="ALL,AG_EXPECTED_GIT_COMMIT=$REPO_COMMIT" \

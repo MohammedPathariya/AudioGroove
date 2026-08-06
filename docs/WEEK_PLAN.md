@@ -120,7 +120,7 @@ Compare the three model families under one fixed training contract.
 | GRU | 128 embedding, 256 hidden | 1 | unidirectional |
 | Transformer | 256 `d_model` | 2 | 4 heads, FFN 512 |
 
-The complete small/baseline/large profile matrix is stored in
+The complete small/baseline/large/larger profile matrix is stored in
 `training/configs/pilot_experiments.json`. Baseline trainable parameter counts
 are 7,652,129 LSTM, 7,553,313 GRU, and 10,732,449 Transformer parameters with
 the corrected 18,849-token vocabulary. This
@@ -157,12 +157,12 @@ Measure configuration sensitivity without creating an uncontrolled grid.
 
 ### Sweep
 
-Run small, baseline, and larger configurations for each family:
+Run small, baseline, large, and larger configurations for each family:
 
-- LSTM and GRU: embedding 128 or 192; hidden size 192, 256, or 384; one or
-  two layers.
-- Transformer: `d_model` 192 or 256; two or four layers; four or eight heads;
-  FFN size 512 or 1024.
+- LSTM and GRU: embedding 128, 192, or 256; hidden size 192, 256, 384, or
+  512; one or two layers.
+- Transformer: `d_model` 192, 256, or 320; two or four layers; four or eight
+  heads; FFN size 512, 1024, or 1280.
 - Learning rates: start with `1e-3` for LSTM/GRU and `3e-4` for Transformer.
 - Weight decay: fixed initially at `1e-4`.
 - Training budget: fixed five-epoch comparison budget before any longer run.

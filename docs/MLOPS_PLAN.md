@@ -68,7 +68,7 @@ budget, seed policy, and evaluation protocol.
 
 Use a deliberately small sweep rather than an unrestricted grid:
 
-- three model sizes per family
+- four model sizes per family
 - fixed five-epoch initial budget
 - validation-only configuration selection
 - at least three seeds for finalists
@@ -80,7 +80,7 @@ generation time, or disproportionately expensive.
 
 The executable configurations are frozen in
 `training/configs/pilot_experiments.json`. Every family has `small`,
-`baseline`, and `large` profiles. The baseline contract uses sequence length
+`baseline`, `large`, and `larger` profiles. The baseline contract uses sequence length
 32, batch size 64, five full epochs, AdamW, weight decay `1e-4`, gradient clip
 1.0, plateau scheduling, early-stopping patience 2, and CUDA AMP. LSTM and GRU
 start at learning rate `1e-3`; Transformer starts at `3e-4`.

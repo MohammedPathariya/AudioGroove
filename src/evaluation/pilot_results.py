@@ -13,7 +13,7 @@ from typing import Any, Iterable
 from src.models.compact_midi_models import MODEL_FAMILIES
 
 
-EXPECTED_PROFILES = {"small", "baseline", "large"}
+EXPECTED_PROFILES = {"small", "baseline", "large", "larger"}
 
 def summarize_report(path: Path) -> dict[str, Any]:
     report = json.loads(path.read_text(encoding="utf-8"))

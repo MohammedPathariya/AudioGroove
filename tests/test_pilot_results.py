@@ -70,7 +70,9 @@ def test_selection_uses_validation_only_and_aggregates_seeds(tmp_path: Path) -> 
 def test_family_selection_requires_all_profiles(tmp_path: Path) -> None:
     rows = []
     for family in ("lstm", "gru", "transformer"):
-        for index, profile in enumerate(("small", "baseline", "large"), start=1):
+        for index, profile in enumerate(
+            ("small", "baseline", "large", "larger"), start=1
+        ):
             path = tmp_path / family / profile / "report.json"
             make_report(path, family, profile, 1, 2.0 + index / 10)
             rows.append(summarize_report(path))
