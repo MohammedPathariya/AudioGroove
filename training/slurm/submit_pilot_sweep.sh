@@ -7,6 +7,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 for model_family in lstm gru transformer; do
     for model_profile in small baseline large; do
         sbatch \
+            --job-name "ag-${model_family}-${model_profile}" \
             "$REPO_ROOT/training/slurm/train_pilot_model.sh" \
             "$model_family" \
             "$model_profile" \

@@ -20,6 +20,7 @@ for finalist in json.load(open(sys.argv[1], encoding="utf-8")):
 PY
     for training_seed in "${SEEDS[@]}"; do
         sbatch \
+            --job-name "ag-${model_family}-${model_profile}-f${training_seed: -2}" \
             "$REPO_ROOT/training/slurm/train_pilot_model.sh" \
             "$model_family" \
             "$model_profile" \

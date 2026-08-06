@@ -1,0 +1,90 @@
+{
+  "archive": {
+    "checksums_verified": true,
+    "file_count": 226,
+    "location": "/N/scratch/mjpathar/AudioGroove/archive/preliminary-v1",
+    "size_gb_reported": 1.4
+  },
+  "classification": "preliminary_invalid_for_final_selection",
+  "dataset_revision": "bf670db4f3390249537a2181cbab4635a7f9123fd864e74904c066ebe843d9fc",
+  "preliminary_validation_leader": "gru",
+  "reason": "vocabulary was fit on train, validation, and test token identities",
+  "repository_commit": "40c462928865fede3948e358dd143d0eb9d81c1a",
+  "runs": [
+    {
+      "best_epoch": 1,
+      "best_val_accuracy": 0.0978656187725694,
+      "best_val_loss": 7.028426534010338,
+      "best_val_perplexity": 1128.2539435827582,
+      "best_val_top5_accuracy": 0.22630724932103521,
+      "checkpoint_size_mb": 103.58256912231445,
+      "epochs_completed": 3,
+      "generated_midi": {
+        "duration_seconds": 4.285679999999984,
+        "messages": 309,
+        "parse_success": true,
+        "tracks": 1
+      },
+      "mlflow_reopened": true,
+      "mlflow_run_id": "27668eb828a743dc96a65c7d952a3749",
+      "model_family": "lstm",
+      "parameter_count": 9050449,
+      "peak_gpu_memory_mb": 223.63330078125,
+      "slurm_elapsed_seconds": 992,
+      "slurm_exit_code": "0:0",
+      "slurm_job_id": 7900534,
+      "trainer_elapsed_seconds": 880.8444414859405
+    },
+    {
+      "best_epoch": 1,
+      "best_val_accuracy": 0.10425498947658378,
+      "best_val_loss": 6.930598784593298,
+      "best_val_perplexity": 1023.106416604989,
+      "best_val_top5_accuracy": 0.2350810668893298,
+      "checkpoint_size_mb": 102.45170974731445,
+      "epochs_completed": 3,
+      "generated_midi": {
+        "duration_seconds": 21.64523500000002,
+        "messages": 253,
+        "parse_success": true,
+        "tracks": 1
+      },
+      "mlflow_reopened": true,
+      "mlflow_run_id": "94fe8140f588448093f6725f9666ea11",
+      "model_family": "gru",
+      "parameter_count": 8951633,
+      "peak_gpu_memory_mb": 222.3154296875,
+      "slurm_elapsed_seconds": 1075,
+      "slurm_exit_code": "0:0",
+      "slurm_job_id": 7900535,
+      "trainer_elapsed_seconds": 962.979307897971
+    },
+    {
+      "best_epoch": 3,
+      "best_val_accuracy": 0.09241883626941667,
+      "best_val_loss": 7.097063101827104,
+      "best_val_perplexity": 1208.4128723255074,
+      "best_val_top5_accuracy": 0.23203594747330408,
+      "checkpoint_size_mb": 144.17677116394043,
+      "epochs_completed": 5,
+      "generated_midi": {
+        "duration_seconds": 16.342343749999998,
+        "messages": 251,
+        "parse_success": true,
+        "tracks": 1
+      },
+      "mlflow_reopened": true,
+      "mlflow_run_id": "3f2e77191cde4c449940f14a053344a4",
+      "model_family": "transformer",
+      "parameter_count": 12595665,
+      "peak_gpu_memory_mb": 305.109375,
+      "slurm_elapsed_seconds": 2067,
+      "slurm_exit_code": "0:0",
+      "slurm_job_id": 7900536,
+      "trainer_elapsed_seconds": 2005.8680205430137
+    }
+  ],
+  "test_evaluated": false,
+  "training_seed": 20260805,
+  "vocabulary_size": 22481
+}

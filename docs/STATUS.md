@@ -40,11 +40,18 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 - Preliminary full-budget jobs completed successfully for LSTM `7900534`, GRU
   `7900535`, and Transformer `7900536`. GRU had the best validation loss at
   6.9306, but these results cannot be the final benchmark because of the
-  vocabulary-fit leakage.
-- Leakage-corrected local preprocessing fits an 18,849-token vocabulary on the
-  training split only and deterministically produces revision `a68aee4e...`.
+  vocabulary-fit leakage. The 1.4 GB `preliminary-v1` archive contains 226
+  checksum-verified files; all three MLflow runs reopen and generated MIDI
+  files parse. Exact evidence is in
+  [`docs/PRELIMINARY_V1_RESULTS.md`](PRELIMINARY_V1_RESULTS.md).
+- Leakage-corrected HPC preprocessing job `7903822` completed with exit code
+  `0:0` and produced revision `a68aee4e...` with an 18,849-token vocabulary fit
+  on training songs only.
   Validation OOV is 7,229 of 465,862 tokens (1.55%); test OOV is 30,427 of
   587,944 tokens (5.18%).
+- Corrected baseline jobs `7903830` LSTM, `7903831` GRU, and `7903832`
+  Transformer have been submitted. Their completion and results are not yet
+  verified.
 
 ## Day 1 foundation completed
 
@@ -57,8 +64,7 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The leakage-corrected revision has not yet been regenerated or trained on
-  HPC.
+- The leakage-corrected baseline runs have not yet completed.
 - The nine-profile sweep and three-seed finalist comparison have not run.
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
@@ -67,9 +73,7 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 ## Known technical blockers
 
-1. Preliminary artifacts must be archived as `preliminary-v1` before corrected
-   preprocessing begins.
-2. Corrected baseline jobs must complete before the profile sweep.
+1. Corrected baseline jobs must complete before the profile sweep.
 3. The project has no complete musical-statistics, originality, or human
    evaluation harness yet.
 4. The current 250-song pilot has no reliable genre metadata and is not a
@@ -110,11 +114,11 @@ model artifact.
 
 ## Current priority
 
-Archive the preliminary runs, regenerate revision `a68aee4e...` on HPC, and
-rerun the three corrected baselines. Do not run the profile sweep until those
-reports pass validation. Do not evaluate the frozen test split, start
-larger-corpus training, or begin raw-audio training before the three-seed
-finalist selection is frozen.
+Monitor the three corrected baseline jobs and validate their reports,
+checkpoints, MLflow runs, and generated MIDI. Do not run the profile sweep
+until those reports pass validation. Do not evaluate the frozen test split,
+start larger-corpus training, or begin raw-audio training before the
+three-seed finalist selection is frozen.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).

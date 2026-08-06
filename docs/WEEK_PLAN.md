@@ -86,15 +86,18 @@ HPC data paths.
 - The 250-song HPC source copy passed all 250 SHA-256 checks.
 - Revision `bf670db4...` produced the approved split and window counts but fit
   vocabulary on all splits, so its completed runs are preliminary only.
-- Corrected local preprocessing produced revision `a68aee4e...`, vocabulary
-  18,849, validation OOV 1.55%, and test OOV 5.18%. HPC regeneration remains.
+- Corrected HPC preprocessing job `7903822` produced revision `a68aee4e...`,
+  vocabulary 18,849, validation OOV 1.55%, and test OOV 5.18% with exit code
+  `0:0`.
 - LSTM job `7900523` completed on CUDA, wrote MLflow run
   `ba27493426aa4baebd1f1082bdba50fe`, reloaded a checkpoint, and generated a
   parseable MIDI artifact.
 - Local forward/backward and optimizer checks pass for LSTM, GRU, and causal
   Transformer through the shared trainer.
-- Preliminary LSTM, GRU, and Transformer production jobs all completed on HPC.
-  Corrected baselines still need to run on revision `a68aee4e...`.
+- Preliminary LSTM, GRU, and Transformer production jobs all completed on HPC,
+  were archived with verified checksums, and have recoverable MLflow runs and
+  parseable generated MIDI. Corrected baseline jobs `7903830`, `7903831`, and
+  `7903832` are submitted but not yet verified complete.
 
 ## Phase 4: Controlled baseline comparison
 
