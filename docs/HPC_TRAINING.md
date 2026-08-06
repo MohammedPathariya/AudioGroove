@@ -169,6 +169,19 @@ python -m src.evaluation.pilot_results \
 Verify that all three reports have the corrected revision, successful
 generation, recoverable best checkpoints, and `test: null`.
 
+## Preserve baseline-v2
+
+Before updating the repository for the profile sweep, preserve the accepted
+baseline artifacts under `$AG_SCRATCH/archive/baseline-v2`. The completed
+archive contains the three run directories, three isolated MLflow stores,
+Slurm logs, comparison reports, corrected dataset manifest, baseline
+experiment configuration, and training commit.
+
+The archive was created before the repository advanced from `5b7ccd8` to
+`cd887a1`. It is 1.1 GB with 243 files, and every entry in its
+`checksums.sha256` manifest passed verification. Keep this archive unchanged
+and outside Git.
+
 ## Profile sweep
 
 The three corrected baseline runs already cover the `baseline` profile for each

@@ -1,4 +1,11 @@
 {
+  "archive": {
+    "checksum_manifest": "checksums.sha256",
+    "checksum_verification": "passed",
+    "file_count": 243,
+    "location": "$AG_SCRATCH/archive/baseline-v2",
+    "reported_size": "1.1G"
+  },
   "classification": "accepted_single_seed_baseline",
   "dataset_revision": "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31",
   "git_commit": "5b7ccd84209b418e0564892c12aeb52d8c1b9f07",

@@ -53,8 +53,10 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   Transformer completed with exit code `0:0`. GRU leads validation loss at
   6.9753, LSTM leads top-1 accuracy at 9.79%, and Transformer is slower and
   larger under the baseline profile. All reports, checkpoints, clean Git
-  provenance, and generated MIDI files passed verification. Exact evidence is
-  in [`docs/CORRECTED_BASELINE_RESULTS.md`](CORRECTED_BASELINE_RESULTS.md).
+  provenance, generated MIDI files, and source MLflow run IDs passed
+  verification. The 1.1 GB `baseline-v2` archive contains 243 files and a
+  fully verified checksum manifest. Exact evidence is in
+  [`docs/CORRECTED_BASELINE_RESULTS.md`](CORRECTED_BASELINE_RESULTS.md).
 
 ## Day 1 foundation completed
 
@@ -72,7 +74,8 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
 - A current end-to-end hosted generation request has not been verified in this session.
-- No defensible model-quality metrics have yet been produced.
+- No musical-quality, originality, or human-listening metrics have yet been
+  produced.
 
 ## Known technical blockers
 
@@ -116,8 +119,8 @@ model artifact.
 
 ## Current priority
 
-Verify that the corrected MLflow stores reopen, then submit the nine missing
-small/large/larger profile jobs. Combine them with the accepted baseline reports for
+Run Slurm dry-run checks, then submit the nine missing small/large/larger
+profile jobs. Combine them with the accepted baseline reports for
 validation-only profile selection. Do not evaluate the frozen test split,
 start larger-corpus training, or begin raw-audio training before the
 three-seed finalist selection is frozen.

@@ -48,6 +48,7 @@ stable model-family advantage.
 Every run has a JSON report, best checkpoint, last checkpoint, environment
 record, experiment configuration, and generated MIDI file. The reports agree
 on dataset revision, vocabulary policy, vocabulary hash, and clean Git commit.
+The three source MLflow stores reopen with their expected run IDs.
 
 | Model | MIDI messages | Duration | Parse result |
 |---|---:|---:|---|
@@ -58,11 +59,24 @@ on dataset revision, vocabulary policy, vocabulary hash, and clean Git commit.
 MIDI parse success is a technical validity result. Musical quality,
 originality, long-range structure, and listener preference remain unmeasured.
 
+## Baseline-v2 archive
+
+The accepted baseline artifacts were copied to
+`$AG_SCRATCH/archive/baseline-v2` before the HPC repository advanced from
+commit `5b7ccd8` to the sweep implementation at `cd887a1`. The archive is 1.1
+GB and contains 243 files, including its checksum manifest. Every entry in
+`checksums.sha256` passed verification.
+
+The archive contains the three run directories, three isolated MLflow stores,
+Slurm stdout and stderr logs, comparison reports, corrected dataset manifest,
+the exact baseline experiment configuration, and the training repository
+commit. The archive remains on HPC scratch and is not stored in Git.
+
 ## Decision
 
 Proceed to the controlled size-profile sweep. The accepted baseline profile
 runs already cover three of the twelve family/profile combinations. Submit only
-the nine missing `small`, `large`, and `larger` profiles, then combine `baseline` and
-`sweep` reports when selecting one profile per family.
+the nine missing `small`, `large`, and `larger` profiles, then combine
+`baseline` and `sweep` reports when selecting one profile per family.
 
 Do not evaluate the test split. Do not promote GRU from this single-seed result.

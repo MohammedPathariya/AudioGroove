@@ -98,7 +98,8 @@ HPC data paths.
   were archived with verified checksums, and have recoverable MLflow runs and
   parseable generated MIDI. Corrected baseline jobs `7903830`, `7903831`, and
   `7903832` completed successfully with verified reports, checkpoints, clean
-  Git provenance, and parseable generated MIDI.
+  Git provenance, parseable generated MIDI, and recoverable MLflow runs. Their
+  1.1 GB `baseline-v2` archive contains 243 checksum-verified files.
 
 ## Phase 4: Controlled baseline comparison
 
