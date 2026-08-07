@@ -116,7 +116,8 @@ def inspect_for_selection(path: Path) -> tuple[float, int]:
 def load_pilot(audit_root: Path) -> tuple[list[dict], set[str], set[str], dict[str, str]]:
     rows = [json.loads(line) for line in (audit_root / "selected_manifest.jsonl").read_text().splitlines()]
     split = json.loads((audit_root / "split_manifest.json").read_text())
-    return rows, (
+    return (
+        rows,
         {row["relative_path"] for row in rows},
         {row["sha256"] for row in rows},
         split["group_assignment"],
