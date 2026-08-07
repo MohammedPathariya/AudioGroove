@@ -145,6 +145,7 @@ def prepare_pilot_dataset(
     dask_workers: int = 2,
     max_time_shift_ticks: int = DEFAULT_MAX_TIME_SHIFT_TICKS,
     velocity_bins: int = DEFAULT_VELOCITY_BINS,
+    dataset_name: str = "lmdclean_pilot_250",
 ) -> dict[str, Any]:
     """Prepare all 250 songs into split-local bounded chunks."""
     if sequence_length < 1 or max_windows_per_chunk < 1:
@@ -210,7 +211,7 @@ def prepare_pilot_dataset(
         ).encode("utf-8")
     ).hexdigest()
     manifest = {
-        "dataset_name": "lmdclean_pilot_250",
+        "dataset_name": dataset_name,
         "dataset_revision": derived_revision,
         "source_dataset_revision": summary["dataset_revision"],
         "representation": "bounded_time_shift_velocity_v2",

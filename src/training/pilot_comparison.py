@@ -781,7 +781,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tracking-uri")
     parser.add_argument(
         "--run-phase",
-        choices=("baseline", "sweep", "finalist"),
+        choices=("baseline", "sweep", "finalist", "scaling"),
         default="baseline",
     )
     parser.add_argument("--run-root", type=Path, default=DEFAULT_RUN_ROOT)
@@ -798,6 +798,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temperature", type=float)
     parser.add_argument("--top-k", type=int)
     parser.add_argument("--disable-amp", action="store_true")
+    parser.add_argument("--dataset-revision")
+    parser.add_argument("--experiment-name")
     return parser.parse_args()
 
 
@@ -824,6 +826,10 @@ def main() -> None:
         overrides["seed"] = args.training_seed
     if overrides:
         experiment = replace(experiment, training=replace(experiment.training, **overrides))
+    if args.dataset_revision is not None:
+        experiment = replace(experiment, dataset_revision=args.dataset_revision)
+    if args.experiment_name is not None:
+        experiment = replace(experiment, experiment_name=args.experiment_name)
     generation_overrides = {}
     for argument, field in (
         ("generation_seed", "seed"),
