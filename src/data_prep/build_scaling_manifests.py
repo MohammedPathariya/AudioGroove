@@ -209,7 +209,7 @@ def build(source_root: Path, pilot_root: Path, output_root: Path) -> dict:
         rows = [dict(record) for record in selected[:size]]
         assignments = assign_splits(rows, pilot_groups, SPLIT_SEED)
         for row in rows:
-            row.pop("path")
+            row.pop("path", None)
             row["source_path"] = f"data/clean_midi/{row['relative_path']}"
             row["split"] = assignments[row["group_identity"]]
         if len({row["sha256"] for row in rows}) != size:
