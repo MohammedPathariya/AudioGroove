@@ -51,12 +51,11 @@ configuration was not useful under this five-epoch budget.
 - All reports have `test: null` and successful MIDI generation.
 - The sweep artifacts were archived under
   `$AG_SCRATCH/archive/profile-sweep-v1` with checksum verification.
-- Each family finalist requires three additional training seeds before final
-  model selection.
+- The three-seed finalist results are documented in
+  [`FINALIST_RESULTS.md`](FINALIST_RESULTS.md).
 
 ## Next step
 
-Run the selected GRU-large, Transformer-large, and LSTM-large configurations
-with seeds `20260807`, `20260808`, and `20260809`. Aggregate those runs using
-mean best validation loss and report seed variance before evaluating the
-held-out test split.
+The validation selection is frozen. Submit exactly one held-out test
+evaluation for the representative GRU-large checkpoint after the finalist
+results have been committed and pulled on HPC.

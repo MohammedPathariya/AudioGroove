@@ -75,7 +75,9 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The three-seed finalist comparison has not run.
+- The three-seed finalist comparison selected GRU-large using mean best
+  validation loss of `6.8435` across three seeds. The representative seed is
+  `20260808`. The one-time held-out test evaluation has not run.
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
 - A current end-to-end hosted generation request has not been verified in this session.
@@ -124,10 +126,9 @@ model artifact.
 
 ## Current priority
 
-Submit the three selected family finalists with three seeds each. Aggregate
-validation results and seed variance before evaluating the frozen test split.
-Do not start larger-corpus training or begin raw-audio training before the
-three-seed finalist selection is frozen.
+Submit exactly one held-out test evaluation for the frozen GRU-large
+selection. Do not start larger-corpus training or begin raw-audio training
+before the test report and final artifact checks are complete.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).

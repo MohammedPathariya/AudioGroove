@@ -1,0 +1,44 @@
+{
+  "dataset_revision": "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31",
+  "final_selection": {
+    "model_family": "gru",
+    "model_profile": "large",
+    "training_seed": 20260808,
+    "mean_best_val_loss": 6.8435282621878315,
+    "selection_metric": "mean_best_validation_loss_across_seeds",
+    "test_evaluated": false,
+    "source_checkpoint": "$AG_SCRATCH/runs/pilot_comparison_v2/gru/large/20260806-191055-7906111/checkpoints/best.pt"
+  },
+  "finalists": [
+    {
+      "model_family": "gru",
+      "model_profile": "large",
+      "seed_count": 3,
+      "mean_best_val_loss": 6.8435282621878315,
+      "stdev_best_val_loss": 0.009136010137396495,
+      "mean_best_val_accuracy": 0.1057262591873656,
+      "mean_elapsed_seconds": 781.2793608217034
+    },
+    {
+      "model_family": "lstm",
+      "model_profile": "large",
+      "seed_count": 3,
+      "mean_best_val_loss": 6.97947353970599,
+      "stdev_best_val_loss": 0.036709461265843325,
+      "mean_best_val_accuracy": 0.10630443733797024,
+      "mean_elapsed_seconds": 954.7845764790351
+    },
+    {
+      "model_family": "transformer",
+      "model_profile": "large",
+      "seed_count": 3,
+      "mean_best_val_loss": 6.904436663646311,
+      "stdev_best_val_loss": 0.02988623734824574,
+      "mean_best_val_accuracy": 0.11006618202999352,
+      "mean_elapsed_seconds": 2425.4571969664344
+    }
+  ],
+  "training_seeds": [20260807, 20260808, 20260809],
+  "vocabulary_hash": "6a67a6b3d51d4c23a5af820175605b1c8612d178ba9f229e32ca7f3a90bec010",
+  "vocabulary_size": 18849
+}

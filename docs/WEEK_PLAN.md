@@ -189,7 +189,7 @@ Separate model selection from final generalization measurement.
 
 - Run at least three training seeds for each finalist.
 - Select the final candidate using validation results and seed stability.
-- Evaluate each final candidate once on the frozen 38-song test split.
+- Evaluate the selected final candidate once on the frozen 38-song test split.
 - Generate MIDI with identical seed files, generation lengths, temperatures,
   and sampling seeds.
 - Produce one final comparison table.

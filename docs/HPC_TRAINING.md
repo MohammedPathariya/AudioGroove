@@ -236,6 +236,10 @@ python -m src.evaluation.pilot_results \
 Inspect and preserve `final_selection.json`. It authorizes one family,
 profile, dataset revision, and seed for final evaluation.
 
+The completed three-seed finalist comparison selected GRU-large with mean best
+validation loss `6.8435`. The representative seed is `20260808`. The detailed
+validation evidence is in [`FINALIST_RESULTS.md`](FINALIST_RESULTS.md).
+
 ## One-time held-out test evaluation
 
 Submit exactly one final test job:
