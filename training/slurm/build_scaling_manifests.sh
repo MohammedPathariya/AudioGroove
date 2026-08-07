@@ -13,6 +13,7 @@ set -euo pipefail
 module purge
 module load python/gpu/3.11.5
 source /N/scratch/mjpathar/AudioGroove/venv/bin/activate
+cd /N/u/mjpathar/BigRed200/AudioGroove
 
 python -u -m src.data_prep.build_scaling_manifests \
   --source-root /N/scratch/mjpathar/AudioGroove/data/clean_midi \
