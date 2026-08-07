@@ -7,7 +7,9 @@ Updated: 2026-08-06
 The three selected `large` configurations were each trained with seeds
 `20260807`, `20260808`, and `20260809` on corrected dataset revision
 `a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31`.
-The held-out test split remains unevaluated.
+The held-out test split was evaluated exactly once after this selection was
+frozen. The result is recorded in
+[`PILOT_FINAL_RESULTS.md`](PILOT_FINAL_RESULTS.md).
 
 | Family | Profile | Seeds | Mean best validation loss | Loss standard deviation | Mean validation accuracy | Mean runtime |
 |---|---|---:|---:|---:|---:|---:|
@@ -30,6 +32,7 @@ The representative run is the GRU-large run with training seed `20260808`:
 
 ## Decision and gate
 
-The validation selection is frozen. Submit exactly one held-out test evaluation
-for the representative GRU-large checkpoint. Do not use the test result to
-change the selected family, profile, seed, or generation configuration.
+The validation selection was frozen before test evaluation. The one-time test
+evaluation completed as Slurm job `7906662` with exit code `0:0`. Do not use
+that test result to change the selected family, profile, or seed. It is a final
+measurement of generalization for this pilot.

@@ -211,7 +211,40 @@ Separate model selection from final generalization measurement.
 The test results are produced once, after model and configuration selection,
 and the report clearly labels validation versus held-out test evidence.
 
-## Phase 7: Registry, deployment, and monitoring
+### Status
+
+Complete. Three-seed finalist runs selected GRU-large by mean validation loss,
+and Slurm job `7906662` evaluated the frozen checkpoint on the test split once.
+The final metrics and archive are recorded in
+[`PILOT_FINAL_RESULTS.md`](PILOT_FINAL_RESULTS.md).
+
+## Phase 7: Deterministic data scaling
+
+### Objective
+
+Measure how the selected GRU-large configuration responds to more source songs
+before committing to the 10K training run.
+
+### Scale points
+
+- 250 songs: completed pilot reference.
+- 500 songs.
+- 1,000 songs.
+- 2,500 songs.
+- 10K songs: main training phase after the scaling decision.
+
+For each new scale, create a deterministic source manifest and source-level
+splits, fit the vocabulary on training songs only, map validation and test OOV
+tokens to `<UNK>`, and record a new dataset revision. Keep the same model
+profile and evaluation contract. Use validation for decisions and reserve the
+final test evaluation for the selected 10K configuration.
+
+Report token counts, OOV rates, validation loss, perplexity, accuracy, runtime,
+peak memory, checkpoint size, generation validity, and generated-MIDI review.
+Also report total tokens and optimizer updates because a fixed five-epoch
+budget changes the amount of optimization as the dataset grows.
+
+## Phase 8: Registry, deployment, and monitoring
 
 ### Objective
 

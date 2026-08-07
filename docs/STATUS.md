@@ -63,6 +63,13 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   the large profile was selected for all three families. The artifacts are
   preserved in the checksum-verified `profile-sweep-v1` archive. Exact
   evidence is in [`docs/PILOT_SWEEP_RESULTS.md`](PILOT_SWEEP_RESULTS.md).
+- Three-seed finalist jobs completed successfully. GRU-large was selected using
+  mean best validation loss `6.8435` across seeds `20260807`, `20260808`, and
+  `20260809`. The one-time held-out test job `7906662` also completed with
+  exit code `0:0`: loss `7.7766`, perplexity `2384.22`, accuracy `9.02%`, and
+  top-5 accuracy `20.61%`. The final-test artifacts and checksum manifest are
+  preserved in `$AG_SCRATCH/archive/final-test-v1`. Exact evidence is in
+  [`docs/PILOT_FINAL_RESULTS.md`](PILOT_FINAL_RESULTS.md).
 
 ## Day 1 foundation completed
 
@@ -75,9 +82,9 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 - The large cleaned training dataset is not present locally.
 - `data/processed/` is empty in this checkout.
-- The three-seed finalist comparison selected GRU-large using mean best
-  validation loss of `6.8435` across three seeds. The representative seed is
-  `20260808`. The one-time held-out test evaluation has not run.
+- The final pilot checkpoint is selected, and the one-time held-out test
+  evaluation is complete. The test generalization gap is documented in
+  [`docs/PILOT_FINAL_RESULTS.md`](PILOT_FINAL_RESULTS.md).
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
 - A current end-to-end hosted generation request has not been verified in this session.
@@ -126,9 +133,10 @@ model artifact.
 
 ## Current priority
 
-Submit exactly one held-out test evaluation for the frozen GRU-large
-selection. Do not start larger-corpus training or begin raw-audio training
-before the test report and final artifact checks are complete.
+Preserve the pilot closeout in Git and begin deterministic data-scaling
+experiments with GRU-large at 500, 1,000, and 2,500 songs. Do not begin raw
+audio training before the symbolic scaling evidence and audio-data feasibility
+work are complete.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).

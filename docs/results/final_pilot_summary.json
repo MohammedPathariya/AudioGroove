@@ -1,0 +1,22 @@
+{
+  "dataset_revision": "a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31",
+  "model_family": "gru",
+  "model_profile": "large",
+  "training_seed": 20260808,
+  "selection_metric": "mean_best_validation_loss_across_seeds",
+  "mean_best_validation_loss": 6.8435282621878315,
+  "test_evaluated_once": true,
+  "test_job_id": 7906662,
+  "test_mlflow_run_id": "34437eaf1c234baab5c95fe66110312a",
+  "test_metrics": {
+    "loss": 7.7766293511145115,
+    "perplexity": 2384.2248764687192,
+    "accuracy": 0.09017295919063006,
+    "top5_accuracy": 0.20612447335051334,
+    "examples": 586728.0,
+    "elapsed_seconds": 72.25277061498491,
+    "examples_per_second": 8120.491366711897
+  },
+  "final_test_archive": "$AG_SCRATCH/archive/final-test-v1",
+  "binary_artifacts_in_git": false
+}
