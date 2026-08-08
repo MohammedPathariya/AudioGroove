@@ -4,7 +4,7 @@
 #SBATCH -p general
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --time=04:00:00
+#SBATCH --time=08:00:00
 #SBATCH -o /N/scratch/mjpathar/AudioGroove/logs/prepare_scaling_%j.out
 #SBATCH -e /N/scratch/mjpathar/AudioGroove/logs/prepare_scaling_%j.err
 
@@ -30,7 +30,7 @@ repo = Path.cwd()
 scaling_root = Path("/N/scratch/mjpathar/AudioGroove/audits/lmdclean_scaling_v1")
 prepared_root = Path("/N/scratch/mjpathar/AudioGroove/prepared")
 
-for size in (500, 1000, 2500):
+for size in (500, 1000, 2500, 10000):
     rows = [
         json.loads(line)
         for line in (scaling_root / f"manifest_{size}.jsonl").read_text().splitlines()

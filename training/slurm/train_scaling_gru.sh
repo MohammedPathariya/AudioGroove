@@ -12,8 +12,13 @@
 set -euo pipefail
 
 SIZE="${1:-}"
-if [[ "$SIZE" != "500" && "$SIZE" != "1000" && "$SIZE" != "2500" ]]; then
-    echo "usage: sbatch $0 {500|1000|2500}" >&2
+PROFILE="${2:-large}"
+if [[ "$SIZE" != "500" && "$SIZE" != "1000" && "$SIZE" != "2500" && "$SIZE" != "10000" ]]; then
+    echo "usage: sbatch $0 {500|1000|2500|10000} [large|larger]" >&2
+    exit 2
+fi
+if [[ "$PROFILE" != "large" && "$PROFILE" != "larger" ]]; then
+    echo "usage: sbatch $0 {500|1000|2500|10000} [large|larger]" >&2
     exit 2
 fi
 
@@ -36,13 +41,13 @@ DATASET_REVISION="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]
 
 python -u -m src.training.pilot_comparison \
     --model-family gru \
-    --profile large \
+    --profile "$PROFILE" \
     --run-phase scaling \
     --config "$AG_REPO/training/configs/pilot_experiments.json" \
     --audit-dir "$AUDIT_DIR" \
     --dataset-dir "$DATASET_DIR" \
     --dataset-revision "$DATASET_REVISION" \
-    --experiment-name "AudioGroove-${SIZE}-Song-GRU-Scaling" \
-    --tracking-dir "$AG_SCRATCH/mlruns/scaling-${SIZE}-gru" \
-    --run-root "$AG_SCRATCH/runs/scaling_gru/${SIZE}" \
+    --experiment-name "AudioGroove-${SIZE}-Song-GRU-${PROFILE}-Scaling" \
+    --tracking-dir "$AG_SCRATCH/mlruns/scaling-${SIZE}-gru-${PROFILE}" \
+    --run-root "$AG_SCRATCH/runs/scaling_gru/${SIZE}/${PROFILE}" \
     --training-seed 20260810
