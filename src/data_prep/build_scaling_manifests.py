@@ -16,7 +16,8 @@ import mido
 
 
 PILOT_SIZE = 250
-SCALES = (500, 1000, 2500, 10000)
+FIXED_SCALES = (500, 1000, 2500)
+REQUESTED_FULL_SCALE = 10000
 SELECTION_SEED = 20260803
 SPLIT_SEED = 20260804
 MAX_DURATION_SECONDS = 600.0
@@ -182,12 +183,12 @@ def build(source_root: Path, pilot_root: Path, output_root: Path) -> dict:
     seen_hashes = set(pilot_hashes)
     exclusions = []
     for index, record in enumerate(ordered, 1):
-        if len(selected) == max(SCALES):
+        if len(selected) == REQUESTED_FULL_SCALE:
             break
         if record["relative_path"] in pilot_paths:
             continue
         if len(selected) >= PILOT_SIZE and index % 250 == 0:
-            print(f"selected {len(selected)}/{max(SCALES)}; scanned {index}")
+            print(f"selected {len(selected)}/{REQUESTED_FULL_SCALE}; scanned {index}")
         try:
             duration, token_count = inspect_for_selection(record["path"])
         except Exception as exc:
@@ -204,16 +205,22 @@ def build(source_root: Path, pilot_root: Path, output_root: Path) -> dict:
         selected.append({**record, "sha256": digest, "size_bytes": record["path"].stat().st_size, "duration_seconds": duration, "token_count": token_count})
 
     output_root.mkdir(parents=True, exist_ok=True)
+    if len(selected) < max(FIXED_SCALES):
+        raise RuntimeError(f"only {len(selected)} eligible songs found")
+    actual_full_scale = min(REQUESTED_FULL_SCALE, len(selected))
+    scales = (*FIXED_SCALES, actual_full_scale)
     summaries = {}
-    for size in SCALES:
+    for size in scales:
         rows = [dict(record) for record in selected[:size]]
         assignments = assign_splits(rows, pilot_groups, SPLIT_SEED)
         for row in rows:
             row.pop("path", None)
             row["source_path"] = f"data/clean_midi/{row['relative_path']}"
             row["split"] = assignments[row["group_identity"]]
-        if len({row["sha256"] for row in rows}) != size:
-            raise RuntimeError(f"{size}: duplicate content hash")
+        if len(rows) != size:
+            raise RuntimeError(f"{size}: expected {size} rows, found {len(rows)}")
+        if len({row["sha256"] for row in rows}) != len(rows):
+            raise RuntimeError(f"{size}: duplicate content hash within selected rows")
         groups = defaultdict(set)
         for row in rows:
             groups[row["split"]].add(row["group_identity"])
@@ -233,6 +240,8 @@ def build(source_root: Path, pilot_root: Path, output_root: Path) -> dict:
         "unique_song_identity_count": len(reps),
         "selection_seed": SELECTION_SEED,
         "split_seed": SPLIT_SEED,
+        "requested_full_scale": REQUESTED_FULL_SCALE,
+        "actual_full_scale": actual_full_scale,
         "pilot_policy": "250-song pilot is the frozen prefix; cross-size overlap is intentional",
         "scales": summaries,
         "exclusion_count": len(exclusions),

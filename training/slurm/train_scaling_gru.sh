@@ -13,12 +13,12 @@ set -euo pipefail
 
 SIZE="${1:-}"
 PROFILE="${2:-large}"
-if [[ "$SIZE" != "500" && "$SIZE" != "1000" && "$SIZE" != "2500" && "$SIZE" != "10000" ]]; then
-    echo "usage: sbatch $0 {500|1000|2500|10000} [large|larger]" >&2
+if ! [[ "$SIZE" =~ ^[0-9]+$ ]]; then
+    echo "usage: sbatch $0 DATASET_SIZE [large|larger]" >&2
     exit 2
 fi
 if [[ "$PROFILE" != "large" && "$PROFILE" != "larger" ]]; then
-    echo "usage: sbatch $0 {500|1000|2500|10000} [large|larger]" >&2
+    echo "usage: sbatch $0 DATASET_SIZE [large|larger]" >&2
     exit 2
 fi
 
