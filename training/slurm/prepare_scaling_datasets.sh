@@ -17,10 +17,16 @@ export AG_REPO=/N/u/mjpathar/BigRed200/AudioGroove
 export AG_SCRATCH=/N/scratch/mjpathar/AudioGroove
 source "$AG_SCRATCH/venv/bin/activate"
 cd "$AG_REPO"
+if [[ "$#" -gt 0 ]]; then
+    export SCALE_SIZES="$*"
+else
+    export SCALE_SIZES="500 1000 2500 10000"
+fi
 
 python -u - <<'PY'
 import hashlib
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -30,7 +36,7 @@ repo = Path.cwd()
 scaling_root = Path("/N/scratch/mjpathar/AudioGroove/audits/lmdclean_scaling_v1")
 prepared_root = Path("/N/scratch/mjpathar/AudioGroove/prepared")
 
-for size in (500, 1000, 2500, 10000):
+for size in [int(value) for value in os.environ["SCALE_SIZES"].split()]:
     rows = [
         json.loads(line)
         for line in (scaling_root / f"manifest_{size}.jsonl").read_text().splitlines()
