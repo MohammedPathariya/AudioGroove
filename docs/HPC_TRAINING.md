@@ -1,6 +1,6 @@
 # HPC Pilot Training
 
-Updated: 2026-08-06
+Updated: 2026-08-08
 
 This runbook covers the leakage-corrected 250-song comparison on Big Red 200.
 The prepared dataset must be stored at
@@ -9,6 +9,15 @@ revision
 `a68aee4e1f3f4dc4407beae45c10eae5b08d27252233d10fe2ff793ef7010d31`.
 The earlier revision `bf670db4...` fit its vocabulary on all splits. Its three
 completed runs are preliminary evidence only.
+
+The pilot and profile-selection phases are complete. The next phase is
+full-scale GRU comparison on the 9,956-song eligible dataset. Its prepared
+dataset is stored at
+`/N/scratch/mjpathar/AudioGroove/prepared/scaling_9956_train_vocab` with
+revision
+`5ec47bf2ac31acec1d760dfaf0888a59c6aa6d165a41f927fc38abceea81abb6`.
+Do not evaluate its test split until GRU-large versus GRU-larger selection is
+complete.
 
 ## Corrected data contract
 

@@ -231,7 +231,7 @@ before committing to the 10K training run.
 - 500 songs.
 - 1,000 songs.
 - 2,500 songs.
-- 10K songs: main training phase after the scaling decision.
+- 9,956 eligible songs: full-scale training phase.
 
 For each new scale, create a deterministic source manifest and source-level
 splits, fit the vocabulary on training songs only, map validation and test OOV
@@ -244,7 +244,31 @@ peak memory, checkpoint size, generation validity, and generated-MIDI review.
 Also report total tokens and optimizer updates because a fixed five-epoch
 budget changes the amount of optimization as the dataset grows.
 
-## Phase 8: Registry, deployment, and monitoring
+### Status
+
+The 500, 1,000, and 2,500-song GRU-large runs are complete and archived. The
+full eligible dataset contains 9,956 songs, with train-only vocabulary revision
+`5ec47bf2...`, and preprocessing is complete. Full-scale training is scheduled
+after the August 9 maintenance window.
+
+## Phase 8: Full-scale model selection and held-out evaluation
+
+### Work
+
+- Train GRU-large and GRU-larger on the identical 9,956-song prepared dataset.
+- Select using validation loss, perplexity, resource cost, and generation
+  validity.
+- Evaluate the selected full-scale checkpoint on the test split exactly once.
+- Archive the selected checkpoint, vocabulary, dataset manifest, MLflow run,
+  generated MIDI, and final report.
+
+### Stop condition
+
+One full-scale configuration is selected from validation evidence, one held-out
+test evaluation is complete, and the final artifact can be reopened from the
+HPC archive.
+
+## Phase 9: Registry, deployment, and monitoring
 
 ### Objective
 

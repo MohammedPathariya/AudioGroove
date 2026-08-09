@@ -1,6 +1,6 @@
 # AudioGroove Status
 
-Updated: 2026-08-06
+Updated: 2026-08-08
 
 ## Current state
 
@@ -70,6 +70,17 @@ audit remain. Training will proceed on Big Red 200, not Colab.
   top-5 accuracy `20.61%`. The final-test artifacts and checksum manifest are
   preserved in `$AG_SCRATCH/archive/final-test-v1`. Exact evidence is in
   [`docs/PILOT_FINAL_RESULTS.md`](PILOT_FINAL_RESULTS.md).
+- Data-scaling runs completed for the nested 500-song, 1,000-song, and
+  2,500-song datasets using GRU-large. Jobs `7908059`, `7908060`, and
+  `7908061` completed with exit code `0:0`; runtimes were 31m 48s, 1h 06m
+  23s, and 4h 38m 45s. Their artifacts are preserved in the `scaling-gru-v1`
+  HPC archive.
+- The deterministic full eligible corpus contains 9,956 songs from the
+  17,256-file source corpus. Its split is 6,953 train, 1,512 validation, and
+  1,491 test songs. Preparation produced revision `5ec47bf2...`, vocabulary
+  size 48,169, 103,823,676 train windows, 21,116,873 validation windows, and
+  23,662,010 test windows. Validation OOV is 0.0701% and test OOV is 0.0763%.
+  Full-scale GRU training has not started.
 
 ## Day 1 foundation completed
 
@@ -80,7 +91,8 @@ audit remain. Training will proceed on Big Red 200, not Colab.
 
 ## Not verified
 
-- The large cleaned training dataset is not present locally.
+- The large cleaned training dataset and trained full-scale checkpoint are not
+  present locally; they remain on HPC scratch.
 - `data/processed/` is empty in this checkout.
 - The final pilot checkpoint is selected, and the one-time held-out test
   evaluation is complete. The test generalization gap is documented in
@@ -133,10 +145,10 @@ model artifact.
 
 ## Current priority
 
-Preserve the pilot closeout in Git and begin deterministic data-scaling
-experiments with GRU-large at 500, 1,000, and 2,500 songs. Do not begin raw
-audio training before the symbolic scaling evidence and audio-data feasibility
-work are complete.
+After the August 9 Big Red maintenance window, train GRU-large and GRU-larger
+on the 9,956-song prepared dataset. Select using validation results, evaluate
+the selected test split once, archive the final artifact, and then begin
+deployment work. Raw audio training remains deferred.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).
