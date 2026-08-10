@@ -1,0 +1,53 @@
+{
+  "dataset_name": "lmdclean_nested_scaling",
+  "exclusion_count": 7048,
+  "pilot_policy": "250-song pilot is the frozen prefix of every larger manifest; cross-size overlap is intentional",
+  "same_content_hash_within_any_manifest": false,
+  "scales": {
+    "1000": {
+      "artist_group_overlap_count": 0,
+      "manifest": "manifest_1000.jsonl",
+      "new_song_count": 750,
+      "pilot_overlap_count": 250,
+      "sha256_overlap_with_pilot": 250,
+      "song_count": 1000,
+      "split_counts": {
+        "test": 150,
+        "train": 700,
+        "val": 150
+      }
+    },
+    "2500": {
+      "artist_group_overlap_count": 0,
+      "manifest": "manifest_2500.jsonl",
+      "new_song_count": 2250,
+      "pilot_overlap_count": 250,
+      "sha256_overlap_with_pilot": 250,
+      "song_count": 2500,
+      "split_counts": {
+        "test": 375,
+        "train": 1750,
+        "val": 375
+      }
+    },
+    "500": {
+      "artist_group_overlap_count": 0,
+      "manifest": "manifest_500.jsonl",
+      "new_song_count": 250,
+      "pilot_overlap_count": 250,
+      "sha256_overlap_with_pilot": 250,
+      "song_count": 500,
+      "split_counts": {
+        "test": 76,
+        "train": 349,
+        "val": 75
+      }
+    }
+  },
+  "selection_seed": 20260803,
+  "source_dir": "data/clean_midi",
+  "source_file_count": 17256,
+  "source_revision": "cb79c82e90dc9087dc7f525d5ddf48648c0e7ba64d39fcdce6619acb94fbe62d",
+  "split_seed": 20260804,
+  "unique_song_identity_count": 10277
+}
