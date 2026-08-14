@@ -15,7 +15,7 @@ from src.models.compact_midi_models import build_compact_model, count_parameters
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ARTIFACT_DIR = ROOT / "local_artifacts" / "gru_large_2500"
-DEFAULT_SEED = ROOT / "data" / "clean_midi" / "AL Bano" / "Felicita.mid"
+DEFAULT_SEED = ROOT / "data" / "seed" / "Boom_Boom_Boom.mid"
 
 
 def load_local_model(artifact_dir: Path) -> tuple[torch.nn.Module, dict[str, int], dict]:
