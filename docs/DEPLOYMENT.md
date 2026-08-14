@@ -4,7 +4,10 @@
 
 The repository contains deployment-oriented files and references to a Vercel frontend and Hugging Face backend, but a current end-to-end hosted generation run has not been verified in this working session. Treat the URLs in the README as targets until the smoke test below passes.
 
-The local repository does not contain the real vocabulary or model weights. The tracked checkpoint files are Git LFS pointer files. The backend Dockerfile downloads artifacts from Hugging Face during image build.
+The recovered 2,500-song GRU-large vocabulary and checkpoint are available
+locally under the ignored `local_artifacts/gru_large_2500/` package. The
+existing Flask backend still targets the older enhanced-LSTM artifact contract
+and is not yet wired to this recovered compact GRU model.
 
 ## Local development
 
@@ -14,6 +17,8 @@ The local repository does not contain the real vocabulary or model weights. The 
 - Install root dependencies from `requirements.txt`.
 - Install backend dependencies from `backend/requirements.txt` if running the API separately.
 - Ensure the processed vocabulary and compatible checkpoint exist before importing `backend/app.py`.
+- For the recovered model, use `python -m src.generation.run_local_gru_2500`
+  before changing the Flask integration.
 
 ### Device selection
 

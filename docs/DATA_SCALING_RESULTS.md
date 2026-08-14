@@ -1,6 +1,6 @@
 # GRU Data-Scaling Phase
 
-Updated: 2026-08-08
+Updated: 2026-08-14
 
 ## Protocol
 
@@ -42,9 +42,10 @@ tokens (0.0763%). Its vocabulary was fit on the 6,953 training songs only.
   `scaling-gru-v1` HPC archive. The 9,956-song prepared dataset is staged
   separately and must be archived with its final model results.
 
-## Next decision
+## Final scaling decision
 
-After maintenance, train GRU-large and GRU-larger on the same 9,956-song
-prepared dataset. Select between them using validation loss, perplexity,
-resource cost, and generation validity. Evaluate the selected full-scale model
-on its test split exactly once.
+The 2,500-song GRU-large run is the largest recoverable trained model. Its
+best checkpoint and complete run evidence were recovered locally under
+`local_artifacts/gru_large_2500/`. The 9,956-song dataset was prepared but
+never trained because the HPC Slurm account association was removed. No
+full-scale model-selection or test-evaluation claim is made.

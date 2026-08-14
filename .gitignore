@@ -14,6 +14,9 @@ training/logs/
 runs/mlruns/
 runs/day4/
 
+# Local recovered model packages and large evidence exports
+local_artifacts/
+
 # Ignore generated outputs
 generated_music.mid
 

@@ -1,6 +1,6 @@
 # AudioGroove Status
 
-Updated: 2026-08-08
+Updated: 2026-08-14
 
 ## Current state
 
@@ -9,10 +9,28 @@ pilot path has deterministic MIDI preprocessing, compact LSTM, GRU, and causal
 Transformer families, a shared training and generation contract, MLflow
 tracking, Slurm launch scripts, a Flask API, and a vanilla JavaScript frontend.
 
-The local training state has been reset for HPC migration. Previous local run
-directories, MLflow data, prepared training chunks, generated training logs,
-and checkpoint artifacts were deleted. The source code and 250-song selection
-audit remain. Training will proceed on Big Red 200, not Colab.
+The 9,956-song GRU training phase is closed because the Big Red 200 project
+association is no longer active. The recovered 2,500-song GRU-large run is now
+the local model endpoint. Its checkpoint, matching vocabulary, configuration,
+report, provenance, and generated MIDI are stored under the ignored
+`local_artifacts/gru_large_2500/` package.
+
+The full-scale dataset was prepared on HPC, but no 9,956-song GRU checkpoint
+was trained. The local package is the recoverable model artifact for continued
+development and deployment work.
+
+## Recovered local model endpoint
+
+- Model: compact GRU-large trained on 2,500 songs.
+- HPC job: `7908061`.
+- Dataset revision: `d3e2b88f...`.
+- Vocabulary: 35,707 tokens, train-only policy, hash
+  `adca960c...`.
+- Best checkpoint: epoch 1, validation loss `6.1305718533`.
+- Training completed three epochs; later validation loss diverged.
+- Local checkpoint contract and forward pass passed on 2026-08-14.
+- Local seeded MIDI generation and MIDI parsing passed on 2026-08-14.
+- Reproducible entry point: `python -m src.generation.run_local_gru_2500`.
 
 ## Verified in the current checkout
 
@@ -145,10 +163,10 @@ model artifact.
 
 ## Current priority
 
-After the August 9 Big Red maintenance window, train GRU-large and GRU-larger
-on the 9,956-song prepared dataset. Select using validation results, evaluate
-the selected test split once, archive the final artifact, and then begin
-deployment work. Raw audio training remains deferred.
+Use the recovered 2,500-song GRU-large artifact for local generation and
+deployment integration. Do not submit or claim the 9,956-song training phase:
+the dataset was prepared, but the Slurm account `r00284` is no longer
+associated with the user. Raw audio training remains deferred.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).
