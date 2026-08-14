@@ -75,7 +75,7 @@ def main() -> None:
     parser.add_argument(
         "--output",
         type=Path,
-        default=DEFAULT_ARTIFACT_DIR / "generation" / "local_generated.mid",
+        default=DEFAULT_ARTIFACT_DIR / "generation" / "generated.mid",
     )
     args = parser.parse_args()
 

@@ -218,11 +218,10 @@ Results are recorded in `data/audit/day2/`:
 
 ## LMDClean 250-song pilot selected
 
-The cleaned corpus is available locally at `data/clean_midi/`. The bounded
-pilot selector is `src/data_prep/build_lmdclean_pilot.py` and copies selected
-source files into the ignored local folder `data/pilot_250/`, organized as
-`train/`, `val/`, and `test/` by artist group. The source corpus is not moved
-or modified.
+The cleaned corpus and ignored `data/pilot_250/` copy were removed from the
+local checkout after the 2,500-song model was recovered. The source-selection
+code and audit manifests remain in the repository, so the datasets can be
+recreated from a separately obtained corpus if needed.
 
 Command:
 
