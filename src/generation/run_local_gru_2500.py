@@ -45,7 +45,9 @@ def load_local_model(artifact_dir: Path) -> tuple[torch.nn.Module, dict[str, int
     return model, vocabulary, config
 
 
-def generate(model: torch.nn.Module, vocabulary: dict[str, int], config: dict, seed: Path) -> list[str]:
+def generate(
+    model: torch.nn.Module, vocabulary: dict[str, int], config: dict, seed: Path
+) -> tuple[list[str], int]:
     encoded = encode_midi(seed)
     sequence_length = config["training"]["sequence_length"]
     generated = [vocabulary.get(token, vocabulary["<UNK>"]) for token in encoded.tokens]
