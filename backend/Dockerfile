@@ -48,6 +48,6 @@ COPY data/seed /code/data/seed
 EXPOSE 7860
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-    CMD python -c "import json, urllib.request; response = urllib.request.urlopen('http://127.0.0.1:7860/', timeout=5); payload = json.load(response); assert payload['model_loaded'] is True"
+    CMD python -c "import json, os, urllib.request; port = os.environ.get('PORT', '7860'); response = urllib.request.urlopen(f'http://127.0.0.1:{port}/', timeout=5); payload = json.load(response); assert payload['model_loaded'] is True"
 
-CMD ["gunicorn", "--chdir", "/code", "backend.app:app", "--bind", "0.0.0.0:7860", "--timeout", "120"]
+CMD ["sh", "-c", "exec gunicorn --chdir /code backend.app:app --bind 0.0.0.0:${PORT:-7860} --timeout 120"]

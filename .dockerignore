@@ -1,0 +1,16 @@
+.git/
+.gitignore
+.env
+.env.*
+.env_local
+local_artifacts/
+data/raw/
+data/chunks/
+data/processed/
+training/checkpoints/
+training/logs/
+runs/
+tests/
+docs/
+frontend/
+*.DS_Store

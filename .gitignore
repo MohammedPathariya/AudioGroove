@@ -37,3 +37,6 @@ venv/
 
 # Colab and Jupyter artifacts
 *.ipynb
+
+# Local credentials
+.env_local
