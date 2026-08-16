@@ -5,9 +5,10 @@
 The repository contains deployment-oriented files and references to a Vercel frontend and Hugging Face backend, but a current end-to-end hosted generation run has not been verified in this working session. Treat the URLs in the README as targets until the smoke test below passes.
 
 The recovered 2,500-song GRU-large vocabulary and checkpoint are available
-locally under the ignored `local_artifacts/gru_large_2500/` package. The
-existing Flask backend still targets the older enhanced-LSTM artifact contract
-and is not yet wired to this recovered compact GRU model.
+locally under the ignored `local_artifacts/gru_large_2500/` package. The Flask
+backend now loads this package and uses the event-based MIDI representation.
+The checkpoint must remain outside Git and be supplied to the container build
+from an artifact repository.
 
 ## Local development
 
@@ -16,9 +17,9 @@ and is not yet wired to this recovered compact GRU model.
 - Python 3.11 is the intended runtime.
 - Install root dependencies from `requirements.txt`.
 - Install backend dependencies from `backend/requirements.txt` if running the API separately.
-- Ensure the processed vocabulary and compatible checkpoint exist before importing `backend/app.py`.
-- For the recovered model, use `python -m src.generation.run_local_gru_2500`
-  before changing the Flask integration.
+- Ensure `local_artifacts/gru_large_2500/` contains the compatible package before
+  running the local API.
+- Use `python3 -m src.generation.run_local_gru_2500` to verify local generation.
 
 ### Device selection
 
@@ -104,7 +105,32 @@ The backend image must:
 - expose the configured service port
 - run a health check after startup
 
-The Dockerfile currently downloads the model and vocabulary with `wget`. This should eventually be changed to verify checksums and fail if the downloaded file is an LFS pointer, an HTML error page, or an incomplete artifact.
+The Dockerfile expects a repository-root build context and downloads the
+following files from `ARTIFACT_BASE_URL`:
+
+```text
+checkpoints/best.pt
+vocabulary.json
+config/experiment_config.json
+datasets/scaling_summary.json
+```
+
+It verifies the SHA-256 hash of every file before the image is completed. The
+default hashes are the recovered local package hashes. If the artifact host
+uses different files, override the four hash build arguments explicitly.
+
+Build from the repository root:
+
+```bash
+docker build \
+  -f backend/Dockerfile \
+  --build-arg ARTIFACT_BASE_URL="https://<artifact-host>/<gru-large-2500-revision>" \
+  -t audiogroove-backend:gru-large-2500 .
+```
+
+The artifact host must preserve the relative paths above. Do not use a mutable
+latest URL for a production image; pin the artifact host to an immutable
+revision or release.
 
 ## Deployment smoke test
 
