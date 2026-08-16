@@ -12,10 +12,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Build from the repository root. The artifact repository must expose these
-# paths: checkpoints/best.pt, vocabulary.json, config/experiment_config.json,
+# paths: checkpoints/deploy.pt, vocabulary.json, config/experiment_config.json,
 # and datasets/scaling_summary.json.
 ARG ARTIFACT_BASE_URL
-ARG BEST_SHA256=16e3fbd6b950e7fca124f970e3b1579c5f8f125bc9535f8d6fa0217cb4cb0700
+ARG DEPLOY_CHECKPOINT_SHA256=17e7ec8a4e6fc7e9f02d02ce93fd36b91aab9820b5b59fde8349afa58e227bb7
 ARG VOCABULARY_SHA256=adca960cd5bbd89500e8977a485f2e5ae5e07f80560fd648044f7bf309a1f267
 ARG CONFIG_SHA256=75a32ece3ae612962aedc87021e9f5d2dfb6a665adb7828e5b96fcf09e8a7929
 ARG SCALING_SUMMARY_SHA256=6ba78eabf9833bc6308619b4fb6366f761534b4d68da85d7ea778eab50b0c09a
@@ -25,8 +25,8 @@ RUN test -n "$ARTIFACT_BASE_URL" \
         /code/local_artifacts/gru_large_2500/config \
         /code/local_artifacts/gru_large_2500/datasets \
     && wget --https-only --retry-connrefused --tries=3 \
-        -O /code/local_artifacts/gru_large_2500/checkpoints/best.pt \
-        "$ARTIFACT_BASE_URL/checkpoints/best.pt" \
+        -O /code/local_artifacts/gru_large_2500/checkpoints/deploy.pt \
+        "$ARTIFACT_BASE_URL/checkpoints/deploy.pt" \
     && wget --https-only --retry-connrefused --tries=3 \
         -O /code/local_artifacts/gru_large_2500/vocabulary.json \
         "$ARTIFACT_BASE_URL/vocabulary.json" \
@@ -36,7 +36,7 @@ RUN test -n "$ARTIFACT_BASE_URL" \
     && wget --https-only --retry-connrefused --tries=3 \
         -O /code/local_artifacts/gru_large_2500/datasets/scaling_summary.json \
         "$ARTIFACT_BASE_URL/datasets/scaling_summary.json" \
-    && echo "$BEST_SHA256  /code/local_artifacts/gru_large_2500/checkpoints/best.pt" | sha256sum -c - \
+    && echo "$DEPLOY_CHECKPOINT_SHA256  /code/local_artifacts/gru_large_2500/checkpoints/deploy.pt" | sha256sum -c - \
     && echo "$VOCABULARY_SHA256  /code/local_artifacts/gru_large_2500/vocabulary.json" | sha256sum -c - \
     && echo "$CONFIG_SHA256  /code/local_artifacts/gru_large_2500/config/experiment_config.json" | sha256sum -c - \
     && echo "$SCALING_SUMMARY_SHA256  /code/local_artifacts/gru_large_2500/datasets/scaling_summary.json" | sha256sum -c -

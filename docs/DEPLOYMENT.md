@@ -109,15 +109,17 @@ The Dockerfile expects a repository-root build context and downloads the
 following files from `ARTIFACT_BASE_URL`:
 
 ```text
-checkpoints/best.pt
+checkpoints/deploy.pt
 vocabulary.json
 config/experiment_config.json
 datasets/scaling_summary.json
 ```
 
 It verifies the SHA-256 hash of every file before the image is completed. The
-default hashes are the recovered local package hashes. If the artifact host
-uses different files, override the four hash build arguments explicitly.
+deployment checkpoint is an inference-only copy containing the model weights,
+dataset revision, and vocabulary hash. The larger local `best.pt` remains the
+full training checkpoint with optimizer and scheduler state. If the artifact
+host uses different files, override the four hash build arguments explicitly.
 
 Build from the repository root:
 

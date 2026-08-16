@@ -33,9 +33,10 @@ def load_local_model(artifact_dir: Path) -> tuple[torch.nn.Module, dict[str, int
     if count_parameters(model) != 22_155_835:
         raise ValueError("unexpected recovered GRU-large parameter count")
 
-    checkpoint = torch.load(
-        artifact_dir / "checkpoints" / "best.pt", map_location="cpu"
-    )
+    checkpoint_path = artifact_dir / "checkpoints" / "deploy.pt"
+    if not checkpoint_path.exists():
+        checkpoint_path = artifact_dir / "checkpoints" / "best.pt"
+    checkpoint = torch.load(checkpoint_path, map_location="cpu")
     if checkpoint["dataset_revision"] != config["dataset_revision"]:
         raise ValueError("checkpoint dataset revision does not match the package")
     if checkpoint["vocabulary_hash"] != vocabulary_hash:
