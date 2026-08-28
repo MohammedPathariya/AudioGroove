@@ -33,6 +33,15 @@ def test_health_reports_recovered_model():
     assert payload["vocabulary_size"] == 18849
 
 
+def test_cors_allows_production_frontend():
+    response = app.test_client().get(
+        "/",
+        headers={"Origin": "https://audiogroove.vercel.app"},
+    )
+
+    assert response.headers["Access-Control-Allow-Origin"] == "https://audiogroove.vercel.app"
+
+
 def test_generate_without_seed_returns_parseable_midi():
     response = app.test_client().post("/generate")
 

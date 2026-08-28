@@ -20,6 +20,7 @@ MODEL_ARTIFACT_ID = "gru_small_250"
 ARTIFACT_DIR = PROJECT_ROOT / "local_artifacts" / MODEL_ARTIFACT_ID
 SEED_FILES_DIR = PROJECT_ROOT / "data" / "seed"
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+PRODUCTION_FRONTEND_URL = "https://audiogroove.vercel.app"
 
 
 def _load_artifacts() -> tuple[object | None, dict[str, int] | None, dict | None, str | None]:
@@ -33,8 +34,15 @@ def _load_artifacts() -> tuple[object | None, dict[str, int] | None, dict | None
 def create_app() -> Flask:
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
-    frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:8000")
-    CORS(app, origins=[frontend_url, "http://127.0.0.1:8000", "http://localhost:5173"])
+    frontend_url = os.environ.get("FRONTEND_URL", PRODUCTION_FRONTEND_URL)
+    allowed_origins = {
+        PRODUCTION_FRONTEND_URL,
+        frontend_url,
+        "http://127.0.0.1:8000",
+        "http://localhost:5173",
+        "http://localhost:8000",
+    }
+    CORS(app, origins=sorted(allowed_origins))
 
     model, vocabulary, config, load_error = _load_artifacts()
     app.extensions["audiogroove"] = {
