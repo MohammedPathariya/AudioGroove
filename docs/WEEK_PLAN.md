@@ -274,6 +274,15 @@ HPC archive.
 
 Turn the selected pilot model into a verifiable product artifact.
 
+### Current deployment candidate
+
+The research-selected GRU-large model is not the Render Free candidate because
+its generation worker exceeded the 512 MB memory envelope. The recovered
+250-song GRU-small package is the deployment candidate. Its inference-only
+checkpoint, matching 18,849-token vocabulary, and deployment manifest passed
+a local 512 MB Docker gate with 236.2 MiB peak memory and no cgroup allocation
+denials or OOM events. Hosted Render deployment remains unverified.
+
 ### Work
 
 - Register the selected checkpoint with its vocabulary and representation

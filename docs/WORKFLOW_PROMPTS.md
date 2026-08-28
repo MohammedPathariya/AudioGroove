@@ -63,7 +63,14 @@ Implement only the controlled model comparison. Keep dataset, split, seed, Dask 
 ## Deployment integration prompt
 
 ```text
-Implement only the integration and deployment-readiness work. Connect the verified local model artifact and representation assets to the backend, add compatibility checks, run supported seeded and unseeded generation, validate the returned MIDI or audio output, and run frontend smoke tests. Update docs/STATUS.md and docs/DEPLOYMENT.md with exact evidence. Do not publish unsupported hosted or model-quality claims.
+Implement only the integration and deployment-readiness work. Connect the
+verified local model artifact and representation assets to the backend, add
+compatibility checks, run supported seeded and unseeded generation, validate
+the returned MIDI or audio output, and run frontend smoke tests. For a
+free-tier container target, use a CPU-only dependency build and record the
+memory limit, live usage, cgroup peak, allocation-denial count, and OOM count.
+Update docs/STATUS.md and docs/DEPLOYMENT.md with exact evidence. Do not
+publish unsupported hosted or model-quality claims.
 ```
 
 ## Review prompt

@@ -94,11 +94,21 @@ My journey with this project followed a complete machine learning lifecycle:
 
 Deploying a machine learning app on a free budget is a true test of problem-solving. Here are the battles I fought and won:
 
-- **Challenge:** **The GitHub 100 MB Limit.** Both my model checkpoint and final vocabulary file were massive, far exceeding GitHub's file size limit.
-- **Solution:** **Decoupling Large Artifacts.** I adopted a standard MLOps practice by hosting all large files on the **Hugging Face Hub**. My deployment server was then configured to download these artifacts during its build step using `wget`, keeping my Git repository lean and focused on code.
+- **Challenge:** **Keeping deployment artifacts out of Git.** Model weights and
+  their matching metadata must not be committed with application code.
+- **Current approach:** The Render candidate is an ignored GRU-small artifact
+  package containing an inference-only `deploy.pt`, vocabulary, configuration,
+  and deployment manifest. The Docker build requires an immutable HTTPS
+  artifact URL and validates SHA-256 hashes before the service starts.
 
-- **Challenge:** **The Render Free Tier Timeout.** My first deployment attempt on Render kept failing. The logs showed a `WORKER TIMEOUT` because the music generation was too resource-intensive for the free plan's CPU and 30-second time limit.
-- **Solution:** **Migrating to the Right Tool for the Job.** I pivoted and migrated the backend from Render to **Hugging Face Spaces**. Spaces are specifically designed for hosting ML apps and provide a much more generous free tier of CPU/RAM, which completely solved the timeout issues.
+- **Challenge:** **Render Free memory limits.** The research-selected
+  2,500-song GRU-large model exceeded the 512 MB free-tier envelope during
+  generation.
+- **Current approach:** The 250-song GRU-small package uses a CPU-only Torch
+  image and passed a local 512 MB constrained-container gate: 236.2 MiB peak
+  memory, no cgroup allocation denials or OOM events, and parseable MIDI from
+  both unseeded and uploaded-seed generation. Hosted Render deployment has not
+  yet been verified.
 
 - **Challenge:** **The Docker `ModuleNotFoundError`.** After containerizing the app, it failed to boot, complaining that it couldn't find my custom Python modules (like `models` or `utils`).
 - **Solution:** **Creating a Self-Contained Deployment Package.** I refactored the project to create a clean, self-contained deployment folder. This folder included the Flask app, the Dockerfile, and the entire `src` directory, ensuring that the Docker container had everything it needed to run, finally resolving the import errors.

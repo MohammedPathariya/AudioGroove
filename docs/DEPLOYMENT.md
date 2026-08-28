@@ -4,11 +4,15 @@
 
 The repository contains deployment-oriented files and references to a Vercel frontend and Hugging Face backend, but a current end-to-end hosted generation run has not been verified in this working session. Treat the URLs in the README as targets until the smoke test below passes.
 
-The recovered 2,500-song GRU-large vocabulary and checkpoint are available
-locally under the ignored `local_artifacts/gru_large_2500/` package. The Flask
-backend now loads this package and uses the event-based MIDI representation.
-The checkpoint must remain outside Git and be supplied to the container build
-from an artifact repository.
+The current deployment candidate is the recovered 250-song GRU-small model
+under the ignored `local_artifacts/gru_small_250/` package. The Flask backend
+loads this event-based MIDI model through a deployment manifest that validates
+the checkpoint, vocabulary, dataset revision, model profile, and parameter
+count. The artifact package remains outside Git and must be supplied to the
+container build from an immutable HTTPS artifact host.
+
+Hosted Render deployment has not yet been verified. The evidence in this
+document is limited to the local constrained-container gate below.
 
 ## Local development
 
@@ -17,7 +21,7 @@ from an artifact repository.
 - Python 3.11 is the intended runtime.
 - Install root dependencies from `requirements.txt`.
 - Install backend dependencies from `backend/requirements.txt` if running the API separately.
-- Ensure `local_artifacts/gru_large_2500/` contains the compatible package before
+- Ensure `local_artifacts/gru_small_250/` contains the compatible package before
   running the local API.
 - Use `python3 -m src.generation.run_local_model` to verify local generation.
 
@@ -64,6 +68,20 @@ Each deployable model artifact must be accompanied by:
 - MLflow run ID and tracking backend
 - Dask preprocessing configuration and worker or partition limits
 
+For the GRU-small deployment candidate, the required artifact files are:
+
+```text
+checkpoints/deploy.pt
+vocabulary.json
+config/experiment_config.json
+deployment_manifest.json
+```
+
+`deploy.pt` is inference-only: it contains the model state, dataset revision,
+and vocabulary hash, but excludes optimizer and scheduler state. The manifest
+records the matching 250-song dataset, 18,849-token vocabulary, GRU-small
+configuration, parameter count, report hash, and HPC provenance.
+
 Do not deploy a checkpoint if its vocabulary, representation, model configuration, or audio preprocessing configuration is unknown.
 
 ## Audio deployment considerations
@@ -105,6 +123,10 @@ The backend image must:
 - expose the configured service port
 - run a health check after startup
 
+The container installs `torch==2.6.0+cpu` from the PyTorch CPU wheel index.
+The CPU-only pin is required: an unpinned Torch installation resolved CUDA
+libraries in the local Linux image and exceeded the free-tier memory budget.
+
 The Dockerfile expects a repository-root build context and downloads the
 following files from `ARTIFACT_BASE_URL`:
 
@@ -112,7 +134,7 @@ following files from `ARTIFACT_BASE_URL`:
 checkpoints/deploy.pt
 vocabulary.json
 config/experiment_config.json
-datasets/scaling_summary.json
+deployment_manifest.json
 ```
 
 It verifies the SHA-256 hash of every file before the image is completed. The
@@ -126,13 +148,32 @@ Build from the repository root:
 ```bash
 docker build \
   -f backend/Dockerfile \
-  --build-arg ARTIFACT_BASE_URL="https://<artifact-host>/<gru-large-2500-revision>" \
-  -t audiogroove-backend:gru-large-2500 .
+  --build-arg ARTIFACT_BASE_URL="https://<artifact-host>/<gru-small-250-revision>" \
+  -t audiogroove-backend:gru-small-250 .
 ```
 
 The artifact host must preserve the relative paths above. Do not use a mutable
 latest URL for a production image; pin the artifact host to an immutable
 revision or release.
+
+## Local 512 MB container gate
+
+The GRU-small artifact passed a local Docker Desktop run with both memory and
+swap limited to 512 MB. This is deployment-readiness evidence, not proof of a
+hosted Render deployment.
+
+- Health response reported `gru_small_250`, GRU `small`, dataset size `250`,
+  and vocabulary size `18,849`.
+- Unseeded and uploaded-seed generation both returned MIDI files that parsed
+  successfully with `mido`.
+- Final live memory was 220.9 MiB; cgroup peak memory was 236.2 MiB.
+- Cgroup allocation denials, OOM events, and OOM kills were all zero.
+- The earlier unpinned-Torch image failed this gate, reaching the 512 MB cap
+  and recording allocation denials. Do not deploy that image.
+
+Before claiming hosted readiness, deploy the immutable artifact package to
+Render and repeat health, both generation paths, MIDI parsing, and memory
+observation against the hosted service.
 
 ## Deployment smoke test
 

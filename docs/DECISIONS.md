@@ -148,3 +148,17 @@ This file records decisions that affect architecture, experiments, evaluation, a
   18,849. All model selection must be repeated on that revision. The final test
   requires a frozen validation-only selection manifest and an atomic one-time
   evaluation gate.
+
+## D-022: Use GRU-small for Render Free deployment
+
+- **Decision:** Use the recovered 250-song GRU-small artifact, rather than the
+  research-selected 2,500-song GRU-large artifact, for the Render Free
+  deployment candidate.
+- **Reason:** The GRU-large worker exceeded the free-tier memory envelope
+  during generation. The GRU-small inference-only package passed a local
+  512 MB constrained-container gate with 236.2 MiB peak memory and no cgroup
+  allocation denials or OOM events.
+- **Consequence:** The deployment package is `gru_small_250`, with a matching
+  18,849-token vocabulary, `deploy.pt`, and deployment manifest. It uses a
+  CPU-only Torch build. Hosted Render verification remains required before any
+  public deployment claim.

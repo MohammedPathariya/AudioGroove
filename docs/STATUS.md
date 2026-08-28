@@ -1,6 +1,6 @@
 # AudioGroove Status
 
-Updated: 2026-08-14
+Updated: 2026-08-28
 
 ## Current state
 
@@ -10,27 +10,35 @@ Transformer families, a shared training and generation contract, MLflow
 tracking, Slurm launch scripts, a Flask API, and a vanilla JavaScript frontend.
 
 The 9,956-song GRU training phase is closed because the Big Red 200 project
-association is no longer active. The recovered 2,500-song GRU-large run is now
-the local model endpoint. Its checkpoint, matching vocabulary, configuration,
-report, provenance, and generated MIDI are stored under the ignored
-`local_artifacts/gru_large_2500/` package.
+association is no longer active. GRU-large remains the strongest recoverable
+research artifact, but it does not fit the Render Free memory envelope. The
+local deployment endpoint now targets the recovered 250-song GRU-small model.
+Its matching checkpoint, vocabulary, configuration, report, provenance, and
+generated MIDI are stored under the ignored
+`local_artifacts/gru_small_250/` package.
 
 The full-scale dataset was prepared on HPC, but no 9,956-song GRU checkpoint
 was trained. The local package is the recoverable model artifact for continued
 development and deployment work.
 
-## Recovered local model endpoint
+## GRU-small deployment candidate
 
-- Model: compact GRU-large trained on 2,500 songs.
-- HPC job: `7908061`.
-- Dataset revision: `d3e2b88f...`.
-- Vocabulary: 35,707 tokens, train-only policy, hash
-  `adca960c...`.
-- Best checkpoint: epoch 1, validation loss `6.1305718533`.
-- Training completed three epochs; later validation loss diverged.
-- Local checkpoint contract and forward pass passed on 2026-08-14.
-- Local seeded MIDI generation and MIDI parsing passed on 2026-08-14.
-- Reproducible entry point: `python -m src.generation.run_local_model`.
+- Model: compact GRU-small trained on 250 songs.
+- Vocabulary: 18,849 tokens, train-only policy, hash
+  `6a67a6b3d51d4c23a5af820175605b1c8612d178ba9f229e32ca7f3a90bec010`.
+- Parameter count: 6,236,001.
+- Deployment package: inference-only `checkpoints/deploy.pt` plus
+  `deployment_manifest.json`; optimizer and scheduler state remain excluded.
+- The manifest validates checkpoint, vocabulary, configuration, dataset,
+  parameter count, report hash, and HPC provenance before inference.
+- Local 512 MB Docker gate passed on 2026-08-28: health loaded GRU-small;
+  unseeded and uploaded-seed generation both returned parseable MIDI; final
+  memory was 220.9 MiB, cgroup peak was 236.2 MiB, and cgroup OOM/allocation
+  denial counts were zero.
+- The backend uses `torch==2.6.0+cpu`; the previous unpinned Torch image
+  installed CUDA libraries and failed the same 512 MB gate.
+- Hosted Render deployment has not been attempted or verified.
+- Reproducible local entry point: `python3 -m src.generation.run_local_model`.
 
 ## Verified in the current checkout
 
@@ -163,9 +171,10 @@ model artifact.
 
 ## Current priority
 
-Use the recovered 2,500-song GRU-large artifact for local generation and
-deployment integration. Do not submit or claim the 9,956-song training phase:
-the dataset was prepared, but the Slurm account `r00284` is no longer
+Use the recovered GRU-small artifact for Render Free deployment integration.
+Keep the GRU-large 2,500-song artifact as research evidence, not as the
+free-tier deployment candidate. Do not submit or claim the 9,956-song training
+phase: the dataset was prepared, but the Slurm account `r00284` is no longer
 associated with the user. Raw audio training remains deferred.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
