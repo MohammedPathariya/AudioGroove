@@ -19,7 +19,7 @@ from an artifact repository.
 - Install backend dependencies from `backend/requirements.txt` if running the API separately.
 - Ensure `local_artifacts/gru_large_2500/` contains the compatible package before
   running the local API.
-- Use `python3 -m src.generation.run_local_gru_2500` to verify local generation.
+- Use `python3 -m src.generation.run_local_model` to verify local generation.
 
 ### Device selection
 

@@ -2,8 +2,8 @@
 data/raw/
 data/chunks/
 data/processed/
-data/audit/day2/chunks/
-data/audit/day2/quarantine/
+data/audit/source_audit/chunks/
+data/audit/source_audit/quarantine/
 data/clean_midi
 data/pilot_250/
 data/audit/lmdclean_pilot_250/chunks/
@@ -12,7 +12,8 @@ data/audit/lmdclean_pilot_250/chunks/
 training/checkpoints/
 training/logs/
 runs/mlruns/
-runs/day4/
+runs/pilot_preprocessing/
+runs/pilot_baseline/
 
 # Local recovered model packages and large evidence exports
 local_artifacts/

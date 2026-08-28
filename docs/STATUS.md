@@ -30,7 +30,7 @@ development and deployment work.
 - Training completed three epochs; later validation loss diverged.
 - Local checkpoint contract and forward pass passed on 2026-08-14.
 - Local seeded MIDI generation and MIDI parsing passed on 2026-08-14.
-- Reproducible entry point: `python -m src.generation.run_local_gru_2500`.
+- Reproducible entry point: `python -m src.generation.run_local_model`.
 
 ## Verified in the current checkout
 
@@ -100,7 +100,7 @@ development and deployment work.
   23,662,010 test windows. Validation OOV is 0.0701% and test OOV is 0.0763%.
   Full-scale GRU training has not started.
 
-## Day 1 foundation completed
+## Foundation completed
 
 - `data/raw/LMDClean` is the canonical raw-dataset path.
 - Chunk outputs use `data/chunks/train`, `data/chunks/val`, and `data/chunks/test`.
@@ -186,21 +186,21 @@ The planned pilot is a bounded development benchmark, not the final generalizati
 
 The larger LMDClean run is blocked until the pilot has a reproducible loader, verified Dask preprocessing, a stable bounded training run tracked in MLflow, verified MIDI serialization, a frozen evaluation report, and a documented resource profile.
 
-## Day 2 data audit completed
+## Source audit completed
 
 Command:
 
 ```bash
-python3 -m src.data_prep.day2_audit
+python3 -m src.data_prep.audit_midi_sources
 ```
 
 The bounded audit used the local `data/seed/` corpus. The configured
 `data/raw/LMDClean/` directory was absent and no download was attempted.
-Results are recorded in `data/audit/day2/`:
+Results are recorded in `data/audit/source_audit/`:
 
 - 10 source MIDI files found, 9 parsed, 0 unreadable, and 1 overlong file.
 - `data/seed/Let_em_In.1.mid` was copied to
-  `data/audit/day2/quarantine/49d3f754018557cd_Let_em_In.1.mid`; the source
+  `data/audit/source_audit/quarantine/49d3f754018557cd_Let_em_In.1.mid`; the source
   file was not deleted or moved.
 - Maximum duration was 600 seconds. The quarantined file measured
   1018.636092 seconds.
@@ -213,7 +213,7 @@ Results are recorded in `data/audit/day2/`:
 - `training_started` is `false`. These artifacts use mido note-on and note-off
   event tokens for preprocessing only; model training remains out of scope.
 - Generated `.pt` chunks and the quarantined MIDI copy remain local and are
-  ignored by Git. The manifests and `src/data_prep/day2_audit.py` regenerate
+  ignored by Git. The manifests and `src/data_prep.audit_midi_sources` regenerate
   them without publishing source media or machine-specific paths.
 
 ## LMDClean 250-song pilot selected
