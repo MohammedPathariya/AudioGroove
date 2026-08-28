@@ -59,10 +59,55 @@ input:focus-visible {
 
 .wordmark {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.7rem;
     color: inherit;
     text-decoration: none;
+}
+
+.brand-mark {
+    position: relative;
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--peach);
+}
+
+.brand-mark::before {
+    position: absolute;
+    inset: 0.3rem;
+    border-radius: 50%;
+    background: var(--green);
+    content: "";
+}
+
+.brand-mark span {
+    position: absolute;
+    inset: 0.65rem;
+    z-index: 1;
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+}
+
+.brand-mark::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: 0.25rem;
+    height: 0.25rem;
+    border: 0.18rem solid var(--cream);
+    border-radius: 50%;
+    background: var(--brown);
+    content: "";
+    transform: translate(-50%, -50%);
+}
+
+.wordmark-copy {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
 }
 
 .wordmark-name {
@@ -466,6 +511,10 @@ h2 {
     }
 
     .wordmark {
+        align-items: flex-start;
+    }
+
+    .wordmark-copy {
         flex-wrap: wrap;
     }
 
