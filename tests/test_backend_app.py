@@ -9,7 +9,8 @@ import pytest
 from backend.app import app
 
 
-ARTIFACT_CHECKPOINT = Path(__file__).parents[1] / "local_artifacts" / "gru_large_2500" / "checkpoints" / "best.pt"
+ARTIFACT_DIR = Path(__file__).parents[1] / "local_artifacts" / "gru_small_250"
+ARTIFACT_CHECKPOINT = ARTIFACT_DIR / "checkpoints" / "deploy.pt"
 ARTIFACTS_AVAILABLE = ARTIFACT_CHECKPOINT.exists()
 
 
@@ -26,9 +27,10 @@ def test_health_reports_recovered_model():
     payload = response.get_json()
     assert payload["model_loaded"] is True
     assert payload["model_family"] == "gru"
-    assert payload["model_profile"] == "large"
-    assert payload["dataset_size"] == 2500
-    assert payload["vocabulary_size"] == 35707
+    assert payload["model_profile"] == "small"
+    assert payload["model_artifact"] == "gru_small_250"
+    assert payload["dataset_size"] == 250
+    assert payload["vocabulary_size"] == 18849
 
 
 def test_generate_without_seed_returns_parseable_midi():

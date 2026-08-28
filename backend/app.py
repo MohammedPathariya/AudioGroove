@@ -1,9 +1,8 @@
-"""Flask API for the recovered local 2,500-song GRU-large model."""
+"""Flask API for the recovered local GRU-small deployment model."""
 
 from __future__ import annotations
 
 import os
-import json
 import random
 import tempfile
 from io import BytesIO
@@ -17,7 +16,8 @@ from src.generation.run_local_model import generate, load_local_model
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-ARTIFACT_DIR = PROJECT_ROOT / "local_artifacts" / "gru_large_2500"
+MODEL_ARTIFACT_ID = "gru_small_250"
+ARTIFACT_DIR = PROJECT_ROOT / "local_artifacts" / MODEL_ARTIFACT_ID
 SEED_FILES_DIR = PROJECT_ROOT / "data" / "seed"
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 
@@ -25,8 +25,6 @@ MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 def _load_artifacts() -> tuple[object | None, dict[str, int] | None, dict | None, str | None]:
     try:
         model, vocabulary, config = load_local_model(ARTIFACT_DIR)
-        summary = json.loads((ARTIFACT_DIR / "datasets" / "scaling_summary.json").read_text())
-        config["dataset_size"] = summary["scales"]["2500"]["song_count"]
         return model, vocabulary, config, None
     except (FileNotFoundError, KeyError, OSError, RuntimeError, ValueError) as error:
         return None, None, None, f"{type(error).__name__}: {error}"
@@ -56,6 +54,7 @@ def create_app() -> Flask:
             "model_loaded": state["model"] is not None,
             "model_family": config.get("model_family") if config else None,
             "model_profile": config.get("model_profile") if config else None,
+            "model_artifact": config.get("artifact_id") if config else None,
             "dataset_size": config.get("dataset_size") if config else None,
             "vocabulary_size": len(state["vocabulary"]) if state["vocabulary"] else None,
         }

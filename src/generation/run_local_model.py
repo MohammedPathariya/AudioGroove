@@ -14,28 +14,37 @@ from src.models.compact_midi_models import build_compact_model, count_parameters
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_ARTIFACT_DIR = ROOT / "local_artifacts" / "gru_large_2500"
+DEFAULT_ARTIFACT_DIR = ROOT / "local_artifacts" / "gru_small_250"
 DEFAULT_SEED = ROOT / "data" / "seed" / "Boom_Boom_Boom.mid"
 
 
 def load_local_model(artifact_dir: Path) -> tuple[torch.nn.Module, dict[str, int], dict]:
     config = json.loads((artifact_dir / "config" / "experiment_config.json").read_text())
+    manifest = json.loads((artifact_dir / "deployment_manifest.json").read_text())
     vocabulary_path = artifact_dir / "vocabulary.json"
     vocabulary = json.loads(vocabulary_path.read_text())
     vocabulary_hash = hashlib.sha256(vocabulary_path.read_bytes()).hexdigest()
-    expected_hash = "adca960cd5bbd89500e8977a485f2e5ae5e07f80560fd648044f7bf309a1f267"
-    if vocabulary_hash != expected_hash:
-        raise ValueError("local vocabulary hash does not match the recovered checkpoint")
-    if config["model_family"] != "gru" or config["model_profile"] != "large":
-        raise ValueError("artifact package is not the recovered GRU-large model")
+    if manifest["artifact_schema_version"] != 1:
+        raise ValueError("unsupported deployment manifest schema")
+    if vocabulary_hash != manifest["vocabulary"]["sha256"]:
+        raise ValueError("local vocabulary hash does not match the deployment manifest")
+    if len(vocabulary) != manifest["vocabulary"]["size"]:
+        raise ValueError("local vocabulary size does not match the deployment manifest")
+    if config["dataset_revision"] != manifest["dataset"]["revision"]:
+        raise ValueError("experiment configuration dataset revision does not match the deployment manifest")
+    if config["model_family"] != manifest["model"]["family"]:
+        raise ValueError("experiment configuration model family does not match the deployment manifest")
+    if config["model_profile"] != manifest["model"]["profile"]:
+        raise ValueError("experiment configuration model profile does not match the deployment manifest")
 
-    model = build_compact_model("gru", len(vocabulary), config["model_parameters"])
-    if count_parameters(model) != 22_155_835:
-        raise ValueError("unexpected recovered GRU-large parameter count")
+    model = build_compact_model(config["model_family"], len(vocabulary), config["model_parameters"])
+    if count_parameters(model) != manifest["model"]["parameter_count"]:
+        raise ValueError("model parameter count does not match the deployment manifest")
 
-    checkpoint_path = artifact_dir / "checkpoints" / "deploy.pt"
-    if not checkpoint_path.exists():
-        checkpoint_path = artifact_dir / "checkpoints" / "best.pt"
+    checkpoint_path = artifact_dir / manifest["checkpoint"]["path"]
+    checkpoint_hash = hashlib.sha256(checkpoint_path.read_bytes()).hexdigest()
+    if checkpoint_hash != manifest["checkpoint"]["sha256"]:
+        raise ValueError("deployment checkpoint hash does not match the deployment manifest")
     checkpoint = torch.load(checkpoint_path, map_location="cpu")
     if checkpoint["dataset_revision"] != config["dataset_revision"]:
         raise ValueError("checkpoint dataset revision does not match the package")
@@ -43,6 +52,8 @@ def load_local_model(artifact_dir: Path) -> tuple[torch.nn.Module, dict[str, int
         raise ValueError("checkpoint vocabulary hash does not match the package")
     model.load_state_dict(checkpoint["model"])
     model.eval()
+    config["dataset_size"] = manifest["dataset"]["song_count"]
+    config["artifact_id"] = manifest["artifact_id"]
     return model, vocabulary, config
 
 
@@ -85,7 +96,10 @@ def main() -> None:
     model, vocabulary, config = load_local_model(args.artifact_dir)
     tokens, ticks_per_beat = generate(model, vocabulary, config, args.seed)
     decode_tokens(tokens, args.output, ticks_per_beat=ticks_per_beat)
-    print(f"model=gru-large dataset=2500 vocabulary={len(vocabulary)}")
+    print(
+        f"model={config['model_family']}-{config['model_profile']} "
+        f"dataset={config['dataset_size']} vocabulary={len(vocabulary)}"
+    )
     print(f"seed={args.seed}")
     print(f"output={args.output}")
 

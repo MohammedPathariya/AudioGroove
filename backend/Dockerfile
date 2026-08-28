@@ -13,33 +13,32 @@ RUN apt-get update \
 
 # Build from the repository root. The artifact repository must expose these
 # paths: checkpoints/deploy.pt, vocabulary.json, config/experiment_config.json,
-# and datasets/scaling_summary.json.
+# and deployment_manifest.json.
 ARG ARTIFACT_BASE_URL
-ARG DEPLOY_CHECKPOINT_SHA256=17e7ec8a4e6fc7e9f02d02ce93fd36b91aab9820b5b59fde8349afa58e227bb7
-ARG VOCABULARY_SHA256=adca960cd5bbd89500e8977a485f2e5ae5e07f80560fd648044f7bf309a1f267
-ARG CONFIG_SHA256=75a32ece3ae612962aedc87021e9f5d2dfb6a665adb7828e5b96fcf09e8a7929
-ARG SCALING_SUMMARY_SHA256=6ba78eabf9833bc6308619b4fb6366f761534b4d68da85d7ea778eab50b0c09a
+ARG DEPLOY_CHECKPOINT_SHA256=4ad344ba119e9d4a2603b191ae6a175d1de184bdab19ef2518970fcd5a367e01
+ARG VOCABULARY_SHA256=6a67a6b3d51d4c23a5af820175605b1c8612d178ba9f229e32ca7f3a90bec010
+ARG CONFIG_SHA256=d002e7663c8d72756b507281f9d7fe515c23bc8bb3e92f3157b9180b20432587
+ARG DEPLOY_MANIFEST_SHA256=73a4ed654fdfdc97c15c92bebf445d3c34c7ae8f3e90a2e96942aab23d81d519
 
 RUN test -n "$ARTIFACT_BASE_URL" \
-    && mkdir -p /code/local_artifacts/gru_large_2500/checkpoints \
-        /code/local_artifacts/gru_large_2500/config \
-        /code/local_artifacts/gru_large_2500/datasets \
+    && mkdir -p /code/local_artifacts/gru_small_250/checkpoints \
+        /code/local_artifacts/gru_small_250/config \
     && wget --https-only --retry-connrefused --tries=3 \
-        -O /code/local_artifacts/gru_large_2500/checkpoints/deploy.pt \
+        -O /code/local_artifacts/gru_small_250/checkpoints/deploy.pt \
         "$ARTIFACT_BASE_URL/checkpoints/deploy.pt" \
     && wget --https-only --retry-connrefused --tries=3 \
-        -O /code/local_artifacts/gru_large_2500/vocabulary.json \
+        -O /code/local_artifacts/gru_small_250/vocabulary.json \
         "$ARTIFACT_BASE_URL/vocabulary.json" \
     && wget --https-only --retry-connrefused --tries=3 \
-        -O /code/local_artifacts/gru_large_2500/config/experiment_config.json \
+        -O /code/local_artifacts/gru_small_250/config/experiment_config.json \
         "$ARTIFACT_BASE_URL/config/experiment_config.json" \
     && wget --https-only --retry-connrefused --tries=3 \
-        -O /code/local_artifacts/gru_large_2500/datasets/scaling_summary.json \
-        "$ARTIFACT_BASE_URL/datasets/scaling_summary.json" \
-    && echo "$DEPLOY_CHECKPOINT_SHA256  /code/local_artifacts/gru_large_2500/checkpoints/deploy.pt" | sha256sum -c - \
-    && echo "$VOCABULARY_SHA256  /code/local_artifacts/gru_large_2500/vocabulary.json" | sha256sum -c - \
-    && echo "$CONFIG_SHA256  /code/local_artifacts/gru_large_2500/config/experiment_config.json" | sha256sum -c - \
-    && echo "$SCALING_SUMMARY_SHA256  /code/local_artifacts/gru_large_2500/datasets/scaling_summary.json" | sha256sum -c -
+        -O /code/local_artifacts/gru_small_250/deployment_manifest.json \
+        "$ARTIFACT_BASE_URL/deployment_manifest.json" \
+    && echo "$DEPLOY_CHECKPOINT_SHA256  /code/local_artifacts/gru_small_250/checkpoints/deploy.pt" | sha256sum -c - \
+    && echo "$VOCABULARY_SHA256  /code/local_artifacts/gru_small_250/vocabulary.json" | sha256sum -c - \
+    && echo "$CONFIG_SHA256  /code/local_artifacts/gru_small_250/config/experiment_config.json" | sha256sum -c - \
+    && echo "$DEPLOY_MANIFEST_SHA256  /code/local_artifacts/gru_small_250/deployment_manifest.json" | sha256sum -c -
 
 COPY backend /code/backend
 COPY src /code/src
