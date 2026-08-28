@@ -1,0 +1,67 @@
+{
+  "source": "data/seed",
+  "selection_method": "Selected from the ten locally available source MIDIs to vary duration, note density, pitch range, instrumentation, percussion share, and meter.",
+  "preview_seconds": 8,
+  "samples": [
+    {
+      "id": "angry-chair",
+      "title": "Angry Chair",
+      "source_path": "data/seed/Angry_Chair.mid",
+      "sha256": "d490769581cbace18298aa68ef902344fb4d59951315535f948d71b67c1272f6",
+      "duration_seconds": 113.1,
+      "note_density_per_second": 8.22,
+      "pitch_range_semitones": 64,
+      "selection_reason": "Shortest and most percussion-heavy candidate."
+    },
+    {
+      "id": "boom-boom-boom",
+      "title": "Boom Boom Boom",
+      "source_path": "data/seed/Boom_Boom_Boom.mid",
+      "sha256": "a0c493173d0dea26d15a24e4ff439e899d32c094da547b88d93358fff791d424",
+      "duration_seconds": 206.4,
+      "note_density_per_second": 43.93,
+      "pitch_range_semitones": 75,
+      "selection_reason": "Highest note density, widest instrumentation, and strongest average velocity."
+    },
+    {
+      "id": "dam-that-river",
+      "title": "Dam That River",
+      "source_path": "data/seed/Dam_That_River.mid",
+      "sha256": "30120ee7da620550d915188e08db59a7247e92dd61f8e2012e510f9c3b9e4205",
+      "duration_seconds": 187.5,
+      "note_density_per_second": 23.64,
+      "pitch_range_semitones": 48,
+      "selection_reason": "Mixed 6/4, 4/4, and 2/4 meter with moderate density."
+    },
+    {
+      "id": "it-takes-me-away",
+      "title": "It Takes Me Away",
+      "source_path": "data/seed/It_Takes_Me_Away.mid",
+      "sha256": "2f54829870e0c825bd463bd1c3dd9c27a413d4e6415b4e423e989d4478541c3c",
+      "duration_seconds": 194.8,
+      "note_density_per_second": 25.79,
+      "pitch_range_semitones": 74,
+      "selection_reason": "Wide melodic register with a mid-density arrangement."
+    },
+    {
+      "id": "delicado",
+      "title": "Delicado",
+      "source_path": "data/seed/Delicado.mid",
+      "sha256": "6af9ebf0c2c885c7e5bc1d17a77b6642fcf46d2346ca59015de88a0d6c89590f",
+      "duration_seconds": 138.4,
+      "note_density_per_second": 35.41,
+      "pitch_range_semitones": 67,
+      "selection_reason": "Bright multi-instrument arrangement with broad pitch variety."
+    },
+    {
+      "id": "another-day",
+      "title": "Another Day",
+      "source_path": "data/seed/Another_Day.mid",
+      "sha256": "636600b9fc8b9e7ed8bb606fc281a1c0b32ed2539395a4bb9677b51c71c882fd",
+      "duration_seconds": 223.7,
+      "note_density_per_second": 32.45,
+      "pitch_range_semitones": 60,
+      "selection_reason": "Layered arrangement with nine channels and multiple time signatures."
+    }
+  ]
+}
