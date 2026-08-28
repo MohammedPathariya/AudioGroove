@@ -3,45 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AudioGroove - AI Music Generator</title>
+    <meta name="description" content="Choose a short MIDI sketch and let AudioGroove continue the melody.">
+    <meta name="audiogroove-api" content="https://audiogroove-api.onrender.com/generate">
+    <title>AudioGroove | MIDI continuation</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
 </head>
 <body>
-    <div class="background-particles"></div>
-
-    <div class="container">
-        <h1 class="logo">AudioGroove</h1>
-        
-        <div class="music-visual">
-            <div class="note-animation">
-                <div class="note"></div><div class="note"></div><div class="note"></div>
-                <div class="note"></div><div class="note"></div>
-            </div>
-            <div class="music-icon">🎵</div>
-        </div>
-
-        <div class="controls">
-            <label for="seed-midi-input" class="btn btn-upload">
-                🌱 Upload Seed MIDI (Optional)
-            </label>
-            <input type="file" id="seed-midi-input" accept=".mid,.midi" hidden>
-            <span id="file-name" class="file-name-text">No file selected</span>
-
-            <div class="button-group">
-                <button id="generate-btn" class="btn btn-generate">Generate</button>
-                <button id="regenerate-btn" class="btn btn-regenerate hidden">Regenerate</button>
-            </div>
-            
-            <div id="progress-container" class="progress-container hidden">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-            <div id="status-text" class="status-text"></div>
-            
-            <a id="download-btn" class="btn btn-download hidden" download="audiogroove_composition.mid">
-                <span>⬇️ Download</span>
+    <div class="site-shell">
+        <header class="masthead">
+            <a class="wordmark" href="#make" aria-label="AudioGroove home">
+                <span class="wordmark-name">AudioGroove</span>
+                <span class="wordmark-byline">a music ML experiment by Mohammed</span>
             </a>
-        </div>
+
+            <div class="header-actions">
+                <p id="backend-status" class="backend-status" data-state="waking" role="status" aria-live="polite">
+                    <span class="backend-status-dot" aria-hidden="true"></span>
+                    <span id="backend-status-text">Backend waking up</span>
+                </p>
+                <nav class="site-nav" aria-label="Main navigation">
+                    <button class="nav-link is-active" type="button" data-view-target="make" aria-pressed="true">Make music</button>
+                    <button class="nav-link" type="button" data-view-target="project" aria-pressed="false">The project</button>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="page-view is-visible" id="make" data-view="make">
+                <p class="kicker">MIDI continuation</p>
+                <h1>A melody in.<br>A new direction out.</h1>
+                <p class="intro">Pick a short musical idea below. AudioGroove will use it as the beginning of a new MIDI continuation.</p>
+
+                <div class="workbench">
+                    <section aria-labelledby="seed-heading">
+                        <div class="section-heading">
+                            <h2 id="seed-heading">Start with one of these</h2>
+                            <span>curated from the project dataset</span>
+                        </div>
+
+                        <div class="seed-list" role="radiogroup" aria-labelledby="seed-heading">
+                            <div class="seed-row">
+                                <label class="seed-choice" for="seed-angry-chair">
+                                    <input id="seed-angry-chair" type="radio" name="seed" value="angry-chair" checked>
+                                    <span class="seed-details"><strong>Angry Chair</strong><small>percussive · 1:53</small></span>
+                                </label>
+                                <button class="preview-button" type="button" data-preview="angry-chair" aria-label="Preview Angry Chair">▶ play</button>
+                            </div>
+
+                            <div class="seed-row">
+                                <label class="seed-choice" for="seed-boom-boom-boom">
+                                    <input id="seed-boom-boom-boom" type="radio" name="seed" value="boom-boom-boom">
+                                    <span class="seed-details"><strong>Boom Boom Boom</strong><small>dense ensemble · 3:26</small></span>
+                                </label>
+                                <button class="preview-button" type="button" data-preview="boom-boom-boom" aria-label="Preview Boom Boom Boom">▶ play</button>
+                            </div>
+
+                            <div class="seed-row">
+                                <label class="seed-choice" for="seed-dam-that-river">
+                                    <input id="seed-dam-that-river" type="radio" name="seed" value="dam-that-river">
+                                    <span class="seed-details"><strong>Dam That River</strong><small>mixed meter · 3:08</small></span>
+                                </label>
+                                <button class="preview-button" type="button" data-preview="dam-that-river" aria-label="Preview Dam That River">▶ play</button>
+                            </div>
+
+                            <div class="seed-row">
+                                <label class="seed-choice" for="seed-it-takes-me-away">
+                                    <input id="seed-it-takes-me-away" type="radio" name="seed" value="it-takes-me-away">
+                                    <span class="seed-details"><strong>It Takes Me Away</strong><small>wide register · 3:15</small></span>
+                                </label>
+                                <button class="preview-button" type="button" data-preview="it-takes-me-away" aria-label="Preview It Takes Me Away">▶ play</button>
+                            </div>
+
+                            <div class="seed-row">
+                                <label class="seed-choice" for="seed-delicado">
+                                    <input id="seed-delicado" type="radio" name="seed" value="delicado">
+                                    <span class="seed-details"><strong>Delicado</strong><small>bright ensemble · 2:18</small></span>
+                                </label>
+                                <button class="preview-button" type="button" data-preview="delicado" aria-label="Preview Delicado">▶ play</button>
+                            </div>
+
+                            <div class="seed-row">
+                                <label class="seed-choice" for="seed-another-day">
+                                    <input id="seed-another-day" type="radio" name="seed" value="another-day">
+                                    <span class="seed-details"><strong>Another Day</strong><small>layered arrangement · 3:44</small></span>
+                                </label>
+                                <button class="preview-button" type="button" data-preview="another-day" aria-label="Preview Another Day">▶ play</button>
+                            </div>
+                        </div>
+
+                        <p class="upload-line">
+                            Have your own?
+                            <label for="seed-midi-input">Upload a MIDI file</label>
+                            <input id="seed-midi-input" type="file" accept=".mid,.midi">
+                        </p>
+                    </section>
+
+                    <aside class="create-panel">
+                        <div class="project-note">
+                            <p>“A melody is a thought in motion. Give it a beginning and let the next phrase unfold.”</p>
+                            <strong>Choose a melody. Hear what follows.</strong>
+                        </div>
+
+                        <button id="generate-btn" class="generate-button" type="button">Continue this melody</button>
+                        <p id="selection-text" class="selection-text" aria-live="polite">Using “Angry Chair”</p>
+
+                        <div id="progress-container" class="progress-track" hidden role="progressbar" aria-label="Generating melody" aria-valuetext="Generation in progress">
+                            <span></span>
+                        </div>
+                        <p id="status-text" class="status-text" role="status" aria-live="polite"></p>
+                        <p id="generation-time-note" class="generation-time-note" hidden>Generation usually takes about 60 seconds. If the backend is waking from inactivity, it can take longer.</p>
+
+                        <div id="output-panel" class="output-panel" hidden>
+                            <h2>Your continuation is ready</h2>
+                            <p>Generated from the selected MIDI sketch.</p>
+                            <div class="output-actions">
+                                <a id="download-btn" class="text-action" download="audiogroove-composition.mid">Download MIDI ↓</a>
+                                <button id="regenerate-btn" class="text-action" type="button">Try another take</button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="page-view" id="project" data-view="project" hidden>
+                <div class="project-intro">
+                    <div>
+                        <p class="kicker">Behind AudioGroove</p>
+                        <h1>A research project you can actually listen to.</h1>
+                        <p class="intro">I built AudioGroove to explore how sequence models learn musical structure from MIDI, then shaped the trained model into this small interactive experience.</p>
+                    </div>
+                    <p class="project-aside">The interface is intentionally simple. The training work lives underneath it, not in the way of the music.</p>
+                </div>
+
+                <div class="evidence-list">
+                    <article class="evidence-row">
+                        <p class="evidence-stage">Exploration</p>
+                        <div><h2>Three model families</h2><p>LSTM, GRU, and causal Transformer experiments on a reproducible MIDI pipeline.</p></div>
+                        <p class="evidence-value">3<small>architectures explored</small></p>
+                    </article>
+                    <article class="evidence-row">
+                        <p class="evidence-stage">Training</p>
+                        <div><h2>Scaled GRU experiments</h2><p>Successful training runs at 500, 1,000, and 2,500 songs on HPC infrastructure.</p></div>
+                        <p class="evidence-value">2,500<small>songs in the largest trained run</small></p>
+                    </article>
+                    <article class="evidence-row">
+                        <p class="evidence-stage">Result</p>
+                        <div><h2>GRU-large model</h2><p>The largest preserved scaling result, with its checkpoint, vocabulary, and configuration kept together.</p></div>
+                        <p class="evidence-value">6.1306<small>best validation loss</small></p>
+                    </article>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script src="script.js" defer></script>
