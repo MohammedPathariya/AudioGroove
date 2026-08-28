@@ -1,132 +1,134 @@
-# 🎵 AudioGroove: An AI Music Composer
+# AudioGroove
 
-<div align="center">
+AudioGroove is a symbolic MIDI continuation application. A user selects a
+curated MIDI sketch or uploads a MIDI file, the backend generates a continuation
+with a recovered GRU-small model, and the browser offers the returned MIDI for
+download. The deployed system is a bounded product integration, not a claim of
+musical quality, originality, or broad generalization.
 
-[![Live App](https://img.shields.io/badge/Live%20Frontend-▲%20Vercel-000000?style=for-the-badge&logo=vercel)](https://audiogroove.vercel.app/)
-[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Live%20Backend-Space-yellow?style=for-the-badge&logo=hugging-face)](https://huggingface.co/spaces/pathariyamohammed/audiogroove-hf)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+## Live deployment
 
-</div>
+| Frontend | Backend |
+| --- | --- |
+| [AudioGroove on Vercel](https://audiogroove-eosin.vercel.app) | [AudioGroove API on Render](https://audiogroove-api.onrender.com) |
+| Vanilla HTML, CSS, and JavaScript | Flask and Gunicorn in Docker |
+| Selects a sample or accepts a MIDI upload | Generates and returns `audio/midi` |
+| Checks backend health and shows a loading state | Loads GRU-small and validates its artifact contract |
 
-**AudioGroove is an AI-powered music generation system that learns from MIDI files to compose new, original musical sequences. It leverages a deep LSTM model enhanced with a self-attention mechanism to understand and replicate complex musical patterns.**
+## Request flow
 
----
+```text
+User
+  -> Vercel static frontend
+  -> POST /generate with an optional seed_midi file
+  -> Render Flask API
+  -> GRU-small inference model
+  -> MIDI response
+  -> Browser download
 
-## 🚀 Experience the Live Demo
+Render builds the API image from GitHub and downloads the immutable model
+artifact package from Hugging Face Hub. CORS permits the production Vercel
+origin.
+```
 
-Generate your own unique compositions with a single click. See what the AI creates!
+## Verified production contract
 
-**[https://audiogroove.vercel.app/](https://audiogroove.vercel.app/)**
+- Frontend deployment: `https://audiogroove-eosin.vercel.app`
+- Backend deployment: `https://audiogroove-api.onrender.com`
+- Application commit: `47caa71` (`allow production frontend CORS`)
+- Model artifact: `pathmohd123/audiogroove-gru-small-250` at commit
+  `aabd26b9344551f0a54d7977680e3846d18608b7`
+- Model: compact GRU-small, trained on 250 songs
+- Vocabulary: 18,849 train-only tokens
+- Parameters: 6,236,001
+- Hosted health endpoint reports the expected model, profile, dataset size, and
+  vocabulary size.
+- Hosted unseeded and uploaded-seed generation both returned HTTP 200 MIDI
+  files that parsed successfully and contained note events.
+- The production API returns the required CORS header for
+  `https://audiogroove-eosin.vercel.app`.
 
----
+## Architecture
 
-## 💡 My Motivation
+### Frontend
 
-As someone who's always been fascinated by both the structured logic of code and the soulful expression of music, I kept asking myself a question: could a machine do more than just rearrange notes? Could it actually learn the *feeling*, the structure, and the creative spark that makes a piece of music memorable?
+- Static files in `frontend/`, deployed from the `frontend` root directory on
+  Vercel.
+- Curated MIDI sketches and audio previews are served with the site.
+- The browser sends the selected or uploaded MIDI file as `seed_midi` to the
+  Render API.
+- The frontend disables generation controls and displays progress while a
+  request is running.
 
-AudioGroove is my answer to that question. This project started as a personal challenge—not just to build another sequence generator, but to see if I could complete the entire journey from raw data to a live, interactive web application. It was about diving deep into the MLOps lifecycle, wrestling with real-world deployment problems, and ultimately creating something that anyone, anywhere, could use to experience a touch of AI-driven creativity.
+### Backend
 
-## ✨ Key Features
-
-- **AI-Powered Composition:** Provides the application path for MIDI composition while reproducible pilot training and benchmarking are completed.
-- **Creative Seeding:** You can upload your own `.mid` file to give the AI a starting point, influencing the melody and style of the output.
-- **Freestyle Generation:** If you don't provide a seed, the backend will pick one at random, leading to surprising and unique compositions.
-- **Interactive & Modern UI:** A clean and responsive web interface built with vanilla HTML, CSS, and JavaScript, ensuring a fast and lightweight user experience.
-- **Robust Decoupled Architecture:** A production-ready system with separate frontend and backend deployments for better scalability and maintainability.
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-AudioGroove is built with a modern, decoupled architecture, with each component chosen for its specific strengths in a production environment.
-
-**Frontend:**
-- **Technology:** Vanilla HTML, CSS, JavaScript (no frameworks for a lean, fast-loading experience).
-- **Deployment:** [**Vercel**](https://vercel.com/) for high-performance static site hosting and seamless continuous deployment from Git.
-
-**Backend:**
-- **Framework:** [**Flask**](https://flask.palletsprojects.com/) served by [**Gunicorn**](https://gunicorn.org/), providing a lightweight yet powerful Python API.
-- **Deployment:** [**Hugging Face Spaces**](https://huggingface.co/spaces) which offers the necessary free CPU/RAM resources to run the ML model effectively.
-- **Containerization:** [**Docker**](https://www.docker.com/) to create a consistent and reproducible runtime environment for the server.
-
-**Machine Learning:**
-- **Core Model:** A PyTorch-based LSTM with a Multi-Head Self-Attention layer.
-- **Data Processing:** Dask for bounded parallel MIDI ETL and `music21` or `mido` for MIDI parsing and feature extraction.
-- **Experiment Tracking:** MLflow for reproducible local training runs, metrics, checkpoints, and benchmark artifacts.
-- **Artifact Hosting:** [**Hugging Face Hub**](https://huggingface.co/docs/hub/index) to store the large model checkpoint (`.pt`) and vocabulary file (`.jsonl`), keeping the source code repository lightweight.
-
-### System Architecture Diagram
-
-[ User on Vercel Frontend ]
-|
-| (HTTPS API Request)
-V
-[ Hugging Face Space (Docker Container) ]
-|
-|---[ Gunicorn Server ]
-|      |
-|      +---[ Flask App (app.py) ]
-|             |
-|             +---[ PyTorch Model ] --> Generates Music
-|
-| (Returns generated .mid file)
-V
-[ User Downloads Composition ]
-
-
----
-
-## ⚙️ My Process: From Data to Deployment
-
-My journey with this project followed a complete machine learning lifecycle:
-
-1.  **Data Collection & Preparation:** The current verified audit uses 10 local seed MIDI files. The next controlled stage is an approximately 250-song LMDClean pilot with deterministic source selection, source-level splits, non-destructive quarantine, bounded chunks, and recorded parser failures. The larger corpus remains a later scale-up phase.
-
-2.  **Vocabulary Building:** The vocabulary and representation are being rebuilt as part of the bounded pilot so every model comparison uses the same versioned preprocessing artifacts.
-
-3.  **Model & Training:** The pilot will compare a compact LSTM, GRU, and compact Transformer on the same frozen source split and training budget. Dask will provide bounded preprocessing and MLflow will track the runs. The existing attention model is a prototype, not yet a verified winner.
-
-4.  **Generation Logic:** The generation path supports autoregressive sampling with temperature and top-k controls. Model-quality and generation-validity claims remain pending the controlled pilot benchmark.
-
----
-
-## 🧗 Challenges & Deployment Battles
-
-Deploying a machine learning app on a free budget is a true test of problem-solving. Here are the battles I fought and won:
-
-- **Challenge:** **Keeping deployment artifacts out of Git.** Model weights and
-  their matching metadata must not be committed with application code.
-- **Current approach:** The Render candidate is an ignored GRU-small artifact
-  package containing an inference-only `deploy.pt`, vocabulary, configuration,
-  and deployment manifest. The Docker build requires an immutable HTTPS
-  artifact URL and validates SHA-256 hashes before the service starts.
-
-- **Challenge:** **Render Free memory limits.** The research-selected
-  2,500-song GRU-large model exceeded the 512 MB free-tier envelope during
+- `backend/app.py` exposes `GET /` for health and `POST /generate` for MIDI
   generation.
-- **Current approach:** The 250-song GRU-small package uses a CPU-only Torch
-  image and passed a local 512 MB constrained-container gate: 236.2 MiB peak
-  memory, no cgroup allocation denials or OOM events, and parseable MIDI from
-  both unseeded and uploaded-seed generation. Hosted Render deployment has not
-  yet been verified.
+- The Docker image uses Python 3.11 and `torch==2.6.0+cpu`.
+- Render runs one Gunicorn worker and receives the Vercel origin through the
+  `FRONTEND_URL` environment variable.
+- The artifact loader verifies model, vocabulary, configuration, dataset
+  revision, parameter count, and SHA-256 hashes before inference.
 
-- **Challenge:** **The Docker `ModuleNotFoundError`.** After containerizing the app, it failed to boot, complaining that it couldn't find my custom Python modules (like `models` or `utils`).
-- **Solution:** **Creating a Self-Contained Deployment Package.** I refactored the project to create a clean, self-contained deployment folder. This folder included the Flask app, the Dockerfile, and the entire `src` directory, ensuring that the Docker container had everything it needed to run, finally resolving the import errors.
+### Model artifact
 
----
+The model binary is intentionally outside the application repository. The
+Hugging Face artifact revision contains only the deployment contract:
 
-## 🚧 Limitations & The Road Ahead
+```text
+checkpoints/deploy.pt
+vocabulary.json
+config/experiment_config.json
+deployment_manifest.json
+```
 
-- **Limitation:** Performance on the free-tier hardware means that generating very long or complex pieces can still be slow.
-- **Limitation:** While the model captures patterns well, it doesn't have a formal understanding of music theory. This can sometimes result in compositions that are musically interesting but lack traditional long-form structure.
+`deploy.pt` is inference-only. It includes model state, dataset revision, and
+vocabulary hash, but not optimizer or scheduler state.
 
-- **Future Work:**
-  - **Smarter Models:** I'm excited to experiment with more advanced architectures like Transformers, which could capture longer-range dependencies in the music.
-  - **Going GPU:** Deploying the model on a GPU-enabled service would cut generation time from minutes to seconds.
-  - **User-Driven Creativity:** I plan to add frontend controls that allow users to directly influence the generation by tweaking parameters like `temperature` and `top-k` sampling.
+## Verification evidence
 
----
+The GRU-small candidate passed two deployment gates on 2026-08-28.
+
+| Gate | Result |
+| --- | --- |
+| Local Docker memory limit | 512 MiB limit, 236.2 MiB cgroup peak, zero allocation denials and OOM events |
+| Local generation | Unseeded and uploaded-seed MIDI parsed successfully |
+| Render health | Loaded `gru_small_250`, GRU `small`, dataset `250`, vocabulary `18,849` |
+| Render generation | Unseeded generation completed in 67.86 seconds; seeded generation completed in 65.97 seconds |
+| Vercel to Render CORS | Render returned `Access-Control-Allow-Origin: https://audiogroove-eosin.vercel.app` |
+| Browser-origin generation | HTTP 200, `audio/midi`, 879 bytes, 67.19 seconds, MIDI parsed with note events |
+
+## Limitations
+
+- Render Free can spin down after inactivity. The first request may take 50
+  seconds or more before generation begins.
+- Generation currently takes about 66 to 68 seconds on the free CPU tier.
+- The local 512 MiB gate is strong deployment evidence, but an exact hosted
+  memory peak has not been recorded from Render Metrics.
+- The deployed GRU-small model is selected for free-tier serving, not because it
+  surpassed the GRU-large research result.
+- The project has no completed musical-quality, originality, or human-listening
+  evaluation harness.
+
+## Local development
+
+From the repository root, run the local model check with a compatible ignored
+artifact package:
+
+```bash
+python3 -m src.generation.run_local_model
+```
+
+Run the full test suite:
+
+```bash
+python3 -m pytest -q
+```
+
+Detailed operational evidence and deployment instructions are in
+[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). Training and experiment history are
+recorded in [`docs/STATUS.md`](docs/STATUS.md).
 
 ## License
 
-This project is licensed under the **MIT License**. Feel free to explore, fork, and build upon it!
+This project is licensed under the MIT License.

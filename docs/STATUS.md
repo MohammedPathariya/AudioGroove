@@ -12,7 +12,7 @@ tracking, Slurm launch scripts, a Flask API, and a vanilla JavaScript frontend.
 The 9,956-song GRU training phase is closed because the Big Red 200 project
 association is no longer active. GRU-large remains the strongest recoverable
 research artifact, but it does not fit the Render Free memory envelope. The
-local deployment endpoint now targets the recovered 250-song GRU-small model.
+hosted deployment endpoint now targets the recovered 250-song GRU-small model.
 Its matching checkpoint, vocabulary, configuration, report, provenance, and
 generated MIDI are stored under the ignored
 `local_artifacts/gru_small_250/` package.
@@ -37,8 +37,28 @@ development and deployment work.
   denial counts were zero.
 - The backend uses `torch==2.6.0+cpu`; the previous unpinned Torch image
   installed CUDA libraries and failed the same 512 MB gate.
-- Hosted Render deployment has not been attempted or verified.
 - Reproducible local entry point: `python3 -m src.generation.run_local_model`.
+
+## Hosted product deployment
+
+- Frontend: `https://audiogroove-eosin.vercel.app`, deployed from `frontend/`
+  on Vercel at application commit `47caa71`.
+- Backend: `https://audiogroove-api.onrender.com`, deployed from the same
+  commit as a Docker-based Render service.
+- Artifact host: Hugging Face repository
+  `pathmohd123/audiogroove-gru-small-250`, pinned to commit
+  `aabd26b9344551f0a54d7977680e3846d18608b7` during the Render build.
+- Render health returned HTTP 200 with `gru_small_250`, GRU `small`, dataset
+  size `250`, and vocabulary size `18,849`.
+- Hosted unseeded generation returned a parseable 898-byte MIDI file in 67.86
+  seconds. Hosted uploaded-seed generation returned a parseable 879-byte MIDI
+  file in 65.97 seconds.
+- Render permits the Vercel production origin through `FRONTEND_URL`. A
+  browser-origin request returned HTTP 200, `audio/midi`, and a parseable
+  879-byte MIDI file in 67.19 seconds.
+- Exact hosted peak memory remains unrecorded. The completed requests show the
+  service survived the observed generation paths, but do not substitute for a
+  Render Metrics peak measurement.
 
 ## Verified in the current checkout
 
@@ -125,7 +145,7 @@ development and deployment work.
   [`docs/PILOT_FINAL_RESULTS.md`](PILOT_FINAL_RESULTS.md).
 - The isolated per-job MLflow stores have not been consolidated into a shared
   tracking server.
-- A current end-to-end hosted generation request has not been verified in this session.
+- An exact hosted Render memory peak has not been recorded.
 - No musical-quality, originality, or human-listening metrics have yet been
   produced.
 
@@ -171,11 +191,11 @@ model artifact.
 
 ## Current priority
 
-Use the recovered GRU-small artifact for Render Free deployment integration.
-Keep the GRU-large 2,500-song artifact as research evidence, not as the
-free-tier deployment candidate. Do not submit or claim the 9,956-song training
-phase: the dataset was prepared, but the Slurm account `r00284` is no longer
-associated with the user. Raw audio training remains deferred.
+Maintain the deployed GRU-small product path and its immutable artifact
+revision. Keep the GRU-large 2,500-song artifact as research evidence, not as
+the free-tier deployment candidate. Do not submit or claim the 9,956-song
+training phase: the dataset was prepared, but the Slurm account `r00284` is no
+longer associated with the user. Raw audio training remains deferred.
 
 The detailed execution plan is in [`docs/MLOPS_PLAN.md`](MLOPS_PLAN.md), and
 the cluster runbook is in [`docs/HPC_TRAINING.md`](HPC_TRAINING.md).

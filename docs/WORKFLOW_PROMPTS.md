@@ -69,8 +69,11 @@ compatibility checks, run supported seeded and unseeded generation, validate
 the returned MIDI or audio output, and run frontend smoke tests. For a
 free-tier container target, use a CPU-only dependency build and record the
 memory limit, live usage, cgroup peak, allocation-denial count, and OOM count.
-Update docs/STATUS.md and docs/DEPLOYMENT.md with exact evidence. Do not
-publish unsupported hosted or model-quality claims.
+For a hosted frontend and backend, also record the public URLs, deployed
+application commit, immutable artifact revision, CORS origin, seeded and
+unseeded response status, parser result, and latency. Update docs/STATUS.md
+and docs/DEPLOYMENT.md with exact evidence. Do not publish unsupported
+hosted-memory or model-quality claims.
 ```
 
 ## Review prompt

@@ -160,5 +160,7 @@ This file records decisions that affect architecture, experiments, evaluation, a
   allocation denials or OOM events.
 - **Consequence:** The deployment package is `gru_small_250`, with a matching
   18,849-token vocabulary, `deploy.pt`, and deployment manifest. It uses a
-  CPU-only Torch build. Hosted Render verification remains required before any
-  public deployment claim.
+  CPU-only Torch build. The Vercel frontend and Render backend passed hosted
+  health, CORS, seeded generation, and MIDI-parser checks on 2026-08-28.
+  Future deployment claims must retain the free-tier latency and hosted-memory
+  measurement limitations.

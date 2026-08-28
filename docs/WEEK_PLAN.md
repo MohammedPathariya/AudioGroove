@@ -281,7 +281,11 @@ its generation worker exceeded the 512 MB memory envelope. The recovered
 250-song GRU-small package is the deployment candidate. Its inference-only
 checkpoint, matching 18,849-token vocabulary, and deployment manifest passed
 a local 512 MB Docker gate with 236.2 MiB peak memory and no cgroup allocation
-denials or OOM events. Hosted Render deployment remains unverified.
+denials or OOM events. The package is now deployed through the Vercel frontend
+and Render backend at commit `47caa71`; hosted health, CORS, unseeded
+generation, and seeded generation returned valid MIDI. Free-tier generation
+latency remains about 66 to 68 seconds, and exact hosted peak memory remains
+unrecorded.
 
 ### Work
 
