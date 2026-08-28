@@ -1,4 +1,4 @@
-"""Deterministic, Dask-backed bounded preprocessing for the Day 4 pilot."""
+"""Deterministic, Dask-backed bounded preprocessing for the 250-song pilot."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from src.data_prep.midi_representation import (
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_AUDIT_DIR = ROOT / "data" / "audit" / "lmdclean_pilot_250"
-DEFAULT_OUTPUT_DIR = ROOT / "runs" / "day4" / "pilot_dataset"
+DEFAULT_OUTPUT_DIR = ROOT / "runs" / "pilot_preprocessing"
 VOCABULARY_POLICY = "train_only"
 UNKNOWN_TOKEN_POLICY = "map_to_unk"
 
@@ -52,7 +52,7 @@ def dask_encode_records(
         import dask
         from dask import delayed
     except ImportError as exc:
-        raise RuntimeError("Dask is required for Day 4 preprocessing") from exc
+        raise RuntimeError("Dask is required for pilot preprocessing") from exc
 
     if workers < 1:
         raise ValueError("workers must be positive")

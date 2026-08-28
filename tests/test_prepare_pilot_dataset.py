@@ -3,7 +3,7 @@ from pathlib import Path
 
 import torch
 
-from src.data_prep.day4_preprocessing import prepare_pilot_dataset
+from src.data_prep.prepare_pilot_dataset import prepare_pilot_dataset
 from src.data_prep.midi_representation import MidiEventSequence
 
 
@@ -33,7 +33,7 @@ def test_pilot_vocabulary_is_fit_on_train_only(tmp_path: Path, monkeypatch) -> N
     }
 
     monkeypatch.setattr(
-        "src.data_prep.day4_preprocessing.load_selected_records",
+        "src.data_prep.prepare_pilot_dataset.load_selected_records",
         lambda _: records,
     )
 
@@ -42,7 +42,7 @@ def test_pilot_vocabulary_is_fit_on_train_only(tmp_path: Path, monkeypatch) -> N
         return enriched, {"workers": 1}
 
     monkeypatch.setattr(
-        "src.data_prep.day4_preprocessing.dask_encode_records",
+        "src.data_prep.prepare_pilot_dataset.dask_encode_records",
         fake_encode,
     )
 

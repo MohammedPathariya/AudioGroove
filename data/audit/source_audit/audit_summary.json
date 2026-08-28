@@ -3,2383 +3,2383 @@
     "chunk_count": 397,
     "chunks": [
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0000.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0000.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0001.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0001.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0002.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0002.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0003.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0003.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0004.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0004.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0005.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0005.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0006.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0006.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0007.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0007.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0008.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0008.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0009.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0009.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0010.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0010.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0011.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0011.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0012.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0012.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0013.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0013.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0014.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0014.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0015.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0015.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0016.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0016.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0017.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0017.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0018.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0018.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0019.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0019.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0020.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0020.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0021.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0021.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0022.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0022.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0023.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0023.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0024.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0024.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0025.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0025.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0026.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0026.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0027.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0027.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0028.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0028.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0029.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0029.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0030.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0030.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0031.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0031.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0032.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0032.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0033.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0033.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0034.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0034.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0035.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0035.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0036.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0036.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0037.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0037.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0038.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0038.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0039.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0039.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0040.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0040.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0041.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0041.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0042.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0042.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0043.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0043.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0044.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0044.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0045.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0045.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0046.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0046.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0047.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0047.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0048.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0048.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0049.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0049.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0050.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0050.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0051.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0051.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0052.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0052.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0053.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0053.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0054.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0054.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0055.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0055.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0056.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0056.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0057.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0057.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0058.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0058.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0059.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0059.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0060.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0060.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0061.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0061.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0062.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0062.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0063.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0063.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0064.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0064.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0065.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0065.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0066.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0066.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0067.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0067.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0068.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0068.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0069.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0069.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0070.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0070.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0071.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0071.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0072.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0072.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0073.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0073.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0074.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0074.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0075.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0075.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0076.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0076.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0077.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0077.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0078.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0078.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0079.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0079.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0080.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0080.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0081.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0081.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0082.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0082.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0083.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0083.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0084.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0084.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0085.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0085.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0086.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0086.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0087.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0087.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0088.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0088.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0089.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0089.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0090.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0090.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0091.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0091.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0092.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0092.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0093.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0093.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0094.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0094.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0095.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0095.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0096.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0096.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0097.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0097.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0098.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0098.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0099.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0099.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0100.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0100.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0101.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0101.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0102.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0102.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0103.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0103.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0104.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0104.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0105.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0105.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0106.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0106.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0107.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0107.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0108.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0108.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0109.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0109.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0110.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0110.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0111.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0111.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0112.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0112.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0113.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0113.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0114.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0114.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0115.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0115.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0116.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0116.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0117.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0117.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0118.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0118.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0119.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0119.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0120.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0120.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0121.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0121.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0122.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0122.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0123.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0123.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0124.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0124.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0125.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0125.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0126.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0126.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0127.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0127.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0128.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0128.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0129.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0129.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0130.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0130.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0131.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0131.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0132.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0132.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0133.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0133.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0134.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0134.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0135.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0135.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0136.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0136.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0137.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0137.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0138.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0138.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0139.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0139.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0140.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0140.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0141.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0141.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0142.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0142.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0143.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0143.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0144.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0144.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0145.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0145.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0146.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0146.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0147.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0147.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0148.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0148.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0149.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0149.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0150.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0150.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0151.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0151.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0152.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0152.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0153.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0153.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0154.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0154.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0155.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0155.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0156.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0156.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0157.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0157.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0158.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0158.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0159.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0159.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0160.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0160.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0161.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0161.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0162.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0162.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0163.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0163.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0164.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0164.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0165.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0165.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0166.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0166.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0167.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0167.pt",
         "sequence_length": 32,
         "token_count": 136,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0168.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0168.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0169.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0169.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0170.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0170.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0171.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0171.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0172.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0172.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0173.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0173.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0174.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0174.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0175.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0175.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0176.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0176.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0177.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0177.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0178.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0178.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0179.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0179.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0180.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0180.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0181.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0181.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0182.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0182.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0183.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0183.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0184.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0184.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0185.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0185.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0186.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0186.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0187.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0187.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0188.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0188.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0189.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0189.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0190.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0190.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0191.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0191.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0192.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0192.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0193.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0193.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0194.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0194.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0195.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0195.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0196.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0196.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0197.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0197.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0198.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0198.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0199.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0199.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0200.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0200.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0201.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0201.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0202.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0202.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0203.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0203.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0204.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0204.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0205.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0205.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0206.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0206.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0207.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0207.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0208.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0208.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0209.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0209.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0210.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0210.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0211.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0211.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0212.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0212.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0213.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0213.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0214.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0214.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0215.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0215.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0216.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0216.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0217.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0217.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0218.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0218.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0219.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0219.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0220.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0220.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0221.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0221.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0222.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0222.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0223.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0223.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0224.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0224.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0225.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0225.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0226.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0226.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0227.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0227.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0228.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0228.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0229.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0229.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0230.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0230.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0231.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0231.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0232.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0232.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0233.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0233.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0234.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0234.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0235.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0235.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0236.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0236.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0237.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0237.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0238.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0238.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0239.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0239.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0240.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0240.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0241.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0241.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0242.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0242.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0243.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0243.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0244.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0244.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0245.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0245.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0246.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0246.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0247.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0247.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0248.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0248.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0249.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0249.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0250.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0250.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0251.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0251.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0252.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0252.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0253.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0253.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0254.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0254.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0255.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0255.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0256.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0256.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0257.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0257.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0258.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0258.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0259.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0259.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0260.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0260.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0261.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0261.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0262.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0262.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0263.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0263.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0264.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0264.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0265.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0265.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0266.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0266.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0267.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0267.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0268.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0268.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0269.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0269.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0270.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0270.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0271.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0271.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0272.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0272.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0273.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0273.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0274.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0274.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0275.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0275.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0276.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0276.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0277.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0277.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0278.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0278.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0279.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0279.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0280.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0280.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0281.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0281.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0282.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0282.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0283.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0283.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0284.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0284.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0285.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0285.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0286.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0286.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0287.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0287.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0288.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0288.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0289.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0289.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0290.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0290.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0291.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0291.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0292.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0292.pt",
         "sequence_length": 32,
         "token_count": 146,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0293.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0293.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0294.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0294.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0295.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0295.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0296.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0296.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0297.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0297.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0298.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0298.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0299.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0299.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0300.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0300.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0301.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0301.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0302.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0302.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0303.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0303.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0304.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0304.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0305.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0305.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0306.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0306.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0307.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0307.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0308.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0308.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0309.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0309.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0310.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0310.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0311.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0311.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0312.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0312.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0313.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0313.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0314.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0314.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0315.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0315.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0316.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0316.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0317.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0317.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0318.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0318.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0319.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0319.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0320.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0320.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0321.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0321.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0322.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0322.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0323.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0323.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0324.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0324.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0325.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0325.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0326.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0326.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0327.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0327.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0328.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0328.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0329.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0329.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0330.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0330.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0331.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0331.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0332.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0332.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0333.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0333.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0334.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0334.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0335.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0335.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0336.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0336.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0337.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0337.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0338.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0338.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0339.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0339.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0340.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0340.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0341.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0341.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0342.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0342.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0343.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0343.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0344.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0344.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0345.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0345.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0346.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0346.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0347.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0347.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0348.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0348.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0349.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0349.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0350.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0350.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0351.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0351.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0352.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0352.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0353.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0353.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0354.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0354.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0355.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0355.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0356.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0356.pt",
         "sequence_length": 32,
         "token_count": 148,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0357.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0357.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0358.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0358.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0359.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0359.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0360.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0360.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0361.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0361.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0362.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0362.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0363.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0363.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0364.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0364.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0365.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0365.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0366.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0366.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0367.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0367.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0368.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0368.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0369.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0369.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0370.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0370.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0371.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0371.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0372.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0372.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0373.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0373.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0374.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0374.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0375.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0375.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0376.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0376.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0377.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0377.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0378.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0378.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0379.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0379.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0380.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0380.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0381.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0381.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0382.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0382.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0383.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0383.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0384.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0384.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0385.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0385.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0386.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0386.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0387.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0387.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0388.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0388.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0389.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0389.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0390.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0390.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0391.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0391.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0392.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0392.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0393.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0393.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0394.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0394.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0395.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0395.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/development/chunk_0396.pt",
+        "chunk_path": "data/audit/source_audit/chunks/development/chunk_0396.pt",
         "sequence_length": 32,
         "token_count": 152,
         "window_count": 86
@@ -2417,811 +2417,811 @@
     "chunk_count": 135,
     "chunks": [
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0000.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0000.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0001.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0001.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0002.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0002.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0003.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0003.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0004.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0004.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0005.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0005.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0006.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0006.pt",
         "sequence_length": 32,
         "token_count": 52,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0007.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0007.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0008.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0008.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0009.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0009.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0010.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0010.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0011.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0011.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0012.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0012.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0013.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0013.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0014.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0014.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0015.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0015.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0016.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0016.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0017.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0017.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0018.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0018.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0019.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0019.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0020.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0020.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0021.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0021.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0022.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0022.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0023.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0023.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0024.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0024.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0025.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0025.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0026.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0026.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0027.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0027.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0028.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0028.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0029.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0029.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0030.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0030.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0031.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0031.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0032.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0032.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0033.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0033.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0034.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0034.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0035.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0035.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0036.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0036.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0037.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0037.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0038.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0038.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0039.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0039.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0040.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0040.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0041.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0041.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0042.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0042.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0043.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0043.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0044.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0044.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0045.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0045.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0046.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0046.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0047.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0047.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0048.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0048.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0049.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0049.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0050.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0050.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0051.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0051.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0052.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0052.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0053.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0053.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0054.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0054.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0055.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0055.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0056.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0056.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0057.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0057.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0058.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0058.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0059.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0059.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0060.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0060.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0061.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0061.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0062.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0062.pt",
         "sequence_length": 32,
         "token_count": 124,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0063.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0063.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0064.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0064.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0065.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0065.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0066.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0066.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0067.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0067.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0068.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0068.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0069.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0069.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0070.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0070.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0071.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0071.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0072.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0072.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0073.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0073.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0074.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0074.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0075.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0075.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0076.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0076.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0077.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0077.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0078.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0078.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0079.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0079.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0080.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0080.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0081.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0081.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0082.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0082.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0083.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0083.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0084.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0084.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0085.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0085.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0086.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0086.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0087.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0087.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0088.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0088.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0089.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0089.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0090.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0090.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0091.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0091.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0092.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0092.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0093.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0093.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0094.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0094.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0095.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0095.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0096.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0096.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0097.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0097.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0098.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0098.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0099.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0099.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0100.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0100.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0101.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0101.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0102.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0102.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0103.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0103.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0104.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0104.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0105.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0105.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0106.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0106.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0107.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0107.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0108.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0108.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0109.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0109.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0110.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0110.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0111.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0111.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0112.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0112.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0113.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0113.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0114.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0114.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0115.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0115.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0116.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0116.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0117.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0117.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0118.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0118.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0119.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0119.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0120.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0120.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0121.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0121.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0122.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0122.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0123.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0123.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0124.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0124.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0125.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0125.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0126.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0126.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0127.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0127.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0128.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0128.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0129.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0129.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0130.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0130.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0131.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0131.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0132.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0132.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0133.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0133.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 256
       },
       {
-        "chunk_path": "data/audit/day2/chunks/smoke/chunk_0134.pt",
+        "chunk_path": "data/audit/source_audit/chunks/smoke/chunk_0134.pt",
         "sequence_length": 32,
         "token_count": 134,
         "window_count": 114

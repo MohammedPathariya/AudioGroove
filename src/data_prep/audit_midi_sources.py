@@ -1,4 +1,4 @@
-"""Day 2 MIDI audit and bounded preprocessing.
+"""Audit MIDI sources and create bounded preprocessing artifacts.
 
 This command is intentionally limited to source inspection, source-level
 splitting, and bounded next-token chunk creation. It does not import or call
@@ -22,7 +22,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE_DIRS = (ROOT / "data" / "raw" / "LMDClean", ROOT / "data" / "seed")
-DEFAULT_OUTPUT_DIR = ROOT / "data" / "audit" / "day2"
+DEFAULT_OUTPUT_DIR = ROOT / "data" / "audit" / "source_audit"
 DEFAULT_MAX_DURATION_SECONDS = 10 * 60
 DEFAULT_SEQUENCE_LENGTH = 32
 DEFAULT_MAX_WINDOWS_PER_CHUNK = 256

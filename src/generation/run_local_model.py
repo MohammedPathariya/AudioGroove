@@ -1,4 +1,4 @@
-"""Load the recovered 2,500-song GRU-large checkpoint and generate MIDI locally."""
+"""Load a recovered local GRU checkpoint and generate MIDI locally."""
 
 from __future__ import annotations
 

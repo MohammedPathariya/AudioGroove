@@ -1,4 +1,4 @@
-"""Run the Day 4 compact MIDI baseline on the bounded 250-song pilot."""
+"""Run the compact MIDI baseline on the bounded 250-song pilot."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader
 
-from src.data_prep.day4_preprocessing import DEFAULT_OUTPUT_DIR, load_selected_records, prepare_pilot_dataset
+from src.data_prep.prepare_pilot_dataset import DEFAULT_OUTPUT_DIR, load_selected_records, prepare_pilot_dataset
 from src.data_prep.midi_representation import (
     DEFAULT_MAX_TIME_SHIFT_TICKS,
     DEFAULT_VELOCITY_BINS,
@@ -34,7 +34,7 @@ from src.models.compact_midi_lstm import CompactMidiLSTM
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_AUDIT_DIR = ROOT / "data" / "audit" / "lmdclean_pilot_250"
 DEFAULT_TRACKING_DIR = ROOT / "runs" / "mlruns"
-DEFAULT_RUN_DIR = ROOT / "runs" / "day4" / "compact_baseline"
+DEFAULT_RUN_DIR = ROOT / "runs" / "pilot_baseline"
 
 
 @dataclass
@@ -320,9 +320,9 @@ def train(
     try:
         import mlflow
     except ImportError as exc:
-        raise RuntimeError("MLflow is required for Day 4 training") from exc
+        raise RuntimeError("MLflow is required for pilot baseline training") from exc
     mlflow.set_tracking_uri(tracking_uri)
-    mlflow.set_experiment("AudioGroove-Day4-Compact-Baseline")
+    mlflow.set_experiment("AudioGroove-Pilot-Baseline")
     start_time = time.perf_counter()
     history: list[dict[str, Any]] = []
     best_val_loss = float("inf")

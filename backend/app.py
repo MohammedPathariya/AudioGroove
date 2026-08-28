@@ -13,7 +13,7 @@ from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 
 from src.data_prep.midi_representation import decode_tokens
-from src.generation.run_local_gru_2500 import generate, load_local_model
+from src.generation.run_local_model import generate, load_local_model
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]

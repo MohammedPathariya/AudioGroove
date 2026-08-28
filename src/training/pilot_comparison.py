@@ -22,7 +22,7 @@ import mido
 import torch
 from torch import nn
 
-from src.data_prep.day4_preprocessing import (
+from src.data_prep.prepare_pilot_dataset import (
     DEFAULT_AUDIT_DIR,
     DEFAULT_OUTPUT_DIR,
     UNKNOWN_TOKEN_POLICY,

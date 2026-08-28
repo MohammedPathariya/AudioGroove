@@ -13,7 +13,7 @@ from typing import Any
 import torch
 from torch import nn
 
-from src.data_prep.day4_preprocessing import UNKNOWN_TOKEN_POLICY, VOCABULARY_POLICY
+from src.data_prep.prepare_pilot_dataset import UNKNOWN_TOKEN_POLICY, VOCABULARY_POLICY
 from src.models.compact_midi_models import build_compact_model, count_parameters
 from src.training.chunk_stream import iter_chunk_batches
 from src.training.pilot_comparison import (

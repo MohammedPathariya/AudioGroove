@@ -33,7 +33,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from src.data_prep.day4_preprocessing import prepare_pilot_dataset
+from src.data_prep.prepare_pilot_dataset import prepare_pilot_dataset
 
 repo = Path.cwd()
 audit_dir = repo / "data/audit/lmdclean_pilot_250"

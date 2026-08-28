@@ -21,7 +21,7 @@ from typing import Any
 
 import torch
 
-from src.data_prep.day2_audit import inspect_midi, sha256_file
+from src.data_prep.audit_midi_sources import inspect_midi, sha256_file
 
 
 ROOT = Path(__file__).resolve().parents[2]
